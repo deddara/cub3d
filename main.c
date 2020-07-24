@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 21:22:20 by deddara           #+#    #+#             */
-/*   Updated: 2020/07/24 21:22:30 by deddara          ###   ########.fr       */
+/*   Updated: 2020/07/24 22:02:45 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,11 @@ int             main(void)
 {
     t_data  img;
     t_vars vars;
+    t_map *map;
     int x;
     int y;
 
+    map_parser(map);
     x = 5;
     y = 5;
     vars.mlx = mlx_init();

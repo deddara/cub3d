@@ -1,37 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_parser.h                                       :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/24 20:53:11 by deddara           #+#    #+#             */
-/*   Updated: 2020/07/24 22:20:39 by deddara          ###   ########.fr       */
+/*   Created: 2020/07/24 21:41:07 by deddara           #+#    #+#             */
+/*   Updated: 2020/07/24 22:25:51 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAP_PARSER_H
-# define MAP_PARSER_H
+#include "map_parser.h"
 
-# include "../main.h"
-
-
-typedef struct s_map
+t_map	*ft_lstmapnew()
 {
-    int     x;
-    int     y;
-    int     count;
-    char    *no;
-    char    *so;
-    char    *we;
-    char    *ea;
-    
-    char    *s;
-    char    *c;
-    int     f_rgb[2];
-    int     c_rgb[2];
-}               t_map;
+	t_map *var;
 
-t_map	*ft_lstmapnew();
-
-#endif
+	var = malloc(sizeof(t_map));
+	if (!var)
+		return (0);
+    var->count = 0; 
+    var->no = NULL;
+    var->so = NULL;
+    var->we = NULL;
+    var->ea = NULL;
+    var->s = NULL;
+    var->c = NULL;
+    var->no = NULL;
+	return (var);
+}
