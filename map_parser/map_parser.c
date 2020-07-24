@@ -6,9 +6,11 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 20:53:16 by deddara           #+#    #+#             */
-/*   Updated: 2020/07/24 21:02:43 by deddara          ###   ########.fr       */
+/*   Updated: 2020/07/24 21:22:54 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "map_parser.h"
 
 int map_parser (int fd)
 {
