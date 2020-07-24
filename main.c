@@ -24,7 +24,6 @@ int             main(void)
 
     x = 5;
     y = 5;
-    z = 1;
     vars.mlx = mlx_init();
     vars.win = mlx_new_window(vars.mlx, 1920, 1080, "Hello world!");
     img.img = mlx_new_image(vars.mlx, 1920, 1080);
