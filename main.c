@@ -22,7 +22,7 @@ int             main(void)
     int x;
     int y;
 
-    x = 5;
+    x = 5;e
     y = 5;
     vars.mlx = mlx_init();
     vars.win = mlx_new_window(vars.mlx, 1920, 1080, "Hello world!");
