@@ -6,16 +6,16 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/15 17:24:24 by deddara           #+#    #+#             */
-/*   Updated: 2020/05/27 23:17:33 by deddara          ###   ########.fr       */
+/*   Updated: 2020/07/27 19:46:51 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int		clear(t_list **list, int fd, char *buf, int code)
+int			clear(t_lister **list, int fd, char *buf, int code)
 {
-	t_list	*tmp;
-	t_list	*var;
+	t_lister	*tmp;
+	t_lister	*var;
 
 	if (*list)
 	{
@@ -40,7 +40,7 @@ int		clear(t_list **list, int fd, char *buf, int code)
 	return (0);
 }
 
-char	*ft_strdup(const char *src)
+char		*ft_strdup_gnl(const char *src)
 {
 	char	*result;
 	int		i;
@@ -63,11 +63,11 @@ char	*ft_strdup(const char *src)
 	return (result);
 }
 
-t_list	*ft_lstnew(int content)
+t_lister	*ft_lstnew_gnl(int content)
 {
-	t_list *var;
+	t_lister *var;
 
-	var = malloc(sizeof(t_list));
+	var = malloc(sizeof(t_lister));
 	if (!var)
 		return (0);
 	var->fd = content;
@@ -77,7 +77,7 @@ t_list	*ft_lstnew(int content)
 	return (var);
 }
 
-char	*ft_strchr(const char *s, int c)
+char		*ft_strchr_gnl(const char *s, int c)
 {
 	int i;
 
@@ -97,7 +97,7 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char		*ft_strjoin_gnl(char *s1, char *s2)
 {
 	char	*result;
 	int		i;

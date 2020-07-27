@@ -6,18 +6,18 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/15 13:23:19 by deddara           #+#    #+#             */
-/*   Updated: 2020/05/27 23:11:10 by deddara          ###   ########.fr       */
+/*   Updated: 2020/07/27 19:45:56 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-t_list		*get_fd(t_list **list, int fd)
+t_lister	*get_fd(t_lister **list, int fd)
 {
-	t_list *tmp;
+	t_lister *tmp;
 
 	if ((*list) == NULL)
-		return ((*list = ft_lstnew(fd)));
+		return ((*list = ft_lstnew_gnl(fd)));
 	tmp = (*list);
 	while ((tmp->fd != fd && tmp->next != 0))
 		tmp = tmp->next;
@@ -25,12 +25,12 @@ t_list		*get_fd(t_list **list, int fd)
 		return (tmp);
 	else
 	{
-		tmp->next = ft_lstnew(fd);
+		tmp->next = ft_lstnew_gnl(fd);
 		return (tmp->next);
 	}
 }
 
-static char	*check_buf(t_list *list, char **line)
+static char	*check_buf(t_lister *list, char **line)
 {
 	char *new_liner;
 	char *new_line;
@@ -42,12 +42,12 @@ static char	*check_buf(t_list *list, char **line)
 		new_liner[0] = '\0';
 		return (new_liner);
 	}
-	if ((new_line = ft_strchr((list)->rest_buf, '\n')))
+	if ((new_line = ft_strchr_gnl((list)->rest_buf, '\n')))
 	{
 		*new_line++ = '\0';
-		if (!((*line) = ft_strdup((list)->rest_buf)))
+		if (!((*line) = ft_strdup_gnl((list)->rest_buf)))
 			return (NULL);
-		new_line = ft_strdup(new_line);
+		new_line = ft_strdup_gnl(new_line);
 		free((list)->rest_buf);
 		(list)->rest_buf = new_line;
 		return (*line);
@@ -57,25 +57,25 @@ static char	*check_buf(t_list *list, char **line)
 	return (*line);
 }
 
-static int	reader_mn(char *buf, t_list *list, char **line)
+static int	reader_mn(char *buf, t_lister *list, char **line)
 {
 	char *new_line;
 
-	if ((new_line = ft_strchr(buf, '\n')))
+	if ((new_line = ft_strchr_gnl(buf, '\n')))
 	{
 		*new_line++ = '\0';
-		if (!((list)->rest_buf = ft_strdup(new_line)))
+		if (!((list)->rest_buf = ft_strdup_gnl(new_line)))
 			return (0);
 	}
 	list->line_back = (*line);
-	if (!((*line) = ft_strjoin(*line, buf)))
+	if (!((*line) = ft_strjoin_gnl(*line, buf)))
 		return (0);
 	free(list->line_back);
 	list->line_back = NULL;
 	return (1);
 }
 
-static int	read_line(t_list **list, char **line, int fd, t_list *ptr)
+static int	read_line(t_lister **list, char **line, int fd, t_lister *ptr)
 {
 	const long long		buff_size = BUFFER_SIZE;
 	char				*buf;
@@ -100,8 +100,8 @@ static int	read_line(t_list **list, char **line, int fd, t_list *ptr)
 
 int			get_next_line(int fd, char **line)
 {
-	static t_list	*list;
-	t_list			*list_ptr;
+	static t_lister	*list;
+	t_lister		*list_ptr;
 	const long long	buff_size = BUFFER_SIZE;
 	char			test[1];
 
