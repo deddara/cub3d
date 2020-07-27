@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 21:41:07 by deddara           #+#    #+#             */
-/*   Updated: 2020/07/27 21:59:21 by deddara          ###   ########.fr       */
+/*   Updated: 2020/07/27 23:25:01 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ t_map	*ft_lstmapnew()
 	var = malloc(sizeof(t_map));
 	if (!var)
 		return (0);
-    var->count = 0; 
+    var->count = 0;
+	var->x = 0;
+	var->y = 0; 
     var->no = NULL;
     var->so = NULL;
     var->we = NULL;
@@ -28,4 +30,15 @@ t_map	*ft_lstmapnew()
     var->c = NULL;
     var->no = NULL;
 	return (var);
+}
+
+int check_int(char *str)
+{
+	while(*str)
+	{
+		if (*str < '0' || *str > '9')
+			return (0);
+		str++;
+	}
+	return (1);
 }
