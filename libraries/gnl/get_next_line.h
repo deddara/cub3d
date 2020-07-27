@@ -6,14 +6,15 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/27 01:34:18 by deddara           #+#    #+#             */
-/*   Updated: 2020/07/24 21:58:30 by deddara          ###   ########.fr       */
+/*   Updated: 2020/07/27 17:40:34 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-# include "../main.h"
-
+# include <stdlib.h>
+# include <unistd.h>
+# define BUFFER_SIZE 50
 typedef struct		s_list
 {
 	int				fd;

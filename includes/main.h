@@ -6,16 +6,16 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 21:22:15 by deddara           #+#    #+#             */
-/*   Updated: 2020/07/24 22:01:46 by deddara          ###   ########.fr       */
+/*   Updated: 2020/07/27 16:49:04 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MAIN_H
 # define MAIN_H
 
-# include "./libft/libft.h"
-# include "./minilibx/mlx.h"
-# include "./map_parser/map_parser.h"
+# include "libft.h"
+# include "mlx.h"
+# include "map_parser.h"
 # include <stdlib.h>
 # include <unistd.h>
 typedef struct  s_vars {

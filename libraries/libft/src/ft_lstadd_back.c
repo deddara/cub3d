@@ -1,37 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_parser.h                                       :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/24 20:53:11 by deddara           #+#    #+#             */
-/*   Updated: 2020/07/24 22:20:39 by deddara          ###   ########.fr       */
+/*   Created: 2020/05/03 00:38:55 by deddara           #+#    #+#             */
+/*   Updated: 2020/05/06 11:53:02 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAP_PARSER_H
-# define MAP_PARSER_H
+#include "libft.h"
 
-# include "../main.h"
-
-
-typedef struct s_map
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-    int     x;
-    int     y;
-    int     count;
-    char    *no;
-    char    *so;
-    char    *we;
-    char    *ea;
-    
-    char    *s;
-    char    *c;
-    int     f_rgb[2];
-    int     c_rgb[2];
-}               t_map;
+	t_list	*tmp;
 
-t_map	*ft_lstmapnew();
-
-#endif
+	tmp = *lst;
+	if (!new)
+		return ;
+	if (tmp)
+	{
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = new;
+	}
+	else
+		*lst = new;
+}

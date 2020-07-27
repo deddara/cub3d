@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 21:22:20 by deddara           #+#    #+#             */
-/*   Updated: 2020/07/24 22:02:45 by deddara          ###   ########.fr       */
+/*   Updated: 2020/07/27 17:55:14 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,18 @@ void            my_mlx_pixel_put(t_data *data, int x, int y, int color)
     *(unsigned int*)dst = color;
 }
 
-int             close(int keycode, t_vars *vars)
-{
-    mlx_destroy_window(vars->mlx, vars->win);
-    return (0);
-}
+
 
 int             main(void)
 {
     t_data  img;
     t_vars vars;
-    t_map *map;
+    t_map map;
     int x;
     int y;
-
-    map_parser(map);
+    
+    if(!(map_parser(&map)))
+        return (0);
     x = 5;
     y = 5;
     vars.mlx = mlx_init();
@@ -43,6 +40,6 @@ int             main(void)
     img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
                                  &img.endian);
     mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
-    mlx_hook(vars.win, 2, 1L<<0, close, &vars);
+    
     mlx_loop(vars.mlx);
 }
