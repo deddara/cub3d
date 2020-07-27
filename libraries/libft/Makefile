@@ -6,13 +6,13 @@
 #    By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/02 01:40:26 by deddara           #+#    #+#              #
-#    Updated: 2020/07/25 13:55:30 by deddara          ###   ########.fr        #
+#    Updated: 2020/07/27 20:50:12 by deddara          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 
-HDR_DIR = ./includes/
+HDR_DIR = includes/
 OBJ_DIR = obj/
 CC = gcc
 FLAGS = -I$(HDR_DIR) -Wall -Wextra -Werror 

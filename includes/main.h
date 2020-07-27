@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 21:22:15 by deddara           #+#    #+#             */
-/*   Updated: 2020/07/27 16:49:04 by deddara          ###   ########.fr       */
+/*   Updated: 2020/07/27 22:22:21 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,19 @@
 # include "map_parser.h"
 # include <stdlib.h>
 # include <unistd.h>
-typedef struct  s_vars {
+# include <stdio.h>
+# include <fcntl.h>
+# include "get_next_line.h"
+
+typedef struct  s_vars 
+{
     void        *mlx;
     void        *win;
 }               t_vars;
 
 
-typedef struct  s_data {
+typedef struct  s_data 
+{
     void        *img;
     char        *addr;
     int         bits_per_pixel;
