@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 21:41:07 by deddara           #+#    #+#             */
-/*   Updated: 2020/07/28 21:03:24 by deddara          ###   ########.fr       */
+/*   Updated: 2020/07/29 02:21:12 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,10 @@ t_map	*ft_lstmapnew()
     var->s = NULL;
     var->c_rgb = -1;
 	var->f_rgb = -1;
+	var->y_count = 0;
+	if(!(var->map_line = (char*)malloc(sizeof(char) * 1)))
+		return (NULL);
+	var->map_line[0] = '\0';
     var->no = NULL;
 	return (var);
 }

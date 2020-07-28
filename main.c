@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 21:22:20 by deddara           #+#    #+#             */
-/*   Updated: 2020/07/27 22:02:46 by deddara          ###   ########.fr       */
+/*   Updated: 2020/07/28 23:28:26 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int             main(void)
     int i;
 
 	i = 3;
-	map_parser(&map);
+	parser(&map);
     return (0);
     // x = 5;
     // y = 5;
