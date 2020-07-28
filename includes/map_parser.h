@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 20:53:11 by deddara           #+#    #+#             */
-/*   Updated: 2020/07/27 23:26:51 by deddara          ###   ########.fr       */
+/*   Updated: 2020/07/28 20:09:56 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ typedef struct		s_map
 	char	*ea;
 	char	*s;
 	char	*c;
-	int		f_rgb[2];
-	int		c_rgb[2];
+	unsigned long f_rgb;
+	unsigned long c_rgb;
 }					t_map;
 
 t_map				*ft_lstmapnew();
