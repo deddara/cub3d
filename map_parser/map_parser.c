@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 20:53:16 by deddara           #+#    #+#             */
-/*   Updated: 2020/07/28 20:26:10 by deddara          ###   ########.fr       */
+/*   Updated: 2020/07/28 20:54:26 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,41 +151,34 @@ static int s_checker(char *line, t_map *map)
 	return (1);
 }
 
-static char	*skip_spaces(char *str)
-{
-	int i;
-
-	i = 0;
-	if (!str)
-		return NULL;
-	while (str[i] &&(str[i] == ' ' || str[i] == '\t'))
-		i++;
-	return (&str[i]);
-}
-
 int		f_checker(char *line, t_map *map)
 {
-	char **words;
+	char	**words;
+	char	**nums;
 	int		r;
 	int 	g;
 	int		b;
 
 	map->count++;
-	if(!(words = ft_split(&line[1], ',')))
+	if (!(words = ft_split(line, ' ')))
 		return (0);
-	if (!(f_word_counter(words)))
+	if (!(word_counter(words)))
 		return (0);
-	words[0] = skip_spaces(words[0]);
-	printf ("%s\n%s\n%s", words[0], words[1], words[2]);
-	if (!(check_int(words[0]) || !(check_int(words[1]))) || !(check_int(words[2])))
+	if (!(nums = ft_split(words[1], ',')))
 		return (0);
-	r = ft_atoi(words[0]);
-	g = ft_atoi(words[1]);
-	b = ft_atoi(words[2]);
-	map->f_rgb = create_rgb(r, g, b);
-	printf("\n==%lx==\n", map->f_rgb);
+	if (!(f_word_counter(nums)) || !(check_int(nums[0]) || !(check_int(nums[1]))) || !(check_int(nums[2])))
+		return (0);
+	r = ft_atoi(nums[0]);
+	g = ft_atoi(nums[1]);
+	b = ft_atoi(nums[2]);
+	if (line[0] == 'F')
+		map->f_rgb = create_rgb(r, g, b);
+	else
+		map->c_rgb = create_rgb(r, g ,b);
 	free (*words);
 	free (words);
+	free (*nums);
+	free (nums);
 	return (1);
 }
 
@@ -215,9 +208,9 @@ int		check_elems(char *line, t_map *map)
 	if (line[0] == 'F' && line[1] == ' ')
 		if (!(f_checker(line, map)))
 			return (0);
-	// if (line[0] == 'C' && line[1] == ' ')
-	// 	if (!(c_checker(line, map)))
-	// 		return (0);	
+	if (line[0] == 'C' && line[1] == ' ')
+		if (!(f_checker(line, map)))
+			return (0);	
 	return (1);
 }
 
