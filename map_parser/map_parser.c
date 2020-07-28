@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 20:53:16 by deddara           #+#    #+#             */
-/*   Updated: 2020/07/28 20:54:26 by deddara          ###   ########.fr       */
+/*   Updated: 2020/07/28 21:08:33 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ static int no_checker(char *line, t_map *map)
 		return (0);
 	if(!(map->no = ft_strdup(words[1])))
 		return (0);
+	
 	free (*words);
 	free (words);
 	return (1);
@@ -214,6 +215,15 @@ int		check_elems(char *line, t_map *map)
 	return (1);
 }
 
+static int check_all_params(t_map *map)
+{
+	if (map->x == 0 || map->y == 0 || map->count != 8 || map->no == NULL || 
+	map->so == NULL || map->we == NULL || map->ea == NULL || map->s == NULL
+	|| map->f_rgb == (unsigned long)-1 || map->c_rgb == (unsigned long)-1)
+		return (0);
+	return (1);
+}
+
 int		map_parser(t_map *map)
 {
 	int		fd;
@@ -238,5 +248,10 @@ int		map_parser(t_map *map)
 	}
 	printf("%s\n", line);
 	free (line);
-	return (0);
+	if(!(check_all_params(map)))
+	{
+		printf("===ERROR===\n");
+		return (0);	
+	}
+	return (1);
 }
