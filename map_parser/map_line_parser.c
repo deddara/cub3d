@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_parser.c                                      :+:      :+:    :+:   */
+/*   map_line_parser.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 01:54:32 by deddara           #+#    #+#             */
-/*   Updated: 2020/07/29 03:46:16 by deddara          ###   ########.fr       */
+/*   Updated: 2020/07/29 04:12:40 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int map_join(char *line, t_map *map)
 	return (1);
 }
 
-static int first_last(char *line, t_map *map)
+int	first_last(char *line, t_map *map)
 {
 	int i;
 
@@ -45,8 +45,9 @@ static int first_last(char *line, t_map *map)
 			return (0);
 		i++;
 	}
-	if (!(map_join(line, map)))
-		return (0);
+	if (map)
+		if (!(map_join(line, map)))
+			return (0);
 	return (1);
 }
 
