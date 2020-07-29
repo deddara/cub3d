@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 20:53:11 by deddara           #+#    #+#             */
-/*   Updated: 2020/07/29 02:11:57 by deddara          ###   ########.fr       */
+/*   Updated: 2020/07/29 02:30:59 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct		s_map
 	unsigned long f_rgb;
 	unsigned long c_rgb;
 	char 	**map;
+	char	player_pos;
 	char	*map_line;
 	int		y_count;
 }					t_map;

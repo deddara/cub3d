@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 01:54:32 by deddara           #+#    #+#             */
-/*   Updated: 2020/07/29 02:28:04 by deddara          ###   ########.fr       */
+/*   Updated: 2020/07/29 03:33:46 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int first_last(char *line, t_map *map)
 	int i;
 
 	i = 0;
-	while (line[i] != '\0')
+	while (line[i])
 	{
 		if (line[i] != '1' && line[i] != ' ')
 			return (0);
@@ -52,14 +52,43 @@ static int first_last(char *line, t_map *map)
 
 static int line_check(char *line, t_map *map)
 {
+	int i;
+	int flag;
 
+	flag = 0;
+	i = 0;
+	map->y_count++;
+	while (line[i])
+	{
+		if (line[i] != ' ' && line[i] != '1' && line[i] != 'N' && line[i] != 'W'
+			&& line[i] != 'E' && line[i] != 'S' && line[i] != '2' && line[i] != '0')
+			return (0);
+		if ((line[i] == '0' || line[i] == '2' || line[i] == 'N' || line[i] == 'E'
+			|| line[i] == 'S' || line[i] == 'W') && flag == 0)
+			return (0);
+		if (line[i] == '1')
+			flag++;
+		if (line[i] == ' ' && !flag)
+		{
+			i++;
+			continue ;
+		}
+		if (line[i] == ' ')
+		{
+			if ((line[i - 1] != ' ' && line[i - 1] != '1') || (line[i + 1] != ' ' && line[i + 1] != '1'))
+				return (0);
+		}
+		if ((line[i] == 'N' || line[i] == 'E' || line[i] == 'S' || line[i] == 'W') && map->player_pos == '0')
+			map->player_pos = line[i];
+		else if ((line[i] == 'N' || line[i] == 'E' || line[i] == 'S' || line[i] == 'W') && map->player_pos != '0')
+			return (0);
+		i++;
+	}
+	return (1);
 }
 
 int map_parser(char *line, t_map *map)
 {
-	int i;
-
-	i = 0;
 	if(map->y_count == 0)
 	{
 		map->y_count++;
@@ -67,5 +96,7 @@ int map_parser(char *line, t_map *map)
 			return (0);
 		return (1);
 	}
+	if (!(line_check(line, map)))
+		return (0);
 	return (1);
 }
