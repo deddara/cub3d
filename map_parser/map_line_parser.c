@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 01:54:32 by deddara           #+#    #+#             */
-/*   Updated: 2020/07/29 03:37:54 by deddara          ###   ########.fr       */
+/*   Updated: 2020/07/29 03:46:16 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ static int line_check(char *line, t_map *map)
 	return (1);
 }
 
-int map_parser(char *line, t_map *map)
+int map_line_parser(char *line, t_map *map)
 {
 	if(map->y_count == 0)
 	{

@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 20:53:11 by deddara           #+#    #+#             */
-/*   Updated: 2020/07/29 02:30:59 by deddara          ###   ########.fr       */
+/*   Updated: 2020/07/29 03:47:07 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,6 @@ t_map				*ft_lstmapnew();
 int					parser(t_map *map);
 int					check_elems(char *line, t_map *map);
 int 				check_int(char *str);
-int 				map_parser(char *line, t_map *map);
+int 				map_line_parser(char *line, t_map *map);
+int					map_parser(t_map *map);
 #endif
