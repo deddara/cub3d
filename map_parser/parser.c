@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 20:53:16 by deddara           #+#    #+#             */
-/*   Updated: 2020/07/29 04:15:59 by deddara          ###   ########.fr       */
+/*   Updated: 2020/07/29 04:39:03 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -246,10 +246,8 @@ int		parser(t_map *map)
 		}
 		if(map->count == 8)
 			break ;
-		printf("%s\n", line);
 		free(line);
 	}
-	printf("%s\n", line);
 	free (line);
 	if(!(check_all_params(map)))
 	{
@@ -257,7 +255,7 @@ int		parser(t_map *map)
 		return (0);	
 	}
 	//MAP PARSING PART
-	printf ("\n=== MAP TIME ===\n\n");
+	// printf ("\n=== MAP TIME ===\n\n");
 
 	while(get_next_line(fd, &line))
 	{
@@ -270,7 +268,6 @@ int		parser(t_map *map)
 			printf("===ERROR===\n");
 			return (0);
 		}
-		printf("%s\n", line);
 		free(line);
 	}
 	if(!(map_line_parser(line, map)))
@@ -283,6 +280,6 @@ int		parser(t_map *map)
 		printf("===ERROR===\n");
 		return (0);
 	}
-	printf ("%d", map->y_count);
+	free(line);
 	return (1);
 }
