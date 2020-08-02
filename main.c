@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 21:22:20 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/02 12:13:31 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/02 12:36:38 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,31 @@ void            my_mlx_pixel_put(t_data *data, int x, int y, int color)
     *(unsigned int*)dst = color;
 }
 
-
+static void paintfc(t_map *map, t_data *img)
+{
+	int y_c = 0;
+	int x_c = 0;
+	while (y_c < map->y / 2)
+	{
+		x_c = 0;
+		while (x_c < map->x)
+		{
+			my_mlx_pixel_put(img, x_c, y_c, 0x0000F9);
+			x_c++;
+		}
+		y_c++;
+	}
+	while(y_c < map->y)
+	{
+		x_c = 0;
+		while (x_c < map->x)
+		{
+			my_mlx_pixel_put(img, x_c, y_c, 0xFFFF41);
+			x_c++;
+		}
+		y_c++;
+	}
+}
 
 int             main(void)
 {
@@ -41,6 +65,7 @@ int             main(void)
     img.img = mlx_new_image(vars.mlx, map.x, map.y);
     img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
                                  &img.endian);
+	paintfc(&map, &img);
     mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
     
     mlx_loop(vars.mlx);

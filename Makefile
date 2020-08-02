@@ -6,7 +6,7 @@
 #    By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/27 16:22:26 by deddara           #+#    #+#              #
-#    Updated: 2020/08/02 12:03:51 by deddara          ###   ########.fr        #
+#    Updated: 2020/08/02 12:17:58 by deddara          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,5 +57,7 @@ clean:
 
 fclean: clean
 	@rm -f $(NAME)
+	@rm -rf a.out.dSYM
+	@rm libmlx.dylib
 
 re: fclean all
