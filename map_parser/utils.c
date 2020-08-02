@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 21:41:07 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/02 12:10:43 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/02 19:09:11 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@ int	ft_lstmapnew(t_map *map)
 		return (0);
 	map->map_line[0] = '\0';
     map->no = NULL;
+	map->a_player = 0;
+	map->x_player = 0;
+	map->y_player = 0;
 	return (1);
 }
 
