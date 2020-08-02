@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 21:22:20 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/02 14:38:03 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/02 19:02:11 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,6 @@ static void paint_map(t_map *map, t_data *img)
 		draw_y = draw_yt + 21;
 		y++;
 	}
-	ft_putnbr_fd(draw_y, 1);
-	ft_putnbr_fd(y, 1);
 }
 
 int             main(void)
@@ -115,7 +113,6 @@ int             main(void)
                                  &img.endian);
 	
 	paint_fc(&map, &img);
-	printf("%c", map.map[0][0]);
 	paint_map(&map, &img);
     mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0); 
     mlx_loop(vars.mlx);

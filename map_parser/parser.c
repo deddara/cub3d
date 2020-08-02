@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 20:53:16 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/02 12:11:20 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/02 19:01:59 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -231,7 +231,7 @@ int		parser(t_map *map)
 	char	*line;
 
 	line = NULL;
-	fd = open("/Users/deddara/school21/cub3d/cub3d_github/example_map.cub", O_RDONLY);
+	fd = open("/Users/deddara/school21/cub3d/cub3d/example_map.cub", O_RDONLY);
 	if(!ft_lstmapnew(map))
 		return(0);
 
@@ -284,7 +284,6 @@ int		parser(t_map *map)
 		printf("===ERROR===\n");
 		return (0);
 	}
-	printf("== %d ==\n", map->x);
 	free(line);
 	return (1);
 }
