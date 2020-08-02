@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 20:53:16 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/02 19:21:21 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/02 19:56:05 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,9 +227,9 @@ static int check_all_params(t_map *map)
 static void get_angle(t_map *map)
 {
 	if (map->player_pos == 'N')
-		map->a_player = M_PI / 2;
-	else if (map->player_pos == 'S')
 		map->a_player = 3 * M_PI / 2;
+	else if (map->player_pos == 'S')
+		map->a_player = M_PI / 2;
 	else if (map->player_pos == 'E')
 		map->a_player = 0;
 	else if (map->player_pos == 'W')

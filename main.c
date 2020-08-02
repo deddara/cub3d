@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 21:22:20 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/02 19:02:11 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/02 19:54:30 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,28 @@ static void paint_map(t_map *map, t_data *img)
 	}
 }
 
+static void paint_player(t_map *map, t_data *img)
+{
+	int c = 0;
+
+	int x, y;
+
+	x = 0;
+	y = 0;
+	map->x_player *= 21;
+	map->y_player *= 21;
+
+	while (c < 2000)
+	{
+		x = map->x_player + c * cos(map->a_player);
+		y = map->y_player + c * sin(map->a_player);
+		my_mlx_pixel_put(img, x, y, 0xFFFFFF);
+		if (map->map[y / 21][x / 21] != '0' && map->map[y / 21][x / 21] != '2' && map->map[y / 21][x / 21] != 'N')
+			break ;
+		c++;
+	}
+}
+
 int             main(void)
 {
     t_data  img;
@@ -114,6 +136,7 @@ int             main(void)
 	
 	paint_fc(&map, &img);
 	paint_map(&map, &img);
+	paint_player(&map, &img);
     mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0); 
     mlx_loop(vars.mlx);
 	return (0);
