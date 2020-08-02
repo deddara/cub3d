@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 21:22:20 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/02 12:36:38 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/02 14:38:03 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void            my_mlx_pixel_put(t_data *data, int x, int y, int color)
     *(unsigned int*)dst = color;
 }
 
-static void paintfc(t_map *map, t_data *img)
+static void paint_fc(t_map *map, t_data *img)
 {
 	int y_c = 0;
 	int x_c = 0;
@@ -46,6 +46,55 @@ static void paintfc(t_map *map, t_data *img)
 	}
 }
 
+static void paint_map(t_map *map, t_data *img)
+{
+	int x;
+	int y;
+	int draw_x;
+	int draw_y;
+	int draw_xt;
+	int draw_yt;
+
+	draw_x = -1;
+	draw_y = 0;
+	y = 0;
+	while (map->map[y])
+	{
+		x = 0;
+		draw_x = -1;
+		while(map->map[y][x])
+		{
+			if (map->map[y][x] == '1')
+			{	
+				draw_yt = draw_y;
+				draw_x = (draw_x == -1) ? x - 1 : draw_x;
+				draw_xt = draw_x;
+				while (draw_y < draw_yt + 20)
+				{
+					draw_x = draw_xt;
+					while (draw_x < draw_xt + 20)
+					{
+						my_mlx_pixel_put(img, draw_x, draw_y, 0xFFFF41);
+						draw_x++;
+					}
+					draw_y++;
+				}
+				draw_x++;
+				draw_y = draw_yt;
+			}
+			else if (map->map[y][x] == '0' || map->map[y][x] == '2' || map->map[y][x] == 'S' || map->map[y][x] == ' ')
+			{
+				draw_x += 21;
+			}
+			x++;
+		}
+		draw_y = draw_yt + 21;
+		y++;
+	}
+	ft_putnbr_fd(draw_y, 1);
+	ft_putnbr_fd(y, 1);
+}
+
 int             main(void)
 {
     t_data  img;
@@ -59,15 +108,16 @@ int             main(void)
 	parser(&map);
     // x = 5;
     // y = 5;
-	printf("== %d ==", map.x);
     vars.mlx = mlx_init();
     vars.win = mlx_new_window(vars.mlx, map.x, map.y, "Hello world!");
     img.img = mlx_new_image(vars.mlx, map.x, map.y);
     img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
                                  &img.endian);
-	paintfc(&map, &img);
-    mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
-    
+	
+	paint_fc(&map, &img);
+	printf("%c", map.map[0][0]);
+	paint_map(&map, &img);
+    mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0); 
     mlx_loop(vars.mlx);
 	return (0);
 }
