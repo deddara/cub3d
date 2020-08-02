@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 20:53:16 by deddara           #+#    #+#             */
-/*   Updated: 2020/07/29 04:39:03 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/02 12:11:20 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,20 +230,22 @@ int		parser(t_map *map)
 	int		fd;
 	char	*line;
 
-	map = NULL;
 	line = NULL;
 	fd = open("/Users/deddara/school21/cub3d/cub3d_github/example_map.cub", O_RDONLY);
-	if (!(map = ft_lstmapnew()))
-		return (0);
+	if(!ft_lstmapnew(map))
+		return(0);
+
 	while(get_next_line(fd, &line))
 	{
+		
 		if(line[0] == '\0')
 			continue ;
 		if(!(check_elems(line, map)))
-		{	
+		{
 			printf("===ERROR===\n");
 			return (0);
 		}
+		printf("%s\n", line);
 		if(map->count == 8)
 			break ;
 		free(line);
@@ -268,8 +270,10 @@ int		parser(t_map *map)
 			printf("===ERROR===\n");
 			return (0);
 		}
+		printf("%s\n", line);
 		free(line);
 	}
+	//добавить проверку на отсутствие игрока!
 	if(!(map_line_parser(line, map)))
 	{	
 		printf("===ERROR===\n");
@@ -280,6 +284,7 @@ int		parser(t_map *map)
 		printf("===ERROR===\n");
 		return (0);
 	}
+	printf("== %d ==\n", map->x);
 	free(line);
 	return (1);
 }

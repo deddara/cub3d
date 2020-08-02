@@ -6,7 +6,7 @@
 #    By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/27 16:22:26 by deddara           #+#    #+#              #
-#    Updated: 2020/07/29 03:51:45 by deddara          ###   ########.fr        #
+#    Updated: 2020/08/02 12:03:51 by deddara          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,8 @@ LBFT_DIR = ./libraries/libft/
 OBJ_DIR = obj/
 HDR_DIR = ./includes/
 HEADERS = -I$(HDR_DIR) -I./libraries/libft/includes/ -I./libraries/minilibx/ -I./libraries/gnl
-COMPILE_FLGS = $(HEADERS) -Wall -Wextra -Werror
-MLX_FLAGS = -lmlx -framework OpenGl -framework AppKit
+COMPILE_FLGS = $(HEADERS) -g -Wall -Wextra -Werror
+MLX_FLAGS = -lmlx 
 CC = gcc
 
 
@@ -37,6 +37,7 @@ PARS_SRC.O = $(addprefix $(OBJ_DIR), $(PARS_SRC:=.o))
 .PHONY: all clean fclean re bonus
 
 all: $(OBJ_DIR) $(NAME)
+	@cp ./libraries/minilibx/libmlx.dylib ./
 	@echo "\033[32m[+] Make completed!\033[0m"
 
 $(NAME): $(GNL_SRC.O) $(PARS_SRC.O)
