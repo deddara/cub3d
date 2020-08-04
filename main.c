@@ -53,7 +53,7 @@ static void paint_map(t_map *map, t_data *img)
 	int draw_x;
 	int draw_y;
 	int draw_xt;
-	int draw_yt;
+	int draw_yt = 0;
 
 	draw_x = -1;
 	draw_y = 0;
@@ -122,9 +122,6 @@ int             main(void)
     t_map map;
     // int x;
     // int y;
-    int i;
-
-	i = 3;
 	parser(&map);
     // x = 5;
     // y = 5;

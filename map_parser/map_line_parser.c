@@ -20,13 +20,11 @@ static int map_join(char *line, t_map *map)
 	tmp_map_line = map->map_line;
 	if (!(tmp_line = ft_strjoin(line, "\n")))
 	{
-		write(1, "d", 1);
 		return (0);
 	
 	}
 	if (!(map->map_line = ft_strjoin(map->map_line, tmp_line)))
 	{
-		write(1, "d", 1);
 		return (0);
 	}
 	free(tmp_map_line);

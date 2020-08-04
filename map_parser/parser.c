@@ -185,9 +185,6 @@ int		f_checker(char *line, t_map *map)
 
 int		check_elems(char *line, t_map *map)
 {
-	int i;
-
-	i = 0;
 	if (line[0] == 'R')
 		if (!(r_checker(line, map)))
 			return (0);
