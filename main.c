@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 21:22:20 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/04 20:00:16 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/04 20:11:43 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,7 +159,7 @@ static void cast_ray(t_map *map, t_data *img)
 			if (map->map[(int)y][(int)x] == '1' || map->map[(int)y][(int)x] == '2')
 			{
 				j = 0;
-				wall.height = map->y / c;
+				wall.height = map->y / (c*cos(angle-map->a_player));
 				while (j < wall.height)
 				{
 					my_mlx_pixel_put(img, i, j + (map->y/2 - wall.height/2 ), 0xFF0000);
