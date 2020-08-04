@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 21:22:20 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/04 19:49:29 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/04 20:00:16 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,13 +162,13 @@ static void cast_ray(t_map *map, t_data *img)
 				wall.height = map->y / c;
 				while (j < wall.height)
 				{
-					my_mlx_pixel_put(img, (map->x + i), j + (map->y/2 - wall.height/2 ), 0xFF0000);
+					my_mlx_pixel_put(img, i, j + (map->y/2 - wall.height/2 ), 0xFF0000);
 					j++;
 				}
 				break ;
 			}
-			my_mlx_pixel_put(img, x * (map->x / map->x_count / 3), \
-			y * (map->y / map->y_count / 3), 0xFF0000);
+			 my_mlx_pixel_put(img, x * (map->x / map->x_count / 3), \
+			 y * (map->y / map->y_count / 3), 0xFF0000);
 			c+=0.0001;
 		}
 		i++;
