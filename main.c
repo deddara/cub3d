@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 21:22:20 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/02 19:54:30 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/04 16:13:04 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,11 +124,21 @@ static void paint_fc(t_map *map, t_data *img)
 
 static int skipper(t_map *map, int x, int y)
 {
-	if (map[x][y] == ' ' || map[x][y] == '0' || map[x][y] == '2' || 
-		map[x][y] == 'N' || map[x][y] == 'S' || map[x][y] == 'W'
-		|| map[x][y] == 'E')
+	if (map->map[x][y] == ' ' || map->map[x][y] == '0' || map->map[x][y] == '2' || 
+		map->map[x][y] == 'N' || map->map[x][y] == 'S' || map->map[x][y] == 'W'
+		|| map->map[x][y] == 'E')
 		return (1);
 	return (0);
+}
+
+static void draw_rect(t_map *map, int x, int y)
+{
+	int rect_w;
+	int rect_h;
+	int rect_x;
+	int rect_y;
+
+	rect_w = map->x / 
 }
 
 static void paint_map(t_map *map, t_data *img)
@@ -143,6 +153,7 @@ static void paint_map(t_map *map, t_data *img)
 		{
 			if (skipper(map, x, y))
 				continue ;
+			draw_rect(map, x, y);
 		}
 	}
 }

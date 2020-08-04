@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 20:53:16 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/02 19:56:05 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/04 16:18:33 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,6 +233,26 @@ static void get_angle(t_map *map)
 		map->a_player = M_PI;
 }
 
+static void longest_width(t_map *map)
+{
+	int y;
+
+	y = 0;
+	int len;
+	int prev_len;
+
+	len = 0;
+	while (map->map[y])
+	{	
+		prev_len = len;
+		len = ft_strlen(map->map[y]);
+		if (prev_len < len)
+			prev_len = len;
+		y++;
+	}
+	map->x_count = prev_len;
+}
+
 int		parser(t_map *map)
 {
 	int		fd;
@@ -294,5 +314,6 @@ int		parser(t_map *map)
 	}
 	free(line);
 	get_angle(map);
+	longest_width(map);
 	return (1);
 }
