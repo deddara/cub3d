@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 21:22:20 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/04 18:57:27 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/04 19:49:29 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,28 +131,42 @@ static void paint_map(t_map *map, t_data *img)
 	}
 }
 
-
+typedef struct s_wall
+{
+	int height;
+	double fov;
+}				t_wall;
 
 static void cast_ray(t_map *map, t_data *img)
 {
 	double c;
 	double x;
 	double y;
-	double fov;
+	int j = 0;
+	t_wall wall;
 	double angle;
 	int i = 0;
+	wall.fov = M_PI / 3;
 	while (i < map->x)
 	{
+		angle = map->a_player - wall.fov / 2 + wall.fov * i / (double)(map->x);
 
-		fov = M_PI / 3;
-		angle = map->a_player - fov / 2 + fov * i / (double)(map->x);
 		c = 0;
 		while ((c < 5000))
 		{
 			x = map->x_player + c * cos(angle);
 			y = map->y_player + c * sin(angle);
 			if (map->map[(int)y][(int)x] == '1' || map->map[(int)y][(int)x] == '2')
-				break;
+			{
+				j = 0;
+				wall.height = map->y / c;
+				while (j < wall.height)
+				{
+					my_mlx_pixel_put(img, (map->x + i), j + (map->y/2 - wall.height/2 ), 0xFF0000);
+					j++;
+				}
+				break ;
+			}
 			my_mlx_pixel_put(img, x * (map->x / map->x_count / 3), \
 			y * (map->y / map->y_count / 3), 0xFF0000);
 			c+=0.0001;
