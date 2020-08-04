@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 21:22:20 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/04 17:42:07 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/04 18:46:37 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,76 +52,6 @@ static void paint_fc(t_map *map, t_data *img)
 
 //ОТРИСОВКА ПОТОЛКА И ПОЛА
 //************************************************
-
-// static void paint_map(t_map *map, t_data *img)
-// {
-// 	int x;
-// 	int y;
-// 	int draw_x;
-// 	int draw_y;
-// 	int draw_xt;
-// 	int draw_yt = 0;
-
-// 	draw_x = -1;
-// 	draw_y = 0;
-// 	y = 0;
-// 	while (map->map[y])
-// 	{
-// 		x = 0;
-// 		draw_x = -1;
-// 		while(map->map[y][x])
-// 		{
-// 			if (map->map[y][x] == '1')
-// 			{	
-// 				draw_yt = draw_y;
-// 				draw_x = (draw_x == -1) ? x - 1 : draw_x;
-// 				draw_xt = draw_x;
-// 				while (draw_y < draw_yt + 20)
-// 				{
-// 					draw_x = draw_xt;
-// 					while (draw_x < draw_xt + 20)
-// 					{
-// 						my_mlx_pixel_put(img, draw_x, draw_y, 0xFFFF41);
-// 						draw_x++;
-// 					}
-// 					draw_y++;
-// 				}
-// 				draw_x++;
-// 				draw_y = draw_yt;
-// 			}
-// 			else if (map->map[y][x] == '0' || map->map[y][x] == '2' || map->map[y][x] == 'S' || map->map[y][x] == ' ')
-// 			{
-// 				draw_x += 21;
-// 			}
-// 			x++;
-// 		}
-// 		draw_y = draw_yt + 21;
-// 		y++;
-// 	}
-// }
-
-// static void paint_player(t_map *map, t_data *img)
-// {
-// 	int c = 0;
-
-// 	int x, y;
-
-// 	x = 0;
-// 	y = 0;
-// 	map->x_player *= 21;
-// 	map->y_player *= 21;
-
-// 	while (c < 2000)
-// 	{
-// 		x = map->x_player + c * cos(map->a_player);
-// 		y = map->y_player + c * sin(map->a_player);
-// 		my_mlx_pixel_put(img, x, y, 0xFFFFFF);
-// 		if (map->map[y / 21][x / 21] != '0' && map->map[y / 21][x / 21] != '2' && map->map[y / 21][x / 21] != 'N')
-// 			break ;
-// 		c++;
-// 	}
-// }
-
 static int skipper(t_map *map, int x, int y)
 {
 	if (map->map[y][x] == ' ' || map->map[y][x] == '0' || map->map[y][x] == '2' || 
@@ -201,6 +131,26 @@ static void paint_map(t_map *map, t_data *img)
 	}
 }
 
+
+
+static void cast_ray(t_map *map, t_data *img)
+{
+	double c;
+	double x;
+	double y;
+	c = 0;
+	while ((c < 5000))
+	{
+		x = map->x_player + c * cos(map->a_player);
+		y = map->y_player + c * sin(map->a_player);
+		if (map->map[(int)y][(int)x] == '1' || map->map[(int)y][(int)x] == '2')
+			break;
+		my_mlx_pixel_put(img, x * (map->x / map->x_count / 3), \
+		y * (map->y / map->y_count / 3), 0xFF0000);
+		c+=0.1;
+	}
+}
+
 int             main(void)
 {
     t_data  img;
@@ -220,6 +170,7 @@ int             main(void)
 	paint_fc(&map, &img);
 	paint_map(&map, &img);
 	draw_player(map.x_player, map.y_player, &map, &img);
+	cast_ray(&map, &img);
 	//paint_player(&map, &img);
     mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0); 
     mlx_loop(vars.mlx);
