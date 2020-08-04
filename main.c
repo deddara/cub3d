@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 21:22:20 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/04 17:31:53 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/04 17:42:07 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,30 @@ static void draw_rect(int x, int y, t_map *map, t_data *img)
 		}
 		i++;
 	}
-	my_mlx_pixel_put(img, rect_x + i, rect_y + j, 0xFFFFFF);
+}
+
+static void draw_player(int x, int y, t_map *map, t_data *img)
+{
+	int rect_x;
+	int rect_y;
+	int i, j;
+
+	i = 0;
+	j = 0;
+	
+	rect_x = x * (map->x / map->x_count / 3);
+	rect_y = y * (map->y / map->y_count / 3);
+	
+	while (i < 5)
+	{
+		j = 0;
+	 	while (j < 5)
+		{
+			my_mlx_pixel_put(img, rect_x + i, rect_y + j, 0xFF0000);
+			j++;
+		}
+		i++;
+	}
 }
 
 static void paint_map(t_map *map, t_data *img)
@@ -196,6 +219,7 @@ int             main(void)
 	
 	paint_fc(&map, &img);
 	paint_map(&map, &img);
+	draw_player(map.x_player, map.y_player, &map, &img);
 	//paint_player(&map, &img);
     mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0); 
     mlx_loop(vars.mlx);
