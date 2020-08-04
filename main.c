@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 21:22:20 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/04 16:13:04 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/04 17:31:53 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,21 +124,36 @@ static void paint_fc(t_map *map, t_data *img)
 
 static int skipper(t_map *map, int x, int y)
 {
-	if (map->map[x][y] == ' ' || map->map[x][y] == '0' || map->map[x][y] == '2' || 
-		map->map[x][y] == 'N' || map->map[x][y] == 'S' || map->map[x][y] == 'W'
-		|| map->map[x][y] == 'E')
+	if (map->map[y][x] == ' ' || map->map[y][x] == '0' || map->map[y][x] == '2' || 
+		map->map[y][x] == 'N' || map->map[y][x] == 'S' || map->map[y][x] == 'W'
+		|| map->map[y][x] == 'E')
 		return (1);
 	return (0);
 }
 
-static void draw_rect(t_map *map, int x, int y)
+static void draw_rect(int x, int y, t_map *map, t_data *img)
 {
-	int rect_w;
-	int rect_h;
 	int rect_x;
 	int rect_y;
+	int i, j;
 
-	rect_w = map->x / 
+	i = 0;
+	j = 0;
+	
+	rect_x = x * (map->x / map->x_count / 3);
+	rect_y = y * (map->y / map->y_count / 3);
+	
+	while (i < (map->x / map->x_count / 3) - 1)
+	{
+		j = 0;
+	 	while (j < (map->y / map->y_count / 3) - 1)
+		{
+			my_mlx_pixel_put(img, rect_x + i, rect_y + j, 0xFFFF41);
+			j++;
+		}
+		i++;
+	}
+	my_mlx_pixel_put(img, rect_x + i, rect_y + j, 0xFFFFFF);
 }
 
 static void paint_map(t_map *map, t_data *img)
@@ -152,9 +167,14 @@ static void paint_map(t_map *map, t_data *img)
 		while (map->map[y][x])
 		{
 			if (skipper(map, x, y))
+			{
+				x++;
 				continue ;
-			draw_rect(map, x, y);
+			}
+			draw_rect(x, y, map, img);
+			x++;
 		}
+		y++;
 	}
 }
 
@@ -174,7 +194,7 @@ int             main(void)
     img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
                                  &img.endian);
 	
-	//paint_fc(&map, &img);
+	paint_fc(&map, &img);
 	paint_map(&map, &img);
 	//paint_player(&map, &img);
     mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0); 
