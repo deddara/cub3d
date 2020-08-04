@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 21:22:20 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/04 18:46:37 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/04 18:57:27 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,16 +138,26 @@ static void cast_ray(t_map *map, t_data *img)
 	double c;
 	double x;
 	double y;
-	c = 0;
-	while ((c < 5000))
+	double fov;
+	double angle;
+	int i = 0;
+	while (i < map->x)
 	{
-		x = map->x_player + c * cos(map->a_player);
-		y = map->y_player + c * sin(map->a_player);
-		if (map->map[(int)y][(int)x] == '1' || map->map[(int)y][(int)x] == '2')
-			break;
-		my_mlx_pixel_put(img, x * (map->x / map->x_count / 3), \
-		y * (map->y / map->y_count / 3), 0xFF0000);
-		c+=0.1;
+
+		fov = M_PI / 3;
+		angle = map->a_player - fov / 2 + fov * i / (double)(map->x);
+		c = 0;
+		while ((c < 5000))
+		{
+			x = map->x_player + c * cos(angle);
+			y = map->y_player + c * sin(angle);
+			if (map->map[(int)y][(int)x] == '1' || map->map[(int)y][(int)x] == '2')
+				break;
+			my_mlx_pixel_put(img, x * (map->x / map->x_count / 3), \
+			y * (map->y / map->y_count / 3), 0xFF0000);
+			c+=0.0001;
+		}
+		i++;
 	}
 }
 
