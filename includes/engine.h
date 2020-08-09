@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/09 14:47:52 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/09 14:54:57 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/09 15:06:12 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,27 @@
 # define ENGINE_H
 # define ANGLE 66
 
-#include "main.h"
+# include "main.h"
 
 typedef struct s_raycast
 {
 	double	camera_x;
 	int		dir_x;
 	int		dir_y;
-	int		ray_dir_x;
-	int		ray_dir_y;
+	double	plane_x;
+	double	plane_y;
+	double	dist_x;
+	double	dist_y;
+	double	dlt_dist_x;
+	double	dlt_dist_y;
+	double		ray_dir_x;
+	double		ray_dir_y;
 	double	player_x;
 	double	player_y;
 	int		map_x;
 	int		map_y;
+
+	int		hit;
 }				t_raycast;
 
 void	ray_caster(t_map *map, t_data *img);
