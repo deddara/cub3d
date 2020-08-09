@@ -6,14 +6,14 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/09 14:46:39 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/09 17:01:14 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/09 17:51:30 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "engine.h"
 #include "main.h"
 
-static void dir_calc(t_raycast *ray, t_map *map)
+void dir_calc(t_raycast *ray, t_map *map)
 {
 	ray->dir_x = 0;
 	ray->dir_y = 0;
@@ -41,16 +41,6 @@ static void dir_calc(t_raycast *ray, t_map *map)
 	}
 }
 
-static void _init(t_raycast *ray, t_map *map)
-{
-	ray->player_x = (double)map->x_player + 0.5;
-	ray->player_y = (double)map->y_player + 0.5;
-	ray->dlt_dist_x = 0;
-	ray->dlt_dist_y = 0;
-	// ray->map_x = map->x_player;
-	// ray->map_y = map->y_player;
-	dir_calc(ray, map);
-}
 
 static void step_side_calc(t_raycast *ray)
 {
@@ -131,31 +121,29 @@ static void paint_map(t_raycast *ray, t_map *map, t_data *img, int x)
 	}
 }
 
-void ray_caster(t_map *map, t_data *img)
+void ray_caster(t_map *map, t_data *img, t_raycast *ray)
 {
 	int			x;
-	t_raycast	ray;
 
-	_init(&ray, map);
 	x = 0;
 	while (x < map->x)
 	{
-		ray.camera_x = 2 * x / (double)map->x - 1;
-		ray.ray_dir_x = ray.dir_x + ray.plane_x * ray.camera_x;
-		ray.ray_dir_y = ray.dir_y + ray.plane_y * ray.camera_x;
-		if (!ray.ray_dir_y)
-			ray.dlt_dist_x = 0;
+		ray->camera_x = 2 * x / (double)map->x - 1;
+		ray->ray_dir_x = ray->dir_x + ray->plane_x * ray->camera_x;
+		ray->ray_dir_y = ray->dir_y + ray->plane_y * ray->camera_x;
+		if (!ray->ray_dir_y)
+			ray->dlt_dist_x = 0;
 		else
-			ray.dlt_dist_x = (!ray.ray_dir_x) ? 1 : fabs(1 / ray.ray_dir_x);
-		if (!ray.ray_dir_x)
-			ray.dlt_dist_y = 0;
+			ray->dlt_dist_x = (!ray->ray_dir_x) ? 1 : fabs(1 / ray->ray_dir_x);
+		if (!ray->ray_dir_x)
+			ray->dlt_dist_y = 0;
 		else
-			ray.dlt_dist_y = (!ray.ray_dir_y) ? 1 : fabs(1 / ray.ray_dir_y);
-		ray.map_x = map->x_player;
-		ray.map_y = map->y_player;
-		step_side_calc(&ray);
-		check_wall(&ray, map);
-		paint_map(&ray, map, img, x);
+			ray->dlt_dist_y = (!ray->ray_dir_y) ? 1 : fabs(1 / ray->ray_dir_y);
+		ray->map_x = map->x_player;
+		ray->map_y = map->y_player;
+		step_side_calc(ray);
+		check_wall(ray, map);
+		paint_map(ray, map, img, x);
 		x++;
 	}
 }
