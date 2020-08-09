@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 21:22:20 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/09 20:40:06 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/09 21:24:11 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,6 +185,30 @@ int             ft_close_2(int keycode, t_raycast *ray)
 		ray_caster(ray->map, ray->img, ray);
 		mlx_put_image_to_window(ray->vars->mlx, ray->vars->win, ray->img->img, 0, 0); 
 		ft_putnbr_fd(ray->player_x, 0);
+	}
+	if(keycode == 0)
+	{	
+		double old_dir_x = ray->dir_x;
+		ray->dir_x = ray->dir_x * cos(M_PI / 20) - ray->dir_y * sin(M_PI / 20);
+		ray->dir_y = old_dir_x * sin(M_PI / 20) + ray->dir_y * cos(M_PI / 20);
+		double old_plane_x = ray->plane_x;
+		ray->plane_x = ray->plane_x * cos(M_PI / 20) - ray->plane_y * sin(M_PI / 20);
+		ray->plane_y = old_plane_x * sin(M_PI / 20) + ray->plane_y * cos(M_PI / 20);
+		paint_fc(ray->map, ray->img);
+		ray_caster(ray->map, ray->img, ray);
+		mlx_put_image_to_window(ray->vars->mlx, ray->vars->win, ray->img->img, 0, 0); 
+	}
+	if(keycode == 2)
+	{	
+		double old_dir_x = ray->dir_x;
+		ray->dir_x = ray->dir_x * cos(-M_PI / 20) - ray->dir_y * sin(-M_PI / 20);
+		ray->dir_y = old_dir_x * sin(-M_PI / 20) + ray->dir_y * cos(-M_PI / 20);
+		double old_plane_x = ray->plane_x;
+		ray->plane_x = ray->plane_x * cos(-M_PI / 20) - ray->plane_y * sin(-M_PI / 20);
+		ray->plane_y = old_plane_x * sin(-M_PI / 20) + ray->plane_y * cos(-M_PI / 20);
+		paint_fc(ray->map, ray->img);
+		ray_caster(ray->map, ray->img, ray);
+		mlx_put_image_to_window(ray->vars->mlx, ray->vars->win, ray->img->img, 0, 0); 
 	}
 	return (0);
 }

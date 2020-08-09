@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/09 14:46:39 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/09 20:25:21 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/09 21:22:55 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,22 @@ void dir_calc(t_raycast *ray, t_map *map)
 	if (map->player_pos == 'N')
 	{
 		ray->dir_y = -1;
-		ray->plane_x = tan(M_PI * ANGLE / 360);
+		ray->plane_x = -tan(M_PI * ANGLE / 360);
 	}
 	else if (map->player_pos == 'S')
 	{
 		ray->dir_y = 1;
-		ray->plane_x = -tan(M_PI * ANGLE / 360);
+		ray->plane_x = tan(M_PI * ANGLE / 360);
 	}
 	else if (map->player_pos == 'W')
 	{
 		ray->dir_x = -1;
-		ray->plane_y = -tan(M_PI * ANGLE / 360);
+		ray->plane_y = tan(M_PI * ANGLE / 360);
 	}
 	else if (map->player_pos == 'E')
 	{
 		ray->dir_x = 1;
-		ray->plane_y = tan(M_PI * ANGLE / 360);
+		ray->plane_y = -tan(M_PI * ANGLE / 360);
 	}
 }
 

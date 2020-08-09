@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/09 14:47:52 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/09 20:25:26 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/09 21:00:38 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 typedef struct s_raycast
 {
 	double	camera_x;
-	int		dir_x;
-	int		dir_y;
+	double		dir_x;
+	double		dir_y;
 	double	plane_x;
 	double	plane_y;
 	double	dist_x;
