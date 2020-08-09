@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 21:22:20 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/09 20:10:01 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/09 20:40:06 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,9 +157,8 @@ int             ft_close_2(int keycode, t_raycast *ray)
 {
 	if(keycode == 13)
 	{
-		if (ray->map->map[ray->map->y_player][ray->map->x_player])
+		if (skipper(ray->map, (int)ray->player_y, (int)ray->player_x + ray->dir_x))
 		{
-			ray->player_x +=  1;
 
 			// for (int i = 0; i < 1920 * 1080 * ray->img->bits_per_pixel / 8; i++)
 			// {
@@ -167,29 +166,25 @@ int             ft_close_2(int keycode, t_raycast *ray)
 			// }
 			// ray->img->addr = mlx_get_data_addr(ray->img->img, &ray->img->bits_per_pixel, &ray->img->line_length,
            	//                       &ray->img->endian);
-			paint_fc(ray->map, ray->img);
-			ray_caster(ray->map, ray->img, ray);
-		
-			mlx_put_image_to_window(ray->vars->mlx, ray->vars->win, ray->img->img, 0, 0); 
+			ray->player_x +=  ray->dir_x;
 			ft_putnbr_fd(ray->player_x, 0);
 		}
+		if (skipper(ray->map, (int)ray->player_y + ray->dir_y, (int)ray->player_x ))
+			ray->player_y +=  ray->dir_y;
+		paint_fc(ray->map, ray->img);
+		ray_caster(ray->map, ray->img, ray);	
+		mlx_put_image_to_window(ray->vars->mlx, ray->vars->win, ray->img->img, 0, 0); 
 	}
 	if(keycode == 1)
 	{
-		if (ray->player_x > 2)
-		{
-			ray->player_x -=  1;
-			// for (int i = 0; i < 1920 * 1080 * ray->img->bits_per_pixel / 8; i++)
-			// {
-			// 	ray->img->addr[i] = 0;
-			// }
-			// ray->img->addr = mlx_get_data_addr(ray->img->img, &ray->img->bits_per_pixel, &ray->img->line_length,
-    	    //                          &ray->img->endian);
-			paint_fc(ray->map, ray->img);
-			ray_caster(ray->map, ray->img, ray);
-			mlx_put_image_to_window(ray->vars->mlx, ray->vars->win, ray->img->img, 0, 0); 
-			ft_putnbr_fd(ray->player_x, 0);
-		}
+		if (skipper(ray->map, (int)ray->player_y, (int)ray->player_x - ray->dir_x))
+			ray->player_x -=  ray->dir_x;
+		if (skipper(ray->map, (int)ray->player_y - ray->dir_y, (int)ray->player_x ))
+			ray->player_y -=  ray->dir_y;
+		paint_fc(ray->map, ray->img);
+		ray_caster(ray->map, ray->img, ray);
+		mlx_put_image_to_window(ray->vars->mlx, ray->vars->win, ray->img->img, 0, 0); 
+		ft_putnbr_fd(ray->player_x, 0);
 	}
 	return (0);
 }

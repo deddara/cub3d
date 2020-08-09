@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/09 14:46:39 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/09 20:17:40 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/09 20:25:21 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static void step_side_calc(t_raycast *ray)
 
 }
 
-static int skipper(t_map *map, int y, int x)
+int skipper(t_map *map, int y, int x)
 {
 	if (map->map[y][x] == ' ' || map->map[y][x] == '0' || 
 		map->map[y][x] == 'N' || map->map[y][x] == 'S' || map->map[y][x] == 'W'

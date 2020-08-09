@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/09 14:47:52 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/09 20:03:38 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/09 20:25:26 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct s_raycast
 	t_vars *vars;
 }				t_raycast;
 
-
+int skipper(t_map *map, int y, int x);
 void	ray_caster(t_map *map, t_data *img, t_raycast *ray);
 void dir_calc(t_raycast *ray, t_map *map);
 
