@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/09 14:46:39 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/09 22:58:43 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/09 23:05:39 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,12 @@
 # include <stdarg.h>
 # include <wchar.h>
 # include <sys/types.h>
+
 static void rates_calc(t_raycast *ray)
 {
 	ray->time_prev = ray->time_curr;
 	ray->time_curr = clock();
-	ray->frame_time = (ray->time_curr - ray->time_prev) / 1000.0;
+	ray->frame_time = (ray->time_curr - ray->time_prev) / 2000.0;
 	ray->move_speed = ray->frame_time * 0.05;
 	ray->rotate_speed = ray->frame_time * 0.02;
 }
