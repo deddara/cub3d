@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/09 14:47:52 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/09 19:52:53 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/09 20:03:38 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ typedef struct s_raycast
 	int		step_x;
 	int		step_y;
 	int 	wall_side;
-	double	wall_dist;
-	int	wall_height;
-	double	wall_start;
-	double	wall_end;
+	double		wall_dist;
+	int		wall_height;
+	int		wall_start;
+	int		wall_end;
 	int		hit;
 	t_data *img;
 	t_map *map;

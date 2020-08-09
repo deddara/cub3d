@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/09 14:46:39 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/09 19:44:38 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/09 20:17:40 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,16 @@ static void step_side_calc(t_raycast *ray)
 		ray->dist_y = (ray->player_y - ray->map_y) * ray->dlt_dist_y;
 	}
 	
+
+}
+
+static int skipper(t_map *map, int y, int x)
+{
+	if (map->map[y][x] == ' ' || map->map[y][x] == '0' || 
+		map->map[y][x] == 'N' || map->map[y][x] == 'S' || map->map[y][x] == 'W'
+		|| map->map[y][x] == 'E')
+		return (1);
+	return (0);
 }
 
 static void check_wall(t_raycast *ray, t_map *map)
@@ -84,15 +94,15 @@ static void check_wall(t_raycast *ray, t_map *map)
 			ray->map_y += ray->step_y;
 			ray->wall_side = (ray->ray_dir_y < 0) ? 0 : 1;
 		}
-		if (map->map[ray->map_y][ray->map_x] != '0')
+		if (!skipper(map, ray->map_y, ray->map_x))
 			ray->hit = 1;
 	}
 	if (ray->wall_side > 1)
-		ray->wall_dist = (double)(ray->map_x - ray->player_x + (1 - ray->step_x) \
-				/ 2) / ray->ray_dir_x;
+		ray->wall_dist = ((ray->map_x - ray->player_x + (1 - ray->step_x) \
+				/ 2) / ray->ray_dir_x);
 	else
-		ray->wall_dist = (double)(ray->map_y - ray->player_y + (1 - ray->step_y) \
-				/ 2) / ray->ray_dir_y;
+		ray->wall_dist = ((ray->map_y - ray->player_y + (1 - ray->step_y) \
+				/ 2) / ray->ray_dir_y);
 }
 
 static void paint_map(t_raycast *ray, t_map *map, t_data *img, int x)
@@ -100,10 +110,10 @@ static void paint_map(t_raycast *ray, t_map *map, t_data *img, int x)
 	int color;
 
 	ray->wall_height = (int)(map->y / ray->wall_dist);
-	ray->wall_start =  -ray->wall_height / 2 + map->y / 2;
+	ray->wall_start = (int)(map->y / 2 - ray->wall_height / 2);
 	if (ray->wall_start < 0)
 		ray->wall_start = 0;
-	ray->wall_end = ray->wall_height / 2 + map->y / 2;
+	ray->wall_end = (int)(ray->wall_height / 2 + map->y / 2);
 	if (ray->wall_end >= map->y)
 		ray->wall_end = map->y - 1;
 	while (ray->wall_start <= ray->wall_end)
@@ -126,8 +136,6 @@ void ray_caster(t_map *map, t_data *img, t_raycast *ray)
 	int			x;
 
 	x = 0;
-		ray->dlt_dist_x = 0;
-	ray->dlt_dist_y = 0;
 	while (x < map->x)
 	{
 		ray->camera_x = 2 * x / (double)map->x - 1;
