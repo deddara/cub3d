@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/09 14:46:39 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/09 17:51:30 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/09 19:44:38 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,8 @@ void ray_caster(t_map *map, t_data *img, t_raycast *ray)
 	int			x;
 
 	x = 0;
+		ray->dlt_dist_x = 0;
+	ray->dlt_dist_y = 0;
 	while (x < map->x)
 	{
 		ray->camera_x = 2 * x / (double)map->x - 1;
@@ -139,8 +141,8 @@ void ray_caster(t_map *map, t_data *img, t_raycast *ray)
 			ray->dlt_dist_y = 0;
 		else
 			ray->dlt_dist_y = (!ray->ray_dir_y) ? 1 : fabs(1 / ray->ray_dir_y);
-		ray->map_x = map->x_player;
-		ray->map_y = map->y_player;
+		ray->map_x = (int)ray->player_x;
+		ray->map_y = (int)ray->player_y;
 		step_side_calc(ray);
 		check_wall(ray, map);
 		paint_map(ray, map, img, x);

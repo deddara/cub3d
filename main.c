@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 21:22:20 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/09 17:50:31 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/09 19:51:39 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,58 @@ static void _init(t_raycast *ray, t_map *map)
 	dir_calc(ray, map);
 }
 
+int             ft_close(int keycode, t_vars *vars)
+{
+	if(keycode == 53)
+	{
+    	mlx_destroy_window(vars->mlx, vars->win);
+		exit(0);
+	}
+		ft_putnbr_fd(keycode, 0);
+	return (0);
+}
+int             ft_close_2(int keycode, t_raycast *ray)
+{
+	if(keycode == 13)
+	{
+		if (ray->map->map[ray->map->y_player][ray->map->x_player])
+		{
+			ray->player_x +=  1;
+
+			// for (int i = 0; i < 1920 * 1080 * ray->img->bits_per_pixel / 8; i++)
+			// {
+			// 	ray->img->addr[i] = 0;
+			// }
+			// ray->img->addr = mlx_get_data_addr(ray->img->img, &ray->img->bits_per_pixel, &ray->img->line_length,
+           	//                       &ray->img->endian);
+			paint_fc(ray->map, ray->img);
+			ray_caster(ray->map, ray->img, ray);
+		
+			mlx_put_image_to_window(ray->vars->mlx, ray->vars->win, ray->img->img, 0, 0); 
+			ft_putnbr_fd(ray->player_x, 0);
+		}
+	}
+	if(keycode == 1)
+	{
+		if (ray->player_x > 2)
+		{
+			ray->player_x -=  1;
+			// for (int i = 0; i < 1920 * 1080 * ray->img->bits_per_pixel / 8; i++)
+			// {
+			// 	ray->img->addr[i] = 0;
+			// }
+			// ray->img->addr = mlx_get_data_addr(ray->img->img, &ray->img->bits_per_pixel, &ray->img->line_length,
+    	    //                          &ray->img->endian);
+			paint_fc(ray->map, ray->img);
+			ray_caster(ray->map, ray->img, ray);
+			mlx_put_image_to_window(ray->vars->mlx, ray->vars->win, ray->img->img, 0, 0); 
+			ft_putnbr_fd(ray->player_x, 0);
+		}
+	}
+	return (0);
+}
+
+
 int             main(void)
 {
     t_data  img;
@@ -164,9 +216,12 @@ int             main(void)
 	_init(&ray, &map);
 	// paint_map(&map, &img);
 	// draw_player(map.x_player, map.y_player, &map, &img);
+	ray.map = &map;
+	ray.img = &img;
+	ray.vars = &vars;
 	ray_caster(&map, &img, &ray);
-	// cast_ray(&map, &img);
-	//paint_player(&map, &img);
+	//mlx_key_hook(vars.win, ft_close, &vars);
+	mlx_key_hook(vars.win, ft_close_2, &ray);
     mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0); 
     mlx_loop(vars.mlx);
 	return (0);
