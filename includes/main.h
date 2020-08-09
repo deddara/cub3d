@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 21:22:15 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/02 19:12:43 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/09 16:18:17 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,8 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <fcntl.h>
-#include <math.h>
+# include <math.h>
 # include "get_next_line.h"
-
 typedef struct  s_vars 
 {
     void        *mlx;
@@ -38,5 +37,7 @@ typedef struct  s_data
     int         line_length;
     int         endian;
 }               t_data;
+
+void            my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
 #endif

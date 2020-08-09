@@ -6,7 +6,7 @@
 #    By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/27 16:22:26 by deddara           #+#    #+#              #
-#    Updated: 2020/08/04 19:56:12 by deddara          ###   ########.fr        #
+#    Updated: 2020/08/09 16:18:01 by deddara          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ LBFT_DIR = ./libraries/libft/
 OBJ_DIR = obj/
 HDR_DIR = ./includes/
 HEADERS = -I$(HDR_DIR) -I./libraries/libft/includes/ -I./libraries/minilibx/ -I./libraries/gnl
-COMPILE_FLGS = $(HEADERS) -g -Wall -Wextra 
+COMPILE_FLGS = $(HEADERS) -g -Wall -Wextra -Werror
 MLX_FLAGS = -lmlx 
 CC = gcc
 
@@ -41,7 +41,7 @@ all: $(OBJ_DIR) $(NAME)
 	@echo "\033[32m[+] Make completed!\033[0m"
 
 $(NAME): $(GNL_SRC.O) $(PARS_SRC.O)
-	@$(CC) $(COMPILE_FLGS) -O2 $(GNL_SRC.O) $(PARS_SRC.O) -L$(LBFT_DIR) -lft -L$(MLX_DIR) $(MLX_FLAGS) main.c
+	@$(CC) $(COMPILE_FLGS) -O2 $(GNL_SRC.O) $(PARS_SRC.O) -L$(LBFT_DIR) -lft -L$(MLX_DIR) $(MLX_FLAGS) ray_caster.c main.c
 
 $(OBJ_DIR):
 	@mkdir -p	$(OBJ_DIR)/$(GNL_DIR) $(OBJ_DIR)/$(PARS_DIR)
