@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/09 14:46:39 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/09 16:19:39 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/09 17:01:14 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ static void _init(t_raycast *ray, t_map *map)
 	ray->player_y = (double)map->y_player + 0.5;
 	ray->dlt_dist_x = 0;
 	ray->dlt_dist_y = 0;
-	ray->map_x = map->x_player;
-	ray->map_y = map->y_player;
+	// ray->map_x = map->x_player;
+	// ray->map_y = map->y_player;
 	dir_calc(ray, map);
 }
 
@@ -98,10 +98,10 @@ static void check_wall(t_raycast *ray, t_map *map)
 			ray->hit = 1;
 	}
 	if (ray->wall_side > 1)
-		ray->wall_dist = (float)(ray->map_x - ray->player_x + (1 - ray->step_x) \
+		ray->wall_dist = (double)(ray->map_x - ray->player_x + (1 - ray->step_x) \
 				/ 2) / ray->ray_dir_x;
 	else
-		ray->wall_dist = (float)(ray->map_y - ray->player_y + (1 - ray->step_y) \
+		ray->wall_dist = (double)(ray->map_y - ray->player_y + (1 - ray->step_y) \
 				/ 2) / ray->ray_dir_y;
 }
 
@@ -109,8 +109,8 @@ static void paint_map(t_raycast *ray, t_map *map, t_data *img, int x)
 {
 	int color;
 
-	ray->wall_height = (int) (map->y / ray->wall_dist);
-	ray->wall_start = map->y / 2 - ray->wall_height / 2;
+	ray->wall_height = (int)(map->y / ray->wall_dist);
+	ray->wall_start =  -ray->wall_height / 2 + map->y / 2;
 	if (ray->wall_start < 0)
 		ray->wall_start = 0;
 	ray->wall_end = ray->wall_height / 2 + map->y / 2;
@@ -151,6 +151,8 @@ void ray_caster(t_map *map, t_data *img)
 			ray.dlt_dist_y = 0;
 		else
 			ray.dlt_dist_y = (!ray.ray_dir_y) ? 1 : fabs(1 / ray.ray_dir_y);
+		ray.map_x = map->x_player;
+		ray.map_y = map->y_player;
 		step_side_calc(&ray);
 		check_wall(&ray, map);
 		paint_map(&ray, map, img, x);

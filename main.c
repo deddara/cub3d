@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 21:22:20 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/09 15:42:28 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/09 17:09:43 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,90 +53,90 @@ static void paint_fc(t_map *map, t_data *img)
 
 //ОТРИСОВКА ПОТОЛКА И ПОЛА
 //************************************************
-static int skipper(t_map *map, int x, int y)
-{
-	if (map->map[y][x] == ' ' || map->map[y][x] == '0' || map->map[y][x] == '2' || 
-		map->map[y][x] == 'N' || map->map[y][x] == 'S' || map->map[y][x] == 'W'
-		|| map->map[y][x] == 'E')
-		return (1);
-	return (0);
-}
+// static int skipper(t_map *map, int x, int y)
+// {
+// 	if (map->map[y][x] == ' ' || map->map[y][x] == '0' || map->map[y][x] == '2' || 
+// 		map->map[y][x] == 'N' || map->map[y][x] == 'S' || map->map[y][x] == 'W'
+// 		|| map->map[y][x] == 'E')
+// 		return (1);
+// 	return (0);
+// }
 
-static void draw_rect(int x, int y, t_map *map, t_data *img)
-{
-	int rect_x;
-	int rect_y;
-	int i, j;
+// static void draw_rect(int x, int y, t_map *map, t_data *img)
+// {
+// 	int rect_x;
+// 	int rect_y;
+// 	int i, j;
 
-	i = 0;
-	j = 0;
+// 	i = 0;
+// 	j = 0;
 	
-	rect_x = x * (map->x / map->x_count / 3);
-	rect_y = y * (map->y / map->y_count / 3);
+// 	rect_x = x * (map->x / map->x_count / 3);
+// 	rect_y = y * (map->y / map->y_count / 3);
 	
-	while (i < (map->x / map->x_count / 3) - 1)
-	{
-		j = 0;
-	 	while (j < (map->y / map->y_count / 3) - 1)
-		{
-			my_mlx_pixel_put(img, rect_x + i, rect_y + j, 0xFFFF41);
-			j++;
-		}
-		i++;
-	}
-}
+// 	while (i < (map->x / map->x_count / 3) - 1)
+// 	{
+// 		j = 0;
+// 	 	while (j < (map->y / map->y_count / 3) - 1)
+// 		{
+// 			my_mlx_pixel_put(img, rect_x + i, rect_y + j, 0xFFFF41);
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// }
 
-static void draw_player(int x, int y, t_map *map, t_data *img)
-{
-	int rect_x;
-	int rect_y;
-	int i, j;
+// static void draw_player(int x, int y, t_map *map, t_data *img)
+// {
+// 	int rect_x;
+// 	int rect_y;
+// 	int i, j;
 
-	i = 0;
-	j = 0;
+// 	i = 0;
+// 	j = 0;
 	
-	rect_x = x * (map->x / map->x_count / 3) + ((map->x / map->x_count / 3) / 2);
-	rect_y = y * (map->y / map->y_count / 3) + ((map->y / map->y_count / 3) / 2);
+// 	rect_x = x * (map->x / map->x_count / 3) + ((map->x / map->x_count / 3) / 2);
+// 	rect_y = y * (map->y / map->y_count / 3) + ((map->y / map->y_count / 3) / 2);
 	
-	while (i < 5)
-	{
-		j = 0;
-	 	while (j < 5)
-		{
-			my_mlx_pixel_put(img, rect_x + i, rect_y + j, 0xFF0000);
-			j++;
-		}
-		i++;
-	}
-}
+// 	while (i < 5)
+// 	{
+// 		j = 0;
+// 	 	while (j < 5)
+// 		{
+// 			my_mlx_pixel_put(img, rect_x + i, rect_y + j, 0xFF0000);
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// }
 
-static void paint_map(t_map *map, t_data *img)
-{
-	int x = 0;
-	int y = 0;
+// static void paint_map(t_map *map, t_data *img)
+// {
+// 	int x = 0;
+// 	int y = 0;
 
-	while (map->map[y])
-	{
-		x = 0;
-		while (map->map[y][x])
-		{
-			if (skipper(map, x, y))
-			{
-				x++;
-				continue ;
-			}
-			draw_rect(x, y, map, img);
-			x++;
-		}
-		y++;
-	}
-}
+// 	while (map->map[y])
+// 	{
+// 		x = 0;
+// 		while (map->map[y][x])
+// 		{
+// 			if (skipper(map, x, y))
+// 			{
+// 				x++;
+// 				continue ;
+// 			}
+// 			draw_rect(x, y, map, img);
+// 			x++;
+// 		}
+// 		y++;
+// 	}
+// }
 
-typedef struct s_wall
-{
-	int height;
-	double fov;
-}				t_wall;
+// typedef struct s_wall
+// {
+// 	int height;
+// 	double fov;
+// }				t_wall;
 
 // static void cast_ray(t_map *map, t_data *img)
 // {
@@ -194,8 +194,8 @@ int             main(void)
                                  &img.endian);
 	
 	paint_fc(&map, &img);
-	paint_map(&map, &img);
-	draw_player(map.x_player, map.y_player, &map, &img);
+	// paint_map(&map, &img);
+	// draw_player(map.x_player, map.y_player, &map, &img);
 	ray_caster(&map, &img);
 	// cast_ray(&map, &img);
 	//paint_player(&map, &img);
