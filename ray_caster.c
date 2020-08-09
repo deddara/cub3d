@@ -6,12 +6,23 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/09 14:46:39 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/09 21:22:55 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/09 22:58:43 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "engine.h"
 #include "main.h"
+# include <stdarg.h>
+# include <wchar.h>
+# include <sys/types.h>
+static void rates_calc(t_raycast *ray)
+{
+	ray->time_prev = ray->time_curr;
+	ray->time_curr = clock();
+	ray->frame_time = (ray->time_curr - ray->time_prev) / 1000.0;
+	ray->move_speed = ray->frame_time * 0.05;
+	ray->rotate_speed = ray->frame_time * 0.02;
+}
 
 void dir_calc(t_raycast *ray, t_map *map)
 {
@@ -22,22 +33,22 @@ void dir_calc(t_raycast *ray, t_map *map)
 	if (map->player_pos == 'N')
 	{
 		ray->dir_y = -1;
-		ray->plane_x = -tan(M_PI * ANGLE / 360);
+		ray->plane_x = tan(M_PI * ANGLE / 360);
 	}
 	else if (map->player_pos == 'S')
 	{
 		ray->dir_y = 1;
-		ray->plane_x = tan(M_PI * ANGLE / 360);
+		ray->plane_x = -tan(M_PI * ANGLE / 360);
 	}
 	else if (map->player_pos == 'W')
 	{
 		ray->dir_x = -1;
-		ray->plane_y = tan(M_PI * ANGLE / 360);
+		ray->plane_y = -tan(M_PI * ANGLE / 360);
 	}
 	else if (map->player_pos == 'E')
 	{
 		ray->dir_x = 1;
-		ray->plane_y = -tan(M_PI * ANGLE / 360);
+		ray->plane_y = tan(M_PI * ANGLE / 360);
 	}
 }
 
@@ -52,7 +63,7 @@ static void step_side_calc(t_raycast *ray)
 	else
 	{
 		ray->step_x = 1;
-		ray->dist_x = (ray->player_x - ray->map_x) * ray->dlt_dist_x;
+		ray->dist_x = (1.0 + ray->map_x - ray->player_x ) * ray->dlt_dist_x;
 	}
 	if (ray->ray_dir_y < 0)
 	{
@@ -62,7 +73,7 @@ static void step_side_calc(t_raycast *ray)
 	else
 	{
 		ray->step_y = 1;
-		ray->dist_y = (ray->player_y - ray->map_y) * ray->dlt_dist_y;
+		ray->dist_y = (1.0 + ray->map_y - ray->player_y ) * ray->dlt_dist_y;
 	}
 	
 
@@ -108,15 +119,17 @@ static void check_wall(t_raycast *ray, t_map *map)
 static void paint_map(t_raycast *ray, t_map *map, t_data *img, int x)
 {
 	int color;
+	int y;
 
 	ray->wall_height = (int)(map->y / ray->wall_dist);
-	ray->wall_start = (int)(map->y / 2 - ray->wall_height / 2);
+	ray->wall_start = (map->y / 2 - ray->wall_height / 2);
 	if (ray->wall_start < 0)
 		ray->wall_start = 0;
-	ray->wall_end = (int)(ray->wall_height / 2 + map->y / 2);
+	ray->wall_end = (ray->wall_height / 2 + map->y / 2);
 	if (ray->wall_end >= map->y)
 		ray->wall_end = map->y - 1;
-	while (ray->wall_start <= ray->wall_end)
+	y = ray->wall_start;
+	while (y <= ray->wall_end)
 	{
 		if (ray->wall_side == 0)
 			color = 0x224A7B;
@@ -126,8 +139,8 @@ static void paint_map(t_raycast *ray, t_map *map, t_data *img, int x)
 			color = 0xA7F192;
 		else
 			color = 0x888945;
-		my_mlx_pixel_put(img, x, ray->wall_start, color);
-		ray->wall_start++;
+		my_mlx_pixel_put(img, x, y, color);
+		y++;
 	}
 }
 
@@ -156,4 +169,5 @@ void ray_caster(t_map *map, t_data *img, t_raycast *ray)
 		paint_map(ray, map, img, x);
 		x++;
 	}
+	rates_calc(ray);
 }
