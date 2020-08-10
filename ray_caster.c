@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/09 14:46:39 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/10 16:19:08 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/10 20:37:31 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,19 @@ static void check_wall(t_raycast *ray, t_map *map)
 				/ 2) / ray->ray_dir_y);
 }
 
+static int getpixelcolor(t_data *img, int x, int y)
+{
+	{
+	if (!img->width || !img->height)
+		return (0);
+	x = abs(x);
+	y = abs(y);
+	if (x > img->width || y > img->height || x < 0 || y < 0)
+		return (0);
+	return (*(int*)(img->addr + ((x + (y * img->width)) * (img->bits_per_pixel / 8))));
+}
+}
+
 static void paint_map(t_raycast *ray, t_map *map, t_data *img, int x)
 {
 	int color;
@@ -130,16 +143,32 @@ static void paint_map(t_raycast *ray, t_map *map, t_data *img, int x)
 	if (ray->wall_end >= map->y)
 		ray->wall_end = map->y - 1;
 	y = ray->wall_start;
-	while (y <= ray->wall_end)
+	double wall_x;
+	if ((ray->wall_side == 2 || ray->wall_side == 3))
+		wall_x = ray->player_y + ray->wall_dist * ray->ray_dir_y;
+	else
+		wall_x = ray->player_x + ray->wall_dist * ray->ray_dir_x;
+	wall_x -= floor((wall_x));
+	int tex_x = (int)(wall_x * (double)(ray->text_img->width));
+	if ((ray->wall_side == 2 || ray->wall_side == 3) && ray->dir_x > 0)
+		tex_x = ray->text_img->width - tex_x - 1;
+	if ((ray->wall_side == 0 || ray->wall_side == 1) && ray->dir_y < 0)
+		tex_x = ray->text_img->width - tex_x - 1;
+	double step = 1.0 * ray->text_img->height / ray->wall_height;
+	double tex_pos = (ray->wall_start - map->y / 2 + ray->wall_height / 2) * step;
+	while (y < ray->wall_end)
 	{
-		if (ray->wall_side == 0)
-			color = 0x224A7B;
-		else if (ray->wall_side == 1)
-			color = 0xFF6524;
-		else if (ray->wall_side == 2)
-			color = 0xA7F192;
-		else
-			color = 0x888945;
+		// if (ray->wall_side == 0)
+		// 	color = 0x224A7B;
+		// else if (ray->wall_side == 1)
+		// 	color = 0xFF6524;
+		// else if (ray->wall_side == 2)
+		// 	color = 0xA7F192;
+		// else
+		// 	color = 0x888945;
+		int tex_y = (int)tex_pos & (ray->text_img->height - 1);
+		tex_pos += step;
+		color = getpixelcolor(ray->text_img, tex_x, tex_y);
 		my_mlx_pixel_put(img, x, y, color);
 		y++;
 	}
@@ -148,8 +177,13 @@ static void paint_map(t_raycast *ray, t_map *map, t_data *img, int x)
 void ray_caster(t_map *map, t_data *img, t_raycast *ray)
 {
 	int			x;
-
 	x = 0;
+	t_data text_img;
+	
+	text_img.img = mlx_png_file_to_image(ray->vars->mlx, map->so, &text_img.width, &text_img.height);
+	text_img.addr = mlx_get_data_addr(text_img.img, &text_img.bits_per_pixel, \
+					&text_img.line_length, &text_img.endian);
+	ray->text_img = &text_img;
 	while (x < map->x)
 	{
 		ray->camera_x = 2 * x / (double)map->x - 1;

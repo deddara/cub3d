@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 21:22:20 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/10 17:39:44 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/10 20:27:07 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -241,9 +241,9 @@ int             main(void)
 	ray.img = &img;
 	ray.vars = &vars;
 	ray_caster(&map, &img, &ray);
+    mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0); 
 	//mlx_key_hook(vars.win, ft_close, &vars);
 	mlx_hook(vars.win, 2, 0, ft_close_2, &ray);
-    mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0); 
     mlx_loop(vars.mlx);
 	return (0);
 }

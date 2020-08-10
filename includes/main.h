@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 21:22:15 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/09 16:18:17 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/10 19:45:35 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ typedef struct  s_data
     int         bits_per_pixel;
     int         line_length;
     int         endian;
+	int			height;
+	int			width;
 }               t_data;
 
 void            my_mlx_pixel_put(t_data *data, int x, int y, int color);

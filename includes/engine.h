@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/09 14:47:52 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/09 22:15:32 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/10 20:34:11 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_raycast
 	int		wall_end;
 	int		hit;
 	t_data *img;
+	t_data *text_img;
 	t_map *map;
 	t_vars *vars;
 	double		frame_time;
