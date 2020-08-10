@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 20:53:16 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/04 16:42:04 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/10 17:37:17 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ static int ea_checker(char *line, t_map *map)
 	if(!(map->ea = ft_strdup(words[1])))
 		return (0);
 	free (*words);
-	free (words);
 	return (1);
 }	
 
@@ -93,7 +92,6 @@ static int we_checker(char *line, t_map *map)
 	if(!(map->we = ft_strdup(words[1])))
 		return (0);
 	free (*words);
-	free (words);
 	return (1);
 }	
 
@@ -111,7 +109,6 @@ static int so_checker(char *line, t_map *map)
 	if(!(map->so = ft_strdup(words[1])))
 		return (0);
 	free (*words);
-	free (words);
 	return (1);
 }	
 
@@ -148,7 +145,6 @@ static int s_checker(char *line, t_map *map)
 	if(!(map->s = ft_strdup(words[1])))
 		return (0);
 	free (*words);
-	free (words);
 	return (1);
 }
 
