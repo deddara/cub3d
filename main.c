@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 21:22:20 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/10 16:47:17 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/10 16:59:59 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,36 +158,33 @@ int             ft_close_2(int keycode, t_raycast *ray)
 	}
 	if (keycode == 13) //w
 	{
-		if (skipper(ray->map, (int)ray->player_y, (int)(ray->player_x + ray->dir_x * 0.3)))
-		{
-			ray->player_x +=  ray->dir_x * 0.3;
-			ft_putnbr_fd(ray->player_x, 0);
-		}
-		if (skipper(ray->map, (int)(ray->player_y + ray->dir_y * 0.3), (int)ray->player_x ))
-			ray->player_y +=  ray->dir_y * 0.3;
+		if (skipper(ray->map, (int)ray->player_y, (int)(ray->player_x + ray->dir_x * 0.1)))
+			ray->player_x +=  ray->dir_x * 0.1;
+		if (skipper(ray->map, (int)(ray->player_y + ray->dir_y * 0.1), (int)ray->player_x ))
+			ray->player_y +=  ray->dir_y * 0.1;
 
 	}
 	if (keycode == 1) //s
 	{
-		if (skipper(ray->map, (int)ray->player_y, (int)(ray->player_x - ray->dir_x * 0.3)))
-			ray->player_x -=  ray->dir_x * 0.3;
-		if (skipper(ray->map, (int)(ray->player_y - ray->dir_y * 0.3), (int)ray->player_x ))
-			ray->player_y -=  ray->dir_y * 0.3;
+		if (skipper(ray->map, (int)ray->player_y, (int)(ray->player_x - ray->dir_x * 0.1)))
+			ray->player_x -=  ray->dir_x * 0.1;
+		if (skipper(ray->map, (int)(ray->player_y - ray->dir_y * 0.1), (int)ray->player_x ))
+			ray->player_y -=  ray->dir_y * 0.1;
 
 	}
 	if (keycode == 0)//a
 	{
-		if (skipper(ray->map, (int)ray->player_y, (int)(ray->player_x - ray->dir_y * 0.3)))
-			ray->player_x -=  ray->dir_y * 0.3;
-		if (skipper(ray->map, (int)(ray->player_y - ray->dir_x * 0.3), (int)ray->player_x ))
-			ray->player_y -=  ray->dir_x * 0.3;
+		if (skipper(ray->map, (int)ray->player_y, (int)(ray->player_x - ray->dir_y * 0.1)))
+			ray->player_x -=  ray->dir_y * 0.1;
+		if (skipper(ray->map, (int)(ray->player_y - ray->dir_x * 0.1), (int)ray->player_x ))
+			ray->player_y -=  ray->dir_x * 0.1;
 	}
 	if (keycode == 2)//a
 	{
-		if (skipper(ray->map, (int)ray->player_y, (int)(ray->player_x + ray->dir_y * 0.3)))
-			ray->player_x +=  ray->dir_y * 0.3;
-		if (skipper(ray->map, (int)(ray->player_y + ray->dir_x * 0.3), (int)ray->player_x ))
-			ray->player_y +=  ray->dir_x * 0.3;
+		if (skipper(ray->map, (int)ray->player_y, (int)(ray->player_x + ray->dir_y * 0.1)))
+			ray->player_x +=  ray->dir_y * 0.1;
+		if (skipper(ray->map, (int)(ray->player_y + ray->dir_x * 0.1), (int)ray->player_x ))
+			ray->player_y +=  ray->dir_x * 0.1;
 	}
 	if (keycode == 123)
 	{	
@@ -206,10 +203,6 @@ int             ft_close_2(int keycode, t_raycast *ray)
 		double old_plane_x = ray->plane_x;
 		ray->plane_x = ray->plane_x * cos(ray->rotate_speed) - ray->plane_y * sin(ray->rotate_speed);
 		ray->plane_y = old_plane_x * sin(ray->rotate_speed) + ray->plane_y * cos(ray->rotate_speed);
-
-	}
-	if (keycode == 0)
-	{
 
 	}
 	mlx_destroy_image(ray->vars->mlx, ray->img->img);
