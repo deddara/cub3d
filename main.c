@@ -174,17 +174,17 @@ int             ft_close_2(int keycode, t_raycast *ray)
 	}
 	if (keycode == 0)//a
 	{
-		if (skipper(ray->map, (int)ray->player_y, (int)(ray->player_x - ray->dir_y * 0.2)))
-			ray->player_x -=  ray->dir_y * 0.1;
-		if (skipper(ray->map, (int)(ray->player_y - ray->dir_x * 0.2), (int)ray->player_x ))
-			ray->player_y -=  ray->dir_x * 0.1;
+		if (skipper(ray->map, (int)ray->player_y, (int)(ray->player_x - ray->plane_x * 0.1)))
+			ray->player_x -=  ray->plane_x * 0.1;
+		if (skipper(ray->map, (int)(ray->player_y - ray->plane_y * 0.1), (int)ray->player_x ))
+			ray->player_y -=  ray->plane_y * 0.1;
 	}
 	if (keycode == 2)//d
 	{
-		if (skipper(ray->map, (int)ray->player_y, (int)(ray->player_x + ray->dir_y * 0.2)))
-			ray->player_x +=  ray->dir_y * 0.1;
-		if (skipper(ray->map, (int)(ray->player_y + ray->dir_x * 0.2), (int)ray->player_x ))
-			ray->player_y +=  ray->dir_x * 0.1;
+		if (skipper(ray->map, (int)ray->player_y, (int)(ray->player_x + ray->plane_x * 0.1)))
+			ray->player_x +=  ray->plane_x * 0.1;
+		if (skipper(ray->map, (int)(ray->player_y + ray->plane_y * 0.1), (int)ray->player_x ))
+			ray->player_y +=  ray->plane_y * 0.1;
 	}
 	if (keycode == 123)
 	{	
