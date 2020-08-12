@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/09 14:47:52 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/12 16:10:51 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/12 18:22:00 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ typedef struct s_raycast
 	int		wall_end;
 	int		hit;
 	t_data *img;
-	t_data *text_img;
 	t_map *map;
 	t_vars *vars;
 	double		frame_time;
@@ -51,11 +50,19 @@ typedef struct s_raycast
 	double		rotate_speed;
 		double		time_curr;
 	double		time_prev;
+	t_data txtr_no;
+	t_data txtr_so;
+	t_data txtr_we;
+	t_data txtr_ea;
+}				t_raycast;
+
+typedef struct s_textures
+{
 	t_data *txtr_no;
 	t_data *txtr_so;
 	t_data *txtr_we;
 	t_data *txtr_ea;
-}				t_raycast;
+}				t_textures;
 
 int skipper(t_map *map, int y, int x);
 void	ray_caster(t_map *map, t_data *img, t_raycast *ray);

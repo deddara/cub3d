@@ -1,11 +1,11 @@
 R 640 480
 
-NO ./pics/eagle.png
-SO ./pics/redbrick.png
-WE ./pics/purplestone.png
-EA ./pics/purplestone.png
+NO ./pics/eagle.xpm
+SO ./pics/redbrick.xpm
+WE ./pics/purplestone.xpm
+EA ./pics/greystone.xpm
 
-S ./pics/barrel.png
+S ./pics/barrel.xpm
 F 220,100,0     
 C 225,30,0   
 
