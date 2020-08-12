@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/09 14:46:39 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/12 15:58:18 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/12 16:50:26 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,9 +150,9 @@ static void paint_map(t_raycast *ray, t_map *map, t_data *img, int x)
 		wall_x = ray->player_x + ray->wall_dist * ray->ray_dir_x;
 	wall_x -= floor((wall_x));
 	int tex_x = (int)(wall_x * (double)(ray->text_img->width));
-	if ((ray->wall_side == 2 || ray->wall_side == 3) && ray->dir_x > 0)
+	if ((ray->wall_side == 2 || ray->wall_side == 3) && ray->ray_dir_x > 0)
 		tex_x = ray->text_img->width - tex_x - 1;
-	if ((ray->wall_side == 0 || ray->wall_side == 1) && ray->dir_y < 0)
+	if ((ray->wall_side == 0 || ray->wall_side == 1) && ray->ray_dir_y < 0)
 		tex_x = ray->text_img->width - tex_x - 1;
 	double step = 1.0 * ray->text_img->height / ray->wall_height;
 	double tex_pos = (ray->wall_start - map->y / 2 + ray->wall_height / 2) * step;
@@ -168,10 +168,42 @@ static void paint_map(t_raycast *ray, t_map *map, t_data *img, int x)
 		// 	color = 0x888945;
 		int tex_y = (int)tex_pos & (ray->text_img->height - 1);
 		tex_pos += step;
-		color = getpixelcolor(ray->text_img, tex_x, tex_y);
+		if (ray->wall_side == 2)
+			color = getpixelcolor(ray->txtr_ea, tex_x, tex_y);
+		else if (ray->wall_side == 3)
+			color = getpixelcolor(ray->txtr_we, tex_x, tex_y);
+		else if (ray->wall_side == 1)
+			color = getpixelcolor(ray->txtr_no, tex_x, tex_y);
+		else
+			color = getpixelcolor(ray->txtr_so, tex_x, tex_y);
 		my_mlx_pixel_put(img, x, y, color);
 		y++;
 	}
+}
+
+static void take_textures(t_raycast *ray)
+{
+	t_data txtr_no;
+	t_data txtr_so;
+	t_data txtr_we;
+	t_data txtr_ea;
+
+	txtr_so.img = mlx_png_file_to_image(ray->vars->mlx, ray->map->so, &txtr_so.width, &txtr_so.height);
+	txtr_so.addr = mlx_get_data_addr(txtr_so.img, &txtr_so.bits_per_pixel, \
+					&txtr_so.line_length, &txtr_so.endian);
+	txtr_no.img = mlx_png_file_to_image(ray->vars->mlx, ray->map->no, &txtr_no.width, &txtr_no.height);
+	txtr_no.addr = mlx_get_data_addr(txtr_no.img, &txtr_no.bits_per_pixel, \
+					&txtr_no.line_length, &txtr_no.endian);
+	txtr_we.img = mlx_png_file_to_image(ray->vars->mlx, ray->map->we, &txtr_we.width, &txtr_we.height);
+	txtr_we.addr = mlx_get_data_addr(txtr_we.img, &txtr_we.bits_per_pixel, \
+					&txtr_we.line_length, &txtr_we.endian);
+	txtr_ea.img = mlx_png_file_to_image(ray->vars->mlx, ray->map->ea, &txtr_ea.width, &txtr_ea.height);
+	txtr_ea.addr = mlx_get_data_addr(txtr_ea.img, &txtr_ea.bits_per_pixel, \
+					&txtr_ea.line_length, &txtr_ea.endian);
+	ray->txtr_so = &txtr_so;
+	ray->txtr_no = &txtr_no;
+	ray->txtr_ea = &txtr_ea;
+	ray->txtr_we = &txtr_we;
 }
 
 void ray_caster(t_map *map, t_data *img, t_raycast *ray)
@@ -184,6 +216,7 @@ void ray_caster(t_map *map, t_data *img, t_raycast *ray)
 	text_img.addr = mlx_get_data_addr(text_img.img, &text_img.bits_per_pixel, \
 					&text_img.line_length, &text_img.endian);
 	ray->text_img = &text_img;
+	take_textures(ray);
 	while (x < map->x)
 	{
 		ray->camera_x = 2 * x / (double)map->x - 1;

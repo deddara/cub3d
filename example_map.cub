@@ -3,7 +3,7 @@ R 640 480
 NO ./pics/eagle.png
 SO ./pics/redbrick.png
 WE ./pics/purplestone.png
-EA ./pics/bluestone.png
+EA ./pics/purplestone.png
 
 S ./pics/barrel.png
 F 220,100,0     
