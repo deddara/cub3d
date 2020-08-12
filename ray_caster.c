@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/09 14:46:39 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/12 18:26:20 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/12 18:46:16 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,6 @@ static void check_wall(t_raycast *ray, t_map *map)
 
 static int getpixelcolor(t_data *img, int x, int y)
 {
-	{
 	if (!img->width || !img->height)
 		return (0);
 	x = abs(x);
@@ -127,7 +126,6 @@ static int getpixelcolor(t_data *img, int x, int y)
 	if (x > img->width || y > img->height || x < 0 || y < 0)
 		return (0);
 	return (*(int*)(img->addr + ((x + (y * img->width)) * (img->bits_per_pixel / 8))));
-}
 }
 
 static void paint_map(t_raycast *ray, t_map *map, t_data *img, int x)
@@ -151,9 +149,7 @@ static void paint_map(t_raycast *ray, t_map *map, t_data *img, int x)
 		wall_x = ray->player_x + ray->wall_dist * ray->ray_dir_x;
 	wall_x -= floor((wall_x));
 	int tex_x = (int)(wall_x * (double)(ray->txtr_so.width));
-	if ((ray->wall_side == 2 || ray->wall_side == 3) && ray->ray_dir_x > 0)
-		tex_x = ray->txtr_so.width - tex_x - 1;
-	if ((ray->wall_side == 0 || ray->wall_side == 1) && ray->ray_dir_y < 0)
+	if (ray->wall_side == 2 || ray->wall_side == 1)
 		tex_x = ray->txtr_so.width - tex_x - 1;
 	double step = 1.0 * ray->txtr_so.height / ray->wall_height;
 	double tex_pos = (ray->wall_start - map->y / 2 + ray->wall_height / 2) * step;
