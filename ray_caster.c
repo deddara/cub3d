@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/09 14:46:39 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/10 20:37:31 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/12 15:58:18 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void rates_calc(t_raycast *ray)
 	ray->time_curr = clock();
 	ray->frame_time = (ray->time_curr - ray->time_prev) / 1000.0;
 	ray->move_speed = ray->frame_time * 0.05;
-	ray->rotate_speed = ray->frame_time * 0.008;
+	ray->rotate_speed = ray->frame_time * 0.015;
 }
 
 void dir_calc(t_raycast *ray, t_map *map)
