@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 21:22:20 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/13 18:12:49 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/13 18:19:09 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,7 @@ static void _init(t_raycast *ray, t_map *map)
 	ray->dlt_dist_y = 0;
 	ray->time_curr = clock();
 	ray->time_prev = 0;
+	sprites_count(ray, map);
 	dir_calc(ray, map);
 }
 
