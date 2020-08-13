@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 21:22:20 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/12 19:57:46 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/13 17:28:34 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void            my_mlx_pixel_put(t_data *data, int x, int y, int color)
 //************************************************
 //ОТРИСОВКА ПОТОЛКА И ПОЛА
 
-static void paint_fc(t_map *map, t_data *img)
+void paint_fc(t_map *map, t_data *img)
 {
 	int y_c = 0;
 	int x_c = 0;
@@ -143,78 +143,82 @@ static void _init(t_raycast *ray, t_map *map)
 	ray->dlt_dist_y = 0;
 	ray->time_curr = clock();
 	ray->time_prev = 0;
-	// ray->map_x = map->x_player;
-	// ray->map_y = map->y_player;
 	dir_calc(ray, map);
 }
 
 
-int             ft_close_2(int keycode, t_raycast *ray)
+// int             ft_close_2(int keycode, t_raycast *ray)
+// {
+// 	if(keycode == 53)
+// 	{
+//     	mlx_destroy_window(ray->vars->mlx, ray->vars->win);
+// 		exit(0);
+// 	}
+// 	if (keycode == 13) //w
+// 	{
+// 		if (skipper(ray->map, (int)ray->player_y, (int)(ray->player_x + ray->dir_x * 0.3)))
+// 			ray->player_x +=  ray->dir_x * 0.3;
+// 		if (skipper(ray->map, (int)(ray->player_y + ray->dir_y * 0.3), (int)ray->player_x ))
+// 			ray->player_y +=  ray->dir_y * 0.3;
+// 	}
+// 	if (keycode == 1) //s
+// 	{
+// 		if (skipper(ray->map, (int)ray->player_y, (int)(ray->player_x - ray->dir_x * 0.3)))
+// 			ray->player_x -=  ray->dir_x * 0.3;
+// 		if (skipper(ray->map, (int)(ray->player_y - ray->dir_y * 0.3), (int)ray->player_x ))
+// 			ray->player_y -=  ray->dir_y * 0.3;
+// 	}
+// 	if (keycode == 0)//a
+// 	{
+// 		if (skipper(ray->map, (int)ray->player_y, (int)(ray->player_x - ray->plane_x * 0.3)))
+// 			ray->player_x -=  ray->plane_x * 0.3;
+// 		if (skipper(ray->map, (int)(ray->player_y - ray->plane_y * 0.3), (int)ray->player_x ))
+// 			ray->player_y -=  ray->plane_y * 0.3;
+// 	}
+// 	if (keycode == 2)//d
+// 	{
+// 		if (skipper(ray->map, (int)ray->player_y, (int)(ray->player_x + ray->plane_x * 0.3)))
+// 			ray->player_x +=  ray->plane_x * 0.3;
+// 		if (skipper(ray->map, (int)(ray->player_y + ray->plane_y * 0.3), (int)ray->player_x ))
+// 			ray->player_y +=  ray->plane_y * 0.3;
+// 	}
+// 	if (keycode == 123)
+// 	{	
+// 		double old_dir_x = ray->dir_x;
+// 		ray->dir_x = ray->dir_x * cos(-ray->rotate_speed) - ray->dir_y * sin(-ray->rotate_speed);
+// 		ray->dir_y = old_dir_x * sin(-ray->rotate_speed) + ray->dir_y * cos(-ray->rotate_speed);
+// 		double old_plane_x = ray->plane_x;
+// 		ray->plane_x = ray->plane_x * cos(-ray->rotate_speed) - ray->plane_y * sin(-ray->rotate_speed);
+// 		ray->plane_y = old_plane_x * sin(-ray->rotate_speed) + ray->plane_y * cos(-ray->rotate_speed);
+// 	}
+// 	if (keycode == 124)
+// 	{	
+// 		double old_dir_x = ray->dir_x;
+// 		ray->dir_x = ray->dir_x * cos(ray->rotate_speed) - ray->dir_y * sin(ray->rotate_speed);
+// 		ray->dir_y = old_dir_x * sin(ray->rotate_speed) + ray->dir_y * cos(ray->rotate_speed);
+// 		double old_plane_x = ray->plane_x;
+// 		ray->plane_x = ray->plane_x * cos(ray->rotate_speed) - ray->plane_y * sin(ray->rotate_speed);
+// 		ray->plane_y = old_plane_x * sin(ray->rotate_speed) + ray->plane_y * cos(ray->rotate_speed);
+// 	}
+// 	mlx_destroy_image(ray->vars->mlx, ray->img->img);
+// 	ray->img->img = mlx_new_image(ray->vars->mlx, ray->map->x, ray->map->y);
+// 	ray->img->addr = mlx_get_data_addr(ray->img->img, &ray->img->bits_per_pixel, &ray->img->line_length,
+//                     	&ray->img->endian);
+// 	paint_fc(ray->map, ray->img);
+// 	ray_caster(ray->map, ray->img, ray);
+// 	mlx_put_image_to_window(ray->vars->mlx, ray->vars->win, ray->img->img, 0, 0); 
+// 	return (0);
+// }
+
+static void keys_init (t_raycast *ray)
 {
-	if(keycode == 53)
-	{
-    	mlx_destroy_window(ray->vars->mlx, ray->vars->win);
-		exit(0);
-	}
-	if (keycode == 13) //w
-	{
-		if (skipper(ray->map, (int)ray->player_y, (int)(ray->player_x + ray->dir_x * 0.3)))
-			ray->player_x +=  ray->dir_x * 0.3;
-		if (skipper(ray->map, (int)(ray->player_y + ray->dir_y * 0.3), (int)ray->player_x ))
-			ray->player_y +=  ray->dir_y * 0.3;
-
-	}
-	if (keycode == 1) //s
-	{
-		if (skipper(ray->map, (int)ray->player_y, (int)(ray->player_x - ray->dir_x * 0.3)))
-			ray->player_x -=  ray->dir_x * 0.3;
-		if (skipper(ray->map, (int)(ray->player_y - ray->dir_y * 0.3), (int)ray->player_x ))
-			ray->player_y -=  ray->dir_y * 0.3;
-
-	}
-	if (keycode == 0)//a
-	{
-		if (skipper(ray->map, (int)ray->player_y, (int)(ray->player_x - ray->plane_x * 0.3)))
-			ray->player_x -=  ray->plane_x * 0.3;
-		if (skipper(ray->map, (int)(ray->player_y - ray->plane_y * 0.3), (int)ray->player_x ))
-			ray->player_y -=  ray->plane_y * 0.3;
-	}
-	if (keycode == 2)//d
-	{
-		if (skipper(ray->map, (int)ray->player_y, (int)(ray->player_x + ray->plane_x * 0.3)))
-			ray->player_x +=  ray->plane_x * 0.3;
-		if (skipper(ray->map, (int)(ray->player_y + ray->plane_y * 0.3), (int)ray->player_x ))
-			ray->player_y +=  ray->plane_y * 0.3;
-	}
-	if (keycode == 123)
-	{	
-		double old_dir_x = ray->dir_x;
-		ray->dir_x = ray->dir_x * cos(-ray->rotate_speed) - ray->dir_y * sin(-ray->rotate_speed);
-		ray->dir_y = old_dir_x * sin(-ray->rotate_speed) + ray->dir_y * cos(-ray->rotate_speed);
-		double old_plane_x = ray->plane_x;
-		ray->plane_x = ray->plane_x * cos(-ray->rotate_speed) - ray->plane_y * sin(-ray->rotate_speed);
-		ray->plane_y = old_plane_x * sin(-ray->rotate_speed) + ray->plane_y * cos(-ray->rotate_speed);
-	}
-	if (keycode == 124)
-	{	
-		double old_dir_x = ray->dir_x;
-		ray->dir_x = ray->dir_x * cos(ray->rotate_speed) - ray->dir_y * sin(ray->rotate_speed);
-		ray->dir_y = old_dir_x * sin(ray->rotate_speed) + ray->dir_y * cos(ray->rotate_speed);
-		double old_plane_x = ray->plane_x;
-		ray->plane_x = ray->plane_x * cos(ray->rotate_speed) - ray->plane_y * sin(ray->rotate_speed);
-		ray->plane_y = old_plane_x * sin(ray->rotate_speed) + ray->plane_y * cos(ray->rotate_speed);
-
-	}
-	mlx_destroy_image(ray->vars->mlx, ray->img->img);
-	ray->img->img = mlx_new_image(ray->vars->mlx, ray->map->x, ray->map->y);
-	ray->img->addr = mlx_get_data_addr(ray->img->img, &ray->img->bits_per_pixel, &ray->img->line_length,
-                    	&ray->img->endian);
-	paint_fc(ray->map, ray->img);
-	ray_caster(ray->map, ray->img, ray);
-	mlx_put_image_to_window(ray->vars->mlx, ray->vars->win, ray->img->img, 0, 0); 
-	return (0);
+	ray->keys.w = 0;
+	ray->keys.s = 0;
+	ray->keys.a = 0;
+	ray->keys.d = 0;
+	ray->keys.l_arr = 0;
+	ray->keys.r_arr = 0;
 }
-
 
 int             main(void)
 {
@@ -222,11 +226,7 @@ int             main(void)
     t_vars vars;
     t_map map;
 	t_raycast ray;
-    // int x;
-    // int y;
 	parser(&map); //парсинг карты
-    // x = 5;
-    // y = 5;
     vars.mlx = mlx_init();
     vars.win = mlx_new_window(vars.mlx, map.x, map.y, "Hello world!");
     img.img = mlx_new_image(vars.mlx, map.x, map.y);
@@ -240,10 +240,15 @@ int             main(void)
 	ray.map = &map;
 	ray.img = &img;
 	ray.vars = &vars;
+	keys_init(&ray);
 	ray_caster(&map, &img, &ray);
     mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0); 
 	//mlx_key_hook(vars.win, ft_close, &vars);
-	mlx_hook(vars.win, 2, 1L << 0, ft_close_2, &ray);
+	mlx_hook(vars.win, 2, 1L << 0, key_press, &ray);
+	mlx_hook(vars.win, 3, 1L << 1, key_release, &ray);
+	mlx_loop_hook(vars.mlx, key_controls, &ray);
+	//mlx_hook(vars.win, 2, 1L << 0, ft_close_2, &ray);
+	
     mlx_loop(vars.mlx);
 	return (0);
 }

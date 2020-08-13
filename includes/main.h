@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 21:22:15 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/12 17:52:51 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/13 17:08:59 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,9 @@ typedef struct  s_data
 	int			width;
 }               t_data;
 
+
 void            my_mlx_pixel_put(t_data *data, int x, int y, int color);
+
+void paint_fc(t_map *map, t_data *img);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/09 14:47:52 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/12 18:46:24 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/13 17:34:32 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,16 @@
 
 # define ANGLE 66
 
+typedef struct t_keys
+{
+	int w;
+	int a;
+	int s;
+	int d;
+	int esc;
+	int l_arr;
+	int r_arr;
+}				t_keys;
 
 typedef struct s_raycast
 {
@@ -54,13 +64,16 @@ typedef struct s_raycast
 	t_data txtr_so;
 	t_data txtr_we;
 	t_data txtr_ea;
+	t_keys	keys;
 }				t_raycast;
 
 
 int skipper(t_map *map, int y, int x);
 void	ray_caster(t_map *map, t_data *img, t_raycast *ray);
 void dir_calc(t_raycast *ray, t_map *map);
-
+int			key_press(int keycode, t_raycast *ray);
+int			key_release(int keycode, t_raycast *ray);
+int 		key_controls(t_raycast *ray);
 
 
 #endif
