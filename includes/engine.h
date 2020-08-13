@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/09 14:47:52 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/13 17:34:32 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/13 17:56:04 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,15 @@ typedef struct s_raycast
 	t_keys	keys;
 }				t_raycast;
 
+typedef struct	s_sprite
+{
+	int			id;
+	double		x;
+	double		y;
+	double		dist;
+	t_sprite	*next;
+	t_sprite	*prev;
+}				t_sprite;			
 
 int skipper(t_map *map, int y, int x);
 void	ray_caster(t_map *map, t_data *img, t_raycast *ray);
@@ -74,6 +83,7 @@ void dir_calc(t_raycast *ray, t_map *map);
 int			key_press(int keycode, t_raycast *ray);
 int			key_release(int keycode, t_raycast *ray);
 int 		key_controls(t_raycast *ray);
+void		paint_fc(t_map *map, t_data *img);
 
 
 #endif
