@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 21:22:20 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/13 20:02:51 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/13 20:05:42 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,48 +134,6 @@ void paint_fc(t_map *map, t_data *img)
 // 		y++;
 // 	}
 // }
-
-static void	list_swap(t_sprite *tmp, t_sprite *a)
-{
-	int		t;
-	double	j;
-	t = 0;
-	t = tmp->id;
-	tmp->id = a->id;
-	a->id = t;
-	j = tmp->x;
-	tmp->x = a->x;
-	a->x = j;
-	j = tmp->y;
-	tmp->y = a->y;
-	a->y = j;
-	j = tmp->dist;
-	tmp->dist = a->dist;
-	a->dist = j;
-}
-
-static void sprites_sort(t_raycast *ray)
-{
- 	t_sprite *tmp;
-    t_sprite *a;
-    int flag=1;
-    while(flag==1)
-    {
-        tmp=ray->sprite;
-        a=tmp->next;
-        flag=0;
-        while(a)
-        {
-            if((tmp->id)<(a->id))
-            {
-				list_swap(tmp, a);
-                flag=1;
-            }
-            tmp=tmp->next;
-            a=a->next;
-        }
-    }
-}
 
 static void _init(t_raycast *ray, t_map *map)
 {

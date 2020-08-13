@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/09 14:47:52 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/13 20:03:38 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/13 20:40:38 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,6 @@ int			key_release(int keycode, t_raycast *ray);
 int 		key_controls(t_raycast *ray);
 void		paint_fc(t_map *map, t_data *img);
 void		sprites_count(t_raycast *ray, t_map *map);
-
+void		sprites_sort(t_raycast *ray);
+void		sprite_handler(t_raycast *ray);
 #endif

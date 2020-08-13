@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/09 14:46:39 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/13 17:31:48 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/13 20:26:28 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,5 +213,6 @@ void ray_caster(t_map *map, t_data *img, t_raycast *ray)
 		paint_map(ray, map, img, x);
 		x++;
 	}
+	sprite_handler(ray);
 	rates_calc(ray);
 }
