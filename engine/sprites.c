@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/13 18:19:45 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/13 22:12:20 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/13 23:19:05 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,53 @@ static void sprite_dist_calc(t_raycast *ray)
 }
 
 void	sprite_handler(t_raycast *ray)
-{
+{	
+	int color;
+	t_sprite *tmp;
 	sprite_dist_calc(ray);
 	sprites_sort(ray);
+	tmp = ray->sprite;
+	while (tmp->next)
+    {
+      double spriteX = tmp->x - ray->player_x;
+      double spriteY = tmp->y - ray->player_y;
+      double invDet = 1.0 / (ray->plane_x * ray->dir_y - ray->dir_x * ray->plane_y); //required for correct matrix multiplication
+      double transformX = invDet * (ray->dir_y * spriteX - ray->dir_x * spriteY);
+      double transformY = invDet * (-ray->plane_y * spriteX + ray->plane_x * spriteY); //this is actually the depth inside the screen, that what Z is in 3D, the distance of sprite to player, matching sqrt(spriteDistance[i])
+      int spriteScreenX = (int)((ray->map->x / 2) * (1 + transformX / transformY));
+      #define uDiv 1
+      #define vDiv 1
+      #define vMove 0.0
+      int vMoveScreen = (int)(vMove / transformY);
+      int spriteHeight = abs((int)(ray->map->y / (transformY))) / vDiv; //using "transformY" instead of the real distance prevents fisheye
+      int drawStartY = -spriteHeight / 2 +ray->map->y / 2 + vMoveScreen;
+      if(drawStartY < 0)
+	  	drawStartY = 0;
+      int drawEndY = spriteHeight / 2 +ray->map->y / 2 + vMoveScreen;
+      if(drawEndY >=ray->map->y) 
+	  	drawEndY =ray->map->y - 1;
+      int spriteWidth = abs( (int) (ray->map->y / (transformY))) / uDiv;
+      int drawStartX = -spriteWidth / 2 + spriteScreenX;
+      if(drawStartX < 0) 
+	  	drawStartX = 0;
+      int drawEndX = spriteWidth / 2 + spriteScreenX;
+      if(drawEndX >= ray->map->x) 
+	  	drawEndX = ray->map->x - 1;
+      for(int stripe = drawStartX; stripe < drawEndX; stripe++)
+      {
+        int texX = (int)(256 * (stripe - (-spriteWidth / 2 + spriteScreenX)) * ray->txtr_s.width / spriteWidth) / 256;
+        if(transformY > 0 && stripe > 0 && stripe < ray->map->x && transformY < ray->x_buffer[stripe])
+		{
+			for(int y = drawStartY; y < drawEndY; y++) //for every pixel of the current stripe
+        	{
+        	  	int d = (y-vMoveScreen) * 256 -ray->map->y * 128 + spriteHeight * 128; //256 and 128 factors to avoid floats
+     	     	int texY = ((d * ray->txtr_s.height) / spriteHeight) / 256;
+	
+			 	color = getpixelcolor(ray->txtr_ea.img, texX, texY); //get current color from the texture
+					my_mlx_pixel_put(ray->img,  stripe, y, color); //paint pixel if it isn't black, black is the invisible color
+        	}
+	  }
+	  }
+	tmp = tmp->next;
+}
 }

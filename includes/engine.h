@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/09 14:47:52 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/13 22:11:06 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/13 22:30:57 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,4 +92,5 @@ void		paint_fc(t_map *map, t_data *img);
 void		sprites_count(t_raycast *ray, t_map *map);
 void		sprites_sort(t_raycast *ray);
 void		sprite_handler(t_raycast *ray);
+int getpixelcolor(t_data *img, int x, int y);
 #endif

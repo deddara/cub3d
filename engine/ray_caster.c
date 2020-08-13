@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/09 14:46:39 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/13 22:15:49 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/13 23:06:28 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ static void step_side_calc(t_raycast *ray)
 
 int skipper(t_map *map, int y, int x)
 {
-	if (map->map[y][x] == ' ' || map->map[y][x] == '0' || 
+	if (map->map[y][x] == ' ' || map->map[y][x] == '0' || map->map[y][x] == '2' ||
 		map->map[y][x] == 'N' || map->map[y][x] == 'S' || map->map[y][x] == 'W'
 		|| map->map[y][x] == 'E')
 		return (1);
@@ -117,7 +117,7 @@ static void check_wall(t_raycast *ray, t_map *map)
 				/ 2) / ray->ray_dir_y);
 }
 
-static int getpixelcolor(t_data *img, int x, int y)
+int getpixelcolor(t_data *img, int x, int y)
 {
 	if (!img->width || !img->height)
 		return (0);
@@ -185,7 +185,7 @@ static void take_textures(t_raycast *ray)
 	ray->txtr_we.img = mlx_xpm_file_to_image(ray->vars->mlx, ray->map->we, &ray->txtr_we.width, &ray->txtr_we.height);
 	ray->txtr_we.addr = mlx_get_data_addr(ray->txtr_we.img, &ray->txtr_we.bits_per_pixel, \
 					&ray->txtr_we.line_length, &ray->txtr_we.endian);
-	ray->txtr_s.img = mlx_xpm_file_to_image(ray->vars->mlx, ray->map->we, &ray->txtr_s.width, &ray->txtr_s.height);
+	ray->txtr_s.img = mlx_xpm_file_to_image(ray->vars->mlx, ray->map->s, &ray->txtr_s.width, &ray->txtr_s.height);
 	ray->txtr_s.addr = mlx_get_data_addr(ray->txtr_s.img, &ray->txtr_s.bits_per_pixel, \
 					&ray->txtr_s.line_length, &ray->txtr_s.endian);
 }
@@ -213,7 +213,7 @@ void ray_caster(t_map *map, t_data *img, t_raycast *ray)
 		step_side_calc(ray);
 		check_wall(ray, map);
 		paint_map(ray, map, img, x);
-		ray->x_buffer[x] = x;
+		ray->x_buffer[x] = ray->wall_dist;
 		x++;
 	}
 	rates_calc(ray);
