@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/13 16:11:25 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/13 17:32:51 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/13 18:52:06 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,16 @@ static void w_and_s_handler(t_raycast *ray)
 {
 	if (ray->keys.w) //w
 	{
-		if (skipper(ray->map, (int)ray->player_y, (int)(ray->player_x + ray->dir_x * 0.1)))
+		if (skipper(ray->map, (int)ray->player_y, (int)(ray->player_x + ray->dir_x * 0.11)))
 			ray->player_x +=  ray->dir_x * 0.1;
-		if (skipper(ray->map, (int)(ray->player_y + ray->dir_y * 0.1), (int)ray->player_x ))
+		if (skipper(ray->map, (int)(ray->player_y + ray->dir_y * 0.11), (int)ray->player_x ))
 			ray->player_y +=  ray->dir_y * 0.1;
 	}
 	if (ray->keys.s) //s
 	{
-		if (skipper(ray->map, (int)ray->player_y, (int)(ray->player_x - ray->dir_x * 0.1)))
+		if (skipper(ray->map, (int)ray->player_y, (int)(ray->player_x - ray->dir_x * 0.11)))
 			ray->player_x -=  ray->dir_x * 0.1;
-		if (skipper(ray->map, (int)(ray->player_y - ray->dir_y * 0.1), (int)ray->player_x ))
+		if (skipper(ray->map, (int)(ray->player_y - ray->dir_y * 0.11), (int)ray->player_x ))
 			ray->player_y -=  ray->dir_y * 0.1;
 	}
 }
@@ -35,16 +35,16 @@ static void	d_and_a_handler(t_raycast *ray)
 {
 	if (ray->keys.a)//a
 	{
-		if (skipper(ray->map, (int)ray->player_y, (int)(ray->player_x - ray->plane_x * 0.1)))
+		if (skipper(ray->map, (int)ray->player_y, (int)(ray->player_x - ray->plane_x * 0.11)))
 			ray->player_x -=  ray->plane_x * 0.1;
-		if (skipper(ray->map, (int)(ray->player_y - ray->plane_y * 0.1), (int)ray->player_x ))
+		if (skipper(ray->map, (int)(ray->player_y - ray->plane_y * 0.11), (int)ray->player_x ))
 			ray->player_y -=  ray->plane_y * 0.1;
 	}
 	if (ray->keys.d)//d
 	{
-		if (skipper(ray->map, (int)ray->player_y, (int)(ray->player_x + ray->plane_x * 0.1)))
+		if (skipper(ray->map, (int)ray->player_y, (int)(ray->player_x + ray->plane_x * 0.11)))
 			ray->player_x +=  ray->plane_x * 0.1;
-		if (skipper(ray->map, (int)(ray->player_y + ray->plane_y * 0.1), (int)ray->player_x ))
+		if (skipper(ray->map, (int)(ray->player_y + ray->plane_y * 0.11), (int)ray->player_x ))
 			ray->player_y +=  ray->plane_y * 0.1;
 	}
 }

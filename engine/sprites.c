@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/13 18:19:45 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/13 18:42:54 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/13 18:47:16 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void		sprites_count(t_raycast *ray, t_map *map)
 				sprite = new_sprite(i , j);
 				flag++;
 			}
-			else if (map->map[i][j] == '2')
+			else if (map->map[i][j] == '2' && flag)
 			{
 				add_sprite(sprite, i, j, flag);
 				flag++;
