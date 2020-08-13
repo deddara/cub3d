@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/09 14:47:52 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/13 20:40:38 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/13 22:11:06 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,18 @@
 # include "main.h"
 
 # define ANGLE 66
+
+
+
+typedef struct	s_sprite
+{
+	int			id;
+	double		x;
+	double		y;
+	double		dist;
+	struct s_sprite	*next;
+	struct s_sprite	*prev;
+}				t_sprite;
 
 typedef struct t_keys
 {
@@ -26,16 +38,6 @@ typedef struct t_keys
 	int l_arr;
 	int r_arr;
 }				t_keys;
-
-typedef struct	s_sprite
-{
-	int			id;
-	double		x;
-	double		y;
-	double		dist;
-	struct s_sprite	*next;
-	struct s_sprite	*prev;
-}				t_sprite;			
 
 typedef struct s_raycast
 {
@@ -68,14 +70,16 @@ typedef struct s_raycast
 	double		frame_time;
 	double		move_speed;
 	double		rotate_speed;
-		double		time_curr;
+	double		time_curr;
 	double		time_prev;
 	t_data txtr_no;
 	t_data txtr_so;
 	t_data txtr_we;
 	t_data txtr_ea;
+	t_data txtr_s;
 	t_keys	keys;
 	t_sprite	*sprite;
+	int		*x_buffer;
 }				t_raycast;
 
 int skipper(t_map *map, int y, int x);

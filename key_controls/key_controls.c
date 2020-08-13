@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/13 16:11:25 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/13 18:52:06 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/13 22:11:34 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,8 @@ int key_release(int keycode, t_raycast *ray)
 		ray->keys.l_arr = 0;
 	if (keycode == 124)
 		ray->keys.r_arr = 0;
+	if (keycode == 53)
+		ray->keys.esc = 0;
 	return (0);
 }
 

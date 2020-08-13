@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/09 14:46:39 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/13 20:26:28 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/13 22:12:51 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,13 +185,15 @@ static void take_textures(t_raycast *ray)
 	ray->txtr_we.img = mlx_xpm_file_to_image(ray->vars->mlx, ray->map->we, &ray->txtr_we.width, &ray->txtr_we.height);
 	ray->txtr_we.addr = mlx_get_data_addr(ray->txtr_we.img, &ray->txtr_we.bits_per_pixel, \
 					&ray->txtr_we.line_length, &ray->txtr_we.endian);
+	ray->txtr_s.img = mlx_xpm_file_to_image(ray->vars->mlx, ray->map->we, &ray->txtr_s.width, &ray->txtr_s.height);
+	ray->txtr_s.addr = mlx_get_data_addr(ray->txtr_s.img, &ray->txtr_s.bits_per_pixel, \
+					&ray->txtr_s.line_length, &ray->txtr_s.endian);
 }
 
 void ray_caster(t_map *map, t_data *img, t_raycast *ray)
 {
 	int			x;
 	x = 0;
-
 	take_textures(ray);
 	while (x < map->x)
 	{
@@ -213,6 +215,6 @@ void ray_caster(t_map *map, t_data *img, t_raycast *ray)
 		paint_map(ray, map, img, x);
 		x++;
 	}
-	sprite_handler(ray);
 	rates_calc(ray);
+	sprite_handler(ray);
 }

@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 21:22:20 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/13 20:05:42 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/13 22:12:09 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,6 @@ static void _init(t_raycast *ray, t_map *map)
 	ray->time_curr = clock();
 	ray->time_prev = 0;
 	sprites_count(ray, map);
-	sprites_sort(ray);
 	dir_calc(ray, map);
 }
 
@@ -159,6 +158,7 @@ static void keys_init (t_raycast *ray)
 	ray->keys.d = 0;
 	ray->keys.l_arr = 0;
 	ray->keys.r_arr = 0;
+	ray->keys.esc = 0;
 }
 
 int             main(void)

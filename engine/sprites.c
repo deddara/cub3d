@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/13 18:19:45 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/13 20:42:06 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/13 22:12:20 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void sprites_sort(t_raycast *ray)
     }
 }
 
-t_sprite	*new_sprite(int y, int x)
+static t_sprite	*new_sprite(int y, int x)
 {
 	t_sprite *sprite;
 
@@ -134,9 +134,6 @@ static void sprite_dist_calc(t_raycast *ray)
 
 void	sprite_handler(t_raycast *ray)
 {
-	int flags;
 	sprite_dist_calc(ray);
 	sprites_sort(ray);
-	flags = 3;
-	flags = 4;
 }
