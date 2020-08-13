@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/13 18:19:45 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/13 23:19:05 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/13 23:33:34 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,7 @@ void	sprite_handler(t_raycast *ray)
       int drawEndY = spriteHeight / 2 +ray->map->y / 2 + vMoveScreen;
       if(drawEndY >=ray->map->y) 
 	  	drawEndY =ray->map->y - 1;
-      int spriteWidth = abs( (int) (ray->map->y / (transformY))) / uDiv;
+      int spriteWidth = abs((int)(ray->map->y / (transformY))) / uDiv;
       int drawStartX = -spriteWidth / 2 + spriteScreenX;
       if(drawStartX < 0) 
 	  	drawStartX = 0;
@@ -175,7 +175,8 @@ void	sprite_handler(t_raycast *ray)
         	  	int d = (y-vMoveScreen) * 256 -ray->map->y * 128 + spriteHeight * 128; //256 and 128 factors to avoid floats
      	     	int texY = ((d * ray->txtr_s.height) / spriteHeight) / 256;
 	
-			 	color = getpixelcolor(ray->txtr_ea.img, texX, texY); //get current color from the texture
+			 	color = getpixelcolor(&ray->txtr_s, texX, texY); //get current color from the texture
+				if((color & 0x00FFFFFF) != 0)
 					my_mlx_pixel_put(ray->img,  stripe, y, color); //paint pixel if it isn't black, black is the invisible color
         	}
 	  }
