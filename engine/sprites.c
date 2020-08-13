@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/13 18:19:45 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/13 18:47:16 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/13 19:28:26 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,13 @@ static void add_sprite(t_sprite *sprite, int y, int x, int id)
 	new->y = y;
 	new->x = x;
 	new->id = id;
+	new->dist = 0;
 	tmp = sprite;
 	while (tmp->next)
 		tmp = tmp->next;
 	tmp->next = new;
 	new->prev = tmp;
 	new->next = NULL;
-	free (tmp);
 }
 
 void		sprites_count(t_raycast *ray, t_map *map)
@@ -53,7 +53,7 @@ void		sprites_count(t_raycast *ray, t_map *map)
 	t_sprite	*sprite;
 
 	flag = 0;
-	i = 0;
+	i = 1;
 	while (map->map[i])
 	{
 		j = 0;
