@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/09 14:47:52 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/13 17:56:04 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/13 18:16:33 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ typedef struct	s_sprite
 	double		x;
 	double		y;
 	double		dist;
-	t_sprite	*next;
-	t_sprite	*prev;
+	struct s_sprite	*next;
+	struct s_sprite	*prev;
 }				t_sprite;			
 
 int skipper(t_map *map, int y, int x);

@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 21:22:20 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/13 17:51:06 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/13 18:12:49 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,9 @@ void paint_fc(t_map *map, t_data *img)
 
 static void _init(t_raycast *ray, t_map *map)
 {
+	int i;
+
+	i = 0;
 	ray->player_x = (double)map->x_player + 0.5;
 	ray->player_y = (double)map->y_player + 0.5;
 	ray->dlt_dist_x = 0;
@@ -158,6 +161,8 @@ static void keys_init (t_raycast *ray)
 
 int             main(void)
 {
+	// paint_map(&map, &img);
+	// draw_player(map.x_player, map.y_player, &map, &img);
     t_data  img;
     t_vars vars;
     t_map map;
@@ -167,24 +172,19 @@ int             main(void)
     vars.win = mlx_new_window(vars.mlx, map.x, map.y, "Hello world!");
     img.img = mlx_new_image(vars.mlx, map.x, map.y);
     img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
-                                 &img.endian);
+                                 &img.endian);	
 	
 	paint_fc(&map, &img);
 	_init(&ray, &map);
-	// paint_map(&map, &img);
-	// draw_player(map.x_player, map.y_player, &map, &img);
 	ray.map = &map;
 	ray.img = &img;
 	ray.vars = &vars;
 	keys_init(&ray);
 	ray_caster(&map, &img, &ray);
     mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0); 
-	//mlx_key_hook(vars.win, ft_close, &vars);
 	mlx_hook(vars.win, 2, 1L << 0, key_press, &ray);
 	mlx_hook(vars.win, 3, 1L << 1, key_release, &ray);
 	mlx_loop_hook(vars.mlx, key_controls, &ray);
-	//mlx_hook(vars.win, 2, 1L << 0, ft_close_2, &ray);
-	
     mlx_loop(vars.mlx);
 	return (0);
 }
