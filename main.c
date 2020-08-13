@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 21:22:20 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/13 22:12:09 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/13 22:15:10 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,11 +135,13 @@ void paint_fc(t_map *map, t_data *img)
 // 	}
 // }
 
-static void _init(t_raycast *ray, t_map *map)
+static int _init(t_raycast *ray, t_map *map)
 {
 	int i;
 
 	i = 0;
+	if(!(ray->x_buffer = (int*)malloc(sizeof(int) * map->x)))
+		return (0);
 	ray->player_x = (double)map->x_player + 0.5;
 	ray->player_y = (double)map->y_player + 0.5;
 	ray->dlt_dist_x = 0;
@@ -148,6 +150,7 @@ static void _init(t_raycast *ray, t_map *map)
 	ray->time_prev = 0;
 	sprites_count(ray, map);
 	dir_calc(ray, map);
+	return (1);
 }
 
 static void keys_init (t_raycast *ray)
@@ -177,7 +180,8 @@ int             main(void)
                                  &img.endian);	
 	
 	paint_fc(&map, &img);
-	_init(&ray, &map);
+	if(!_init(&ray, &map))
+		return (0);
 	ray.map = &map;
 	ray.img = &img;
 	ray.vars = &vars;

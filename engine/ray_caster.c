@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/09 14:46:39 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/13 22:12:51 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/13 22:15:49 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,6 +213,7 @@ void ray_caster(t_map *map, t_data *img, t_raycast *ray)
 		step_side_calc(ray);
 		check_wall(ray, map);
 		paint_map(ray, map, img, x);
+		ray->x_buffer[x] = x;
 		x++;
 	}
 	rates_calc(ray);
