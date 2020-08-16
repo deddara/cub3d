@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/09 14:47:52 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/16 18:19:44 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/16 19:13:43 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ typedef struct s_raycast
 	t_data txtr_s;
 	t_keys	keys;
 	t_sprite	*sprite;
-	int		*x_buffer;
+	double		*x_buffer;
 }				t_raycast;
 
 int skipper(t_map *map, int y, int x);

@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/13 18:19:45 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/13 23:38:29 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/16 19:23:37 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,9 @@ static t_sprite	*new_sprite(int y, int x)
 
 	if (!(sprite = malloc(sizeof(t_sprite) * 1)))
 		return NULL;
-	sprite->y = y;
-	sprite->x = x;
+	sprite->y = (double)y + 0.5;
+	sprite->x = (double)x + 0.5;
+	sprite->dist = 0.0;
 	sprite->id = 0;
 	sprite->prev = NULL;
 	sprite->next = NULL;
@@ -76,10 +77,10 @@ static void add_sprite(t_sprite *sprite, int y, int x, int id)
 
 	if (!(new = malloc(sizeof(t_sprite) * 1)))
 		return ;
-	new->y = y;
-	new->x = x;
+	new->y = (double)y + 0.5;
+	new->x = (double)x + 0.5;
 	new->id = id;
-	new->dist = 0;
+	new->dist = 0.0;
 	tmp = sprite;
 	while (tmp->next)
 		tmp = tmp->next;
@@ -139,7 +140,7 @@ void	sprite_handler(t_raycast *ray)
 	sprite_dist_calc(ray);
 	sprites_sort(ray);
 	tmp = ray->sprite;
-	while (tmp->next)
+	while (tmp)
     {
       double spriteX = tmp->x - ray->player_x;
       double spriteY = tmp->y - ray->player_y;
@@ -147,18 +148,19 @@ void	sprite_handler(t_raycast *ray)
       double transformX = invDet * (ray->dir_y * spriteX - ray->dir_x * spriteY);
       double transformY = invDet * (-ray->plane_y * spriteX + ray->plane_x * spriteY); //this is actually the depth inside the screen, that what Z is in 3D, the distance of sprite to player, matching sqrt(spriteDistance[i])
       int spriteScreenX = (int)((ray->map->x / 2) * (1 + transformX / transformY));
-      #define uDiv 1
-      #define vDiv 1
-      #define vMove 0.0
+      #define uDiv 0.7
+      #define vDiv 0.7
+      #define vMove 128
+
       int vMoveScreen = (int)(vMove / transformY);
-      int spriteHeight = abs((int)(ray->map->y / (transformY))) / vDiv; //using "transformY" instead of the real distance prevents fisheye
+      int spriteHeight = abs((int)(((ray->map->y / (transformY))) * vDiv)); //using "transformY" instead of the real distance prevents fisheye
       int drawStartY = -spriteHeight / 2 +ray->map->y / 2 + vMoveScreen;
       if(drawStartY < 0)
 	  	drawStartY = 0;
       int drawEndY = spriteHeight / 2 +ray->map->y / 2 + vMoveScreen;
       if(drawEndY >=ray->map->y) 
 	  	drawEndY =ray->map->y - 1;
-      int spriteWidth = abs((int)(ray->map->y / (transformY))) / uDiv;
+      int spriteWidth = abs((int)(((ray->map->y / (transformY))) * uDiv));
       int drawStartX = -spriteWidth / 2 + spriteScreenX;
       if(drawStartX < 0) 
 	  	drawStartX = 0;

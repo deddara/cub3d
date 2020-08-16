@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 21:22:20 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/16 18:19:09 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/16 19:14:13 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,7 @@ static int _init(t_raycast *ray, t_map *map)
 	int i;
 
 	i = 0;
-	if(!(ray->x_buffer = (int*)malloc(sizeof(int) * map->x)))
+	if(!(ray->x_buffer = (double*)malloc(sizeof(double) * map->x)))
 		return (0);
 	ray->player_x = (double)map->x_player + 0.5;
 	ray->player_y = (double)map->y_player + 0.5;
