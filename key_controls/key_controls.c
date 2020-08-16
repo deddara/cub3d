@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/13 16:11:25 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/13 22:11:34 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/16 17:56:04 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,20 +54,20 @@ static void	r_and_l_handler(t_raycast *ray)
 	if (ray->keys.l_arr)
 	{	
 		double old_dir_x = ray->dir_x;
-		ray->dir_x = ray->dir_x * cos(-ray->rotate_speed) - ray->dir_y * sin(-ray->rotate_speed);
-		ray->dir_y = old_dir_x * sin(-ray->rotate_speed) + ray->dir_y * cos(-ray->rotate_speed);
+		ray->dir_x = ray->dir_x * cos(-0.05) - ray->dir_y * sin(-0.05);
+		ray->dir_y = old_dir_x * sin(-0.05) + ray->dir_y * cos(-0.05);
 		double old_plane_x = ray->plane_x;
-		ray->plane_x = ray->plane_x * cos(-ray->rotate_speed) - ray->plane_y * sin(-ray->rotate_speed);
-		ray->plane_y = old_plane_x * sin(-ray->rotate_speed) + ray->plane_y * cos(-ray->rotate_speed);
+		ray->plane_x = ray->plane_x * cos(-0.05) - ray->plane_y * sin(-0.05);
+		ray->plane_y = old_plane_x * sin(-0.05) + ray->plane_y * cos(-0.05);
 	}
 	if (ray->keys.r_arr)
 	{	
 		double old_dir_x = ray->dir_x;
-		ray->dir_x = ray->dir_x * cos(ray->rotate_speed) - ray->dir_y * sin(ray->rotate_speed);
-		ray->dir_y = old_dir_x * sin(ray->rotate_speed) + ray->dir_y * cos(ray->rotate_speed);
+		ray->dir_x = ray->dir_x * cos(0.05) - ray->dir_y * sin(0.05);
+		ray->dir_y = old_dir_x * sin(0.05) + ray->dir_y * cos(0.05);
 		double old_plane_x = ray->plane_x;
-		ray->plane_x = ray->plane_x * cos(ray->rotate_speed) - ray->plane_y * sin(ray->rotate_speed);
-		ray->plane_y = old_plane_x * sin(ray->rotate_speed) + ray->plane_y * cos(ray->rotate_speed);
+		ray->plane_x = ray->plane_x * cos(0.05) - ray->plane_y * sin(0.05);
+		ray->plane_y = old_plane_x * sin(0.05) + ray->plane_y * cos(0.05);
 	}
 }
 
