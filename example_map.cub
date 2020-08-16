@@ -1,4 +1,4 @@
-R 640 480
+R 1920 1080
 NO ./pics/eagle.xpm
 SO ./pics/redbrick.xpm
 WE ./pics/purplestone.xpm
