@@ -6,7 +6,7 @@
 #    By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/27 16:22:26 by deddara           #+#    #+#              #
-#    Updated: 2020/08/16 18:02:44 by deddara          ###   ########.fr        #
+#    Updated: 2020/08/17 18:27:24 by deddara          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ PARS_SRC = $(addprefix $(PARS_DIR),map_parser map_line_parser parser utils)
 PARS_SRC.O = $(addprefix $(OBJ_DIR), $(PARS_SRC:=.o))
 #ENGINE
 ENGINE_DIR = engine/
-ENGINE_SRC = $(addprefix $(ENGINE_DIR),ray_caster ray_caster_utils painter sprites)
+ENGINE_SRC = $(addprefix $(ENGINE_DIR),ray_caster ray_caster_utils painter sprite_painter sprites)
 ENGINE_SRC.O = $(addprefix $(OBJ_DIR), $(ENGINE_SRC:=.o))
 #CONTROLS
 CTRLS_DIR = key_controls/

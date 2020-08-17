@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/09 14:47:52 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/16 19:13:43 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/17 18:10:38 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 # include "main.h"
 
 # define ANGLE 66
-
+#define uDiv 0.7
+#define vDiv 0.7
+#define vMove 128
 
 
 typedef struct	s_sprite
@@ -27,6 +29,25 @@ typedef struct	s_sprite
 	struct s_sprite	*next;
 	struct s_sprite	*prev;
 }				t_sprite;
+
+typedef struct	s_spaint
+{
+	double	spr_x;
+	double	spr_y;
+	double	inv_det;
+	double	trnsfrm_x;
+	double	trnsfrm_y;
+	int		spr_scr_x;
+	int		v_move_scr;
+	int		spr_height;
+	int		start_y;
+	int		start_x;
+	int		end_y;
+	int		end_x;
+	int		tex_x;
+	int		tex_y;
+	int		spr_width;
+}				t_spaint;
 
 typedef struct t_keys
 {
@@ -93,5 +114,6 @@ void		sprites_count(t_raycast *ray, t_map *map);
 void		sprites_sort(t_raycast *ray);
 void		sprite_handler(t_raycast *ray);
 int			getpixelcolor(t_data *img, int x, int y);
-void paint_map(t_raycast *ray, t_map *map, t_data *img, int x);
+void		paint_map(t_raycast *ray, t_map *map, t_data *img, int x);
+void		sprite_painter(t_raycast *ray, t_sprite *sprite_data);
 #endif
