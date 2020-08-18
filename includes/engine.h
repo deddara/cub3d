@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/09 14:47:52 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/18 14:57:24 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/18 17:00:22 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,15 @@ typedef struct t_keys
 	int l_arr;
 	int r_arr;
 }				t_keys;
+
+typedef struct	s_paint
+{
+	double	wall_x;
+	int		tex_x;
+	int		tex_y;
+	double	step;
+	double	tex_pos;
+}				t_paint;	
 
 typedef struct s_raycast
 {
