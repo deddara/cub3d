@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 17:22:49 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/18 15:08:18 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/18 15:46:56 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void	y_calcs(t_raycast *ray, t_spaint *spaint)
 	if (spaint->start_y < 0)
 		spaint->start_y = 0;
 	spaint->end_y = spaint->spr_h / 2 + ray->map->y / 2 + spaint->v_move_scr;
-	if (spaint->end_y >= ray->map->y) 
+	if (spaint->end_y >= ray->map->y)
 		spaint->end_y = ray->map->y - 1;
 }
 
@@ -78,10 +78,10 @@ void		sprite_painter(t_raycast *ray, t_sprite *sprite_data)
 	y_calcs(ray, &spaint);
 	spaint.spr_w = abs((int)(((ray->map->y / (spaint.trnsfrm_y))) * UDIV));
 	spaint.start_x = -spaint.spr_w / 2 + spaint.spr_scr_x;
-	if(spaint.start_x < 0) 
+	if (spaint.start_x < 0)
 		spaint.start_x = 0;
 	spaint.end_x = spaint.spr_w / 2 + spaint.spr_scr_x;
-	if(spaint.end_x >= ray->map->x) 
+	if (spaint.end_x >= ray->map->x)
 		spaint.end_x = ray->map->x - 1;
 	draw_sprite(&spaint, ray);
 }
