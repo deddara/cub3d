@@ -4,7 +4,7 @@ SO ./pics/redbrick.xpm
 WE ./pics/purplestone.xpm
 EA ./pics/greystone.xpm
 
-S ./pics/barrel.xpm
+S ./pics/pillar.xpm
 F 220,100,0     
 C 225,30,0   
 
