@@ -4,9 +4,9 @@ SO ./pics/redbrick.xpm
 WE ./pics/purplestone.xpm
 EA ./pics/greystone.xpm
 
-S ./pics/pillar.xpm
-F 220,100,0     
-C 225,30,0   
+S ./pics/barrel.xpm
+F 52,58,65
+C 0,0,126
 
 111111111111111111111111111111111111111
 102222222020000002000000000000000000001
