@@ -6,7 +6,7 @@
 #    By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/27 16:22:26 by deddara           #+#    #+#              #
-#    Updated: 2020/08/18 14:10:22 by deddara          ###   ########.fr        #
+#    Updated: 2020/08/18 18:08:30 by deddara          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ ENGINE_SRC = $(addprefix $(ENGINE_DIR),ray_caster ray_caster_utils painter sprit
 ENGINE_SRC.O = $(addprefix $(OBJ_DIR), $(ENGINE_SRC:=.o))
 #CONTROLS
 CTRLS_DIR = key_controls/
-CTRLS_SRC = $(addprefix $(CTRLS_DIR),key_controls)
+CTRLS_SRC = $(addprefix $(CTRLS_DIR),key_controls step_n_dir)
 CTRLS_SRC.O = $(addprefix $(OBJ_DIR), $(CTRLS_SRC:=.o))
 
 

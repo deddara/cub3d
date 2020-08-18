@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/09 14:47:52 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/18 17:14:05 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/18 18:07:59 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,4 +137,7 @@ void		paint_map(t_raycast *ray, t_map *map, t_data *img, int x);
 void		sprite_painter(t_raycast *ray, t_sprite *sprite_data);
 void		add_sprite(t_sprite *sprite, int y, int x, int id);
 t_sprite	*new_sprite(int y, int x);
+void		r_and_l_handler(t_raycast *ray);
+void		d_and_a_handler(t_raycast *ray);
+void		w_and_s_handler(t_raycast *ray);
 #endif
