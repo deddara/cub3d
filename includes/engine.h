@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/09 14:47:52 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/17 18:10:38 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/18 14:28:24 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,18 @@ typedef struct	s_sprite
 	double		x;
 	double		y;
 	double		dist;
+	int			flag;
 	struct s_sprite	*next;
 	struct s_sprite	*prev;
 }				t_sprite;
+
+typedef struct	s_counters
+{
+	int		i;
+	int		j;
+	int		flag;
+}				t_counters;
+
 
 typedef struct	s_spaint
 {
@@ -111,9 +120,10 @@ int			key_release(int keycode, t_raycast *ray);
 int 		key_controls(t_raycast *ray);
 void		paint_fc(t_map *map, t_data *img);
 void		sprites_count(t_raycast *ray, t_map *map);
-void		sprites_sort(t_raycast *ray);
 void		sprite_handler(t_raycast *ray);
 int			getpixelcolor(t_data *img, int x, int y);
 void		paint_map(t_raycast *ray, t_map *map, t_data *img, int x);
 void		sprite_painter(t_raycast *ray, t_sprite *sprite_data);
+void		add_sprite(t_sprite *sprite, int y, int x, int id);
+t_sprite	*new_sprite(int y, int x);
 #endif

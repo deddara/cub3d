@@ -6,17 +6,17 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/13 18:19:45 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/17 18:27:02 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/18 14:33:03 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "engine.h"
 
-
 static void	list_swap(t_sprite *tmp, t_sprite *a)
 {
 	int		t;
 	double	j;
+
 	t = 0;
 	t = tmp->id;
 	tmp->id = a->id;
@@ -32,95 +32,61 @@ static void	list_swap(t_sprite *tmp, t_sprite *a)
 	a->dist = j;
 }
 
-void sprites_sort(t_raycast *ray)
+static void	sprites_sort(t_raycast *ray)
 {
- 	t_sprite *tmp;
-    t_sprite *a;
-    int flag=1;
-    while(flag==1)
-    {
-        tmp=ray->sprite;
-        a=tmp->next;
-        flag=0;
-        while(a)
-        {
-            if((tmp->dist)<(a->dist))
-            {
+	t_sprite	*tmp;
+	t_sprite	*a;
+	int			flag;
+
+	flag = 1;
+	while (flag)
+	{
+		tmp = ray->sprite;
+		a = tmp->next;
+		flag = 0;
+		while (a)
+		{
+			if ((tmp->dist) < (a->dist))
+			{
 				list_swap(tmp, a);
-                flag=1;
-            }
-            tmp=tmp->next;
-            a=a->next;
-        }
-    }
-}
-
-static t_sprite	*new_sprite(int y, int x)
-{
-	t_sprite *sprite;
-
-	if (!(sprite = malloc(sizeof(t_sprite) * 1)))
-		return NULL;
-	sprite->y = (double)y + 0.5;
-	sprite->x = (double)x + 0.5;
-	sprite->dist = 0.0;
-	sprite->id = 0;
-	sprite->prev = NULL;
-	sprite->next = NULL;
-	return (sprite);
-}
-
-static void add_sprite(t_sprite *sprite, int y, int x, int id)
-{
-	t_sprite *tmp;
-	t_sprite *new;
-
-	if (!(new = malloc(sizeof(t_sprite) * 1)))
-		return ;
-	new->y = (double)y + 0.5;
-	new->x = (double)x + 0.5;
-	new->id = id;
-	new->dist = 0.0;
-	tmp = sprite;
-	while (tmp->next)
-		tmp = tmp->next;
-	tmp->next = new;
-	new->prev = tmp;
-	new->next = NULL;
+				flag = 1;
+			}
+			tmp = tmp->next;
+			a = a->next;
+		}
+	}
 }
 
 void		sprites_count(t_raycast *ray, t_map *map)
 {
-	int			i;
-	int			j;
-	int			flag;
+	t_counters	count;
 	t_sprite	*sprite;
 
-	flag = 0;
-	i = 1;
-	while (map->map[i])
+	count.flag = 0;
+	count.i = 0;
+	while (map->map[count.i])
 	{
-		j = 0;
-		while (map->map[i][j])
+		count.j = 0;
+		while (map->map[count.i][count.j])
 		{
-			if (map->map[i][j] == '2' && flag == 0)
+			if (map->map[count.i][count.j] == '2' && count.flag == 0)
 			{
-				sprite = new_sprite(i , j);
-				flag++;
+				sprite = new_sprite(count.i, count.j);
+				count.flag++;
 			}
-			else if (map->map[i][j] == '2' && flag)
+			else if (map->map[count.i][count.j] == '2' && count.flag)
 			{
-				add_sprite(sprite, i, j, flag);
-				flag++;
+				add_sprite(sprite, count.i, count.j, count.flag);
+				count.flag++;
 			}
-			j++;
+			count.j++;
 		}
-		i++;
+		count.i++;
 	}
 	ray->sprite = sprite;
 }
 
-static void sprite_dist_calc(t_raycast *ray)
+static void	sprite_dist_calc(t_raycast *ray)
 {
 	t_sprite	*sp;
 
@@ -133,15 +99,15 @@ static void sprite_dist_calc(t_raycast *ray)
 	}
 }
 
-void	sprite_handler(t_raycast *ray)
-{	
-	int color;
+void		sprite_handler(t_raycast *ray)
+{
 	t_sprite *tmp;
+
 	sprite_dist_calc(ray);
 	sprites_sort(ray);
 	tmp = ray->sprite;
 	while (tmp)
-    {
+	{
 		sprite_painter(ray, tmp);
 		tmp = tmp->next;
 	}

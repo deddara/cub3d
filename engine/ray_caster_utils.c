@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 17:57:47 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/16 17:59:37 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/18 14:28:38 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,38 @@ int skipper(t_map *map, int y, int x)
 		|| map->map[y][x] == 'E')
 		return (1);
 	return (0);
+}
+
+t_sprite	*new_sprite(int y, int x)
+{
+	t_sprite *sprite;
+
+	if (!(sprite = malloc(sizeof(t_sprite) * 1)))
+		return NULL;
+	sprite->y = (double)y + 0.5;
+	sprite->x = (double)x + 0.5;
+	sprite->dist = 0.0;
+	sprite->id = 0;
+	sprite->prev = NULL;
+	sprite->next = NULL;
+	return (sprite);
+}
+
+void add_sprite(t_sprite *sprite, int y, int x, int id)
+{
+	t_sprite *tmp;
+	t_sprite *new;
+
+	if (!(new = malloc(sizeof(t_sprite) * 1)))
+		return ;
+	new->y = (double)y + 0.5;
+	new->x = (double)x + 0.5;
+	new->id = id;
+	new->dist = 0.0;
+	tmp = sprite;
+	while (tmp->next)
+		tmp = tmp->next;
+	tmp->next = new;
+	new->prev = tmp;
+	new->next = NULL;
 }
