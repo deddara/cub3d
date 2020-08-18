@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/09 14:47:52 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/18 14:28:24 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/18 14:57:24 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 # include "main.h"
 
 # define ANGLE 66
-#define uDiv 0.7
-#define vDiv 0.7
-#define vMove 128
+#define UDIV 0.7
+#define VDIV 0.7
+#define VMOVE 128
 
 
 typedef struct	s_sprite
@@ -48,14 +48,14 @@ typedef struct	s_spaint
 	double	trnsfrm_y;
 	int		spr_scr_x;
 	int		v_move_scr;
-	int		spr_height;
+	int		spr_h;
 	int		start_y;
 	int		start_x;
 	int		end_y;
 	int		end_x;
 	int		tex_x;
 	int		tex_y;
-	int		spr_width;
+	int		spr_w;
 }				t_spaint;
 
 typedef struct t_keys
