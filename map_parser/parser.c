@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 20:53:16 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/19 20:32:33 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/19 21:58:48 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -255,37 +255,29 @@ static void longest_width(t_map *map)
 	map->x_count = prev_len;
 }
 
-int		parser(t_map *map)
+int		parser(t_map *map, char *argv)
 {
 	int		fd;
 	char	*line;
 
 	line = NULL;
-	fd = open("/Users/deddara/school21/cub3d/cub3d/example_map.cub", O_RDONLY);
+	if((fd = open(argv, O_RDONLY)) < 0)
+		return (error_handler(0, 0, 1));
 	if(!ft_lstmapnew(map))
-		return(0);
+		return (error_handler(0, 0, 2));
 	while(get_next_line(fd, &line))
 	{		
 		if(line[0] == '\0')
 			continue ;
 		if(!(check_elems(line, map)))
-		{
-			printf("===ERROR===\n");
-			return (0);
-		}
-		printf("%s\n", line);
+			return (error_handler(map, line, 3));
 		if(map->count == 8)
 			break ;
 		free(line);
 	}
 	free (line);
 	if(!(check_all_params(map)))
-	{
-		printf("===ERROR===\n");
-		return (0);	
-	}
-	//MAP PARSING PART
-	// printf ("\n=== MAP TIME ===\n\n");
+		return (error_handler(map, line, 3));
 	while(get_next_line(fd, &line))
 	{
 		if(line[0] == '\0' && map->y_count == 0)

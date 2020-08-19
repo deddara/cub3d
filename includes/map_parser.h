@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 20:53:11 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/18 19:03:54 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/19 21:55:57 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,11 @@ typedef struct		s_map
 }					t_map;
 
 int					ft_lstmapnew();
-int					parser(t_map *map);
+int					parser(t_map *map, char *argv);
 int					check_elems(char *line, t_map *map);
 int					check_int(char *str);
 int					map_line_parser(char *line, t_map *map);
 int					map_parser(t_map *map);
 int					first_last(char *line, t_map *map);
+int					error_handler(t_map *map, char *line, int code);
 #endif

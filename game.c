@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 19:38:29 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/19 20:17:45 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/19 21:30:58 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,13 @@ static void keys_init (t_raycast *ray)
 	ray->keys.esc = 0;
 }
 
-int			game(void)
+int			game(char *argv)
 {
     t_data		img;
     t_vars		vars;
     t_map		map;
 	t_raycast	ray;
-	if(!parser(&map))
+	if(!parser(&map, argv))
 		return (0); //парсинг карты
     vars.mlx = mlx_init();
     vars.win = mlx_new_window(vars.mlx, map.x, map.y, "Hello world!");

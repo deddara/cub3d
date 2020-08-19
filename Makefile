@@ -6,7 +6,7 @@
 #    By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/27 16:22:26 by deddara           #+#    #+#              #
-#    Updated: 2020/08/19 20:16:44 by deddara          ###   ########.fr        #
+#    Updated: 2020/08/19 21:43:34 by deddara          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ GNL_SRC = $(addprefix $(GNL_DIR), get_next_line get_next_line_utils)
 GNL_SRC.O = $(addprefix $(OBJ_DIR), $(GNL_SRC:=.o))
 #PARSER
 PARS_DIR = map_parser/
-PARS_SRC = $(addprefix $(PARS_DIR),map_parser map_line_parser parser utils)
+PARS_SRC = $(addprefix $(PARS_DIR),map_parser map_line_parser parser utils error)
 PARS_SRC.O = $(addprefix $(OBJ_DIR), $(PARS_SRC:=.o))
 #ENGINE
 ENGINE_DIR = engine/
