@@ -6,12 +6,12 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 20:53:16 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/10 17:37:17 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/19 19:55:11 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "map_parser.h"
-
+#include <stdio.h>
 static unsigned long create_rgb(int r, int g, int b)
 {   
     return ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
@@ -217,7 +217,7 @@ static int check_all_params(t_map *map)
 	return (1);
 }
 
-static void get_angle(t_map *map)
+static int get_angle(t_map *map)
 {
 	if (map->player_pos == 'N')
 		map->a_player = 3 * M_PI / 2;
@@ -228,6 +228,11 @@ static void get_angle(t_map *map)
 	else if (map->player_pos == 'W')
 		map->a_player = M_PI;
 	else
+	{
+		ft_putstr_fd("no player on map", 0);
+		return (0);
+	}
+	return (1);
 }
 
 static void longest_width(t_map *map)
@@ -289,7 +294,7 @@ int		parser(t_map *map)
 			return (0);
 		if(!(map_line_parser(line, map)))
 		{	
-			printf("===ERROR===\n");
+			printf("===ERROR==2=\n");
 			return (0);
 		}
 		printf("%s\n", line);
@@ -298,7 +303,7 @@ int		parser(t_map *map)
 	//добавить проверку на отсутствие игрока!
 	if(!(map_line_parser(line, map)))
 	{	
-		printf("===ERROR===\n");
+		printf("===ERROR===3\n");
 		return (0);
 	}
 	free(line);
@@ -307,7 +312,8 @@ int		parser(t_map *map)
 		printf("===ERROR===\n");
 		return (0);
 	}
-	get_angle(map);
+	if(!get_angle(map))
+		return(0);
 	longest_width(map);
 	return (1);
 }

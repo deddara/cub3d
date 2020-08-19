@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 03:49:06 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/02 13:21:54 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/19 20:12:06 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int	map_parser(t_map *map)
 			if (map->map[i][j] == ' ' && (map->map[i - 1][j] == '0' || map->map[i - 1][j] == '2'
 				|| map->map[i - 1][j] == 'N' || map->map[i - 1][j] == 'S' || map->map[i - 1][j] == 'W'
 					|| map->map[i - 1][j] == 'E'))
+				return (0);
+			if (map->map[i][j] == '0' && (map->map[i - 1][j] == ' '))
 				return (0);
 			j++;
 		}

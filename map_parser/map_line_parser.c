@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 01:54:32 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/02 19:10:57 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/19 19:51:02 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static int line_check(char *line, t_map *map)
 			map->x_player = i;
 			map->y_player = map->y_count - 1;
 		}
-		if ((line[i] == 'N' || line[i] == 'E' || line[i] == 'S' || line[i] == 'W') && map->player_pos != '0')
+		else if ((line[i] == 'N' || line[i] == 'E' || line[i] == 'S' || line[i] == 'W') && map->player_pos != '0')
 			return (0);
 		if (line[i + 1] == '\0' && line[i] != '1')
 			return (0);

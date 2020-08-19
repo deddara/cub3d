@@ -6,16 +6,15 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 21:22:20 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/18 19:49:27 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/19 19:46:02 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "main.h"
-//#include "engine.h"
+#include "main.h"
+#include "engine.h"
 #include <stdio.h>
-#include "./libraries/libft/includes/libft.h"
 
-static void argv_handler(int argc, char **argv)
+static int	argv_handler(int argc, char **argv)
 {
 	int len;
 
@@ -45,9 +44,9 @@ static void argv_handler(int argc, char **argv)
 
 int             main(int argc, char **argv)
 {
-	if (!argv_handler(argc, argv));
+	if (!argv_handler(argc, argv))
 		return (0);
-	if (!(game())
+	if (!(game()))
 		return (0);
 	return (1);
 }
