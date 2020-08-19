@@ -5,8 +5,8 @@ WE ./pics/purplestone.xpm
 EA ./pics/greystone.xpm
 
 S ./pics/barrel.xpm
-C 0,0,126
-F 52,58,   65
+C 0,  0,  126
+F 52,58,  65
 
         1111111111111111111111111
         1000000000110000000000001

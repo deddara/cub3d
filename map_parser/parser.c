@@ -6,34 +6,17 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 20:53:16 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/20 00:18:45 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/20 01:18:52 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "map_parser.h"
-#include <stdio.h>
 
-// static void freesher(char **arr)
-// {
-// 	int i;
-// 	int j;
 
-// 	j = 0;
-// 	i = 2;
-// 	if (arr[0][1] == 'R' || arr[0][1] == 'C' || arr[0][1] == 'F')
-// 		i = 3;
-// 	while (arr[j])
-// 	{
-// 		free (arr[j]);
-// 		j++;
-// 	}
-// 	free (arr);
+// static unsigned long create_rgb(int r, int g, int b)
+// {   
+//     return ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
 // }
-
-static unsigned long create_rgb(int r, int g, int b)
-{   
-    return ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
-}
 static int word_counter(char **str)
 {
 	int i;
@@ -46,17 +29,17 @@ static int word_counter(char **str)
 	return (1);
 }
 
-static int f_word_counter(char **str)
-{
-	int i;
+// static int f_word_counter(char **str)
+// {
+// 	int i;
 
-	i = 0;
-	while (str[i])
-		i++;
-	if (i != 3)
-		return (0);
-	return (1);
-}
+// 	i = 0;
+// 	while (str[i])
+// 		i++;
+// 	if (i != 3)
+// 		return (0);
+// 	return (1);
+// }
 
 static int check_is_alone(char *line)
 {
@@ -179,27 +162,103 @@ static int s_checker(char *line, t_map *map)
 		return (0);
 	if(!(map->s = ft_strdup(words[1])))
 		return (0);
+	
 	return (1);
 }
 
-int		f_checker(char *line, t_map *map)
+static int	ft_isspace(int c)
 {
-	char	**nums;
-	int		r;
-	int 	g;
-	int		b;
+	if (c == '\n' || c == '\t' || c == '\v' || \
+			c == '\r' || c == '\f' || c == ' ')
+		return (1);
+	return (0);
+}
+
+static void	f_skip_spaces(char *line, int *i)
+{
+	while (ft_isspace(line[*i]))
+		(*i)++;
+}
+static int		f_cub3d_atoi(char *line, int *i)
+{
+	long long int	result;
+	int				sign;
+
+	sign = 1;
+	result = 0;
+	f_skip_spaces(line, i);
+	if (line[*i] == '-')
+		sign = -1;
+	if (line[*i] == '-' || line[*i] == '+')
+		(*i)++;
+	while (line[*i] >= '0' && line[*i] <= '9')
+	{
+		if ((result * 10) < result)
+			return (sign < 0 ? 0 : -1);
+		result = result * 10 + line[*i] - '0';
+		(*i)++;
+	}
+	return ((int)result * (int)sign);
+}
+
+
+static int	f_check_color_string(char *line, int i, int *rgb)
+{
+	int				errcode;
+	int				number;
+	int				comma;
+
+	errcode = 0;
+	number = 0;
+	comma = 0;
+	f_skip_spaces(line, &i);
+	while (line[i] && !errcode)
+	{
+		if (ft_isdigit(line[i]) && number < 3)
+		{
+			number++;
+			rgb[number - 1] = f_cub3d_atoi(line, &i);
+			f_skip_spaces(line, &i);
+			if (line[i])
+				(line[i++] == ',' && comma < 2) ? comma++ : errcode++;
+			f_skip_spaces(line, &i);
+		}
+		else
+			errcode++;
+	}
+	if (errcode || !(number == 3 && comma == 2))
+		return (0);
+	return (1);
+}
+
+static int			f_checker(char *line, t_map *map)
+{
+	int				errcode;
+	int				rgb[3];
+	int					i = 0;
+	errcode = 0;
 	map->count++;
-	if (!(nums = ft_split(line, ',')))
+	i++;
+	if (!(errcode = f_check_color_string(line, i, rgb)))
 		return (0);
-	if (!(f_word_counter(nums)))
+	if (rgb[0] > 255 || rgb[1] > 255 || rgb[2] > 255)
 		return (0);
-	r = ft_atoi(&nums[0][1]);
-	g = ft_atoi(nums[1]);
-	b = ft_atoi(nums[2]);
-	if (line[0] == 'F')
-		map->f_rgb = create_rgb(r, g, b);
-	else
-		map->c_rgb = create_rgb(r, g ,b);
+	map->f_rgb = rgb[0] << 16 | rgb[1] << 8 | rgb[2];
+	return (1);
+}
+static int			c_checker(char *line, t_map *map)
+{
+	int				errcode;
+	int				rgb[3];
+	int					i = 0;
+	errcode = 0;
+	map->count++;
+	i++;
+	if (!(errcode = f_check_color_string(line, i, rgb)))
+		return (0);
+	if (rgb[0] > 255 || rgb[1] > 255 || rgb[2] > 255)
+		return (0);
+	map->c_rgb = rgb[0] << 16 | rgb[1] << 8 | rgb[2];
 	return (1);
 }
 
@@ -227,7 +286,7 @@ int		check_elems(char *line, t_map *map)
 		if (!(f_checker(line, map)))
 			return (0);
 	if (line[0] == 'C' && line[1] == ' ')
-		if (!(f_checker(line, map)))
+		if (!(c_checker(line, map)))
 			return (0);	
 	return (1);
 }
@@ -304,10 +363,7 @@ int		parser(t_map *map, char *argv)
 	while(get_next_line(fd, &line))
 	{
 		if(line[0] == '\0' && map->y_count == 0)
-		{
-			free(line);
-			continue ;
-		}
+			continue;
 		else if ((line && line[0] != ' ' && line[0] != '1')&& map->y_count != 0)
 			return (error_handler(map, line, 4));
 		if(!(map_line_parser(line, map)))
@@ -315,15 +371,15 @@ int		parser(t_map *map, char *argv)
 		free(line);
 	}
 	if ((line && line[0] != ' ' && line[0] != '1')&& map->y_count != 0)
-		return (error_handler(map, line, 4));
+		return (error_handler(map, line, 4));	
 	if(!(map_line_parser(line, map)))
 		return (error_handler(map, line, 4));
 	free (line);
-	// ft_putstr_fd(map->map_line, 0);
 	if(!(map_parser(map)))
 		return (error_handler(map, 0, 5));
 	if(!get_angle(map))
 		return(0);
 	longest_width(map);
+	ft_putstr_fd(map->map_line, 0);
 	return (1);
 }
