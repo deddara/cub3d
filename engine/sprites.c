@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/13 18:19:45 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/18 14:33:03 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/19 20:33:57 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,13 +102,15 @@ static void	sprite_dist_calc(t_raycast *ray)
 void		sprite_handler(t_raycast *ray)
 {
 	t_sprite *tmp;
-
-	sprite_dist_calc(ray);
-	sprites_sort(ray);
-	tmp = ray->sprite;
-	while (tmp)
+	if (ray->sprite)
 	{
-		sprite_painter(ray, tmp);
-		tmp = tmp->next;
+		sprite_dist_calc(ray);
+		sprites_sort(ray);
+		tmp = ray->sprite;
+		while (tmp)
+		{
+			sprite_painter(ray, tmp);
+			tmp = tmp->next;
+		}
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 20:53:16 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/19 19:55:11 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/19 20:32:33 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -289,9 +289,16 @@ int		parser(t_map *map)
 	while(get_next_line(fd, &line))
 	{
 		if(line[0] == '\0' && map->y_count == 0)
+		{
+			free(line);
 			continue ;
-		else if ((line[0] != ' ' && line[0] != '1')&& map->y_count != 0)
+		}
+		else if ((line && line[0] != ' ' && line[0] != '1')&& map->y_count != 0)
+		{
+			free(line);
+			ft_putstr_fd("dd",0);
 			return (0);
+		}
 		if(!(map_line_parser(line, map)))
 		{	
 			printf("===ERROR==2=\n");
@@ -300,7 +307,11 @@ int		parser(t_map *map)
 		printf("%s\n", line);
 		free(line);
 	}
-	//добавить проверку на отсутствие игрока!
+	if ((line && line[0] != ' ' && line[0] != '1')&& map->y_count != 0)
+	{
+		free(line);
+		return (0);
+	}
 	if(!(map_line_parser(line, map)))
 	{	
 		printf("===ERROR===3\n");

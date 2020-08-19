@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 19:38:29 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/19 19:57:05 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/19 20:17:45 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static void keys_init (t_raycast *ray)
 	ray->keys.esc = 0;
 }
 
-int			main(void)
+int			game(void)
 {
     t_data		img;
     t_vars		vars;
