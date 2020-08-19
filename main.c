@@ -15,9 +15,10 @@
 #include <stdio.h>
 #include "./libraries/libft/includes/libft.h"
 
-int             main(int argc, char **argv)
+static void argv_handler(int argc, char **argv)
 {
 	int len;
+
 	if (argc > 3)
 	{
 		printf("Too many arguments");
@@ -39,6 +40,14 @@ int             main(int argc, char **argv)
 		printf("not .cub format");
 		return (0);
 	}
-	printf ("%c", argv[1][len]);	
+	return (1);
+}
+
+int             main(int argc, char **argv)
+{
+	if (!argv_handler(argc, argv));
+		return (0);
+	if (!(game())
+		return (0);
 	return (1);
 }

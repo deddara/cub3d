@@ -227,6 +227,7 @@ static void get_angle(t_map *map)
 		map->a_player = 0;
 	else if (map->player_pos == 'W')
 		map->a_player = M_PI;
+	else
 }
 
 static void longest_width(t_map *map)
@@ -258,10 +259,8 @@ int		parser(t_map *map)
 	fd = open("/Users/deddara/school21/cub3d/cub3d/example_map.cub", O_RDONLY);
 	if(!ft_lstmapnew(map))
 		return(0);
-
 	while(get_next_line(fd, &line))
-	{
-		
+	{		
 		if(line[0] == '\0')
 			continue ;
 		if(!(check_elems(line, map)))
@@ -282,12 +281,11 @@ int		parser(t_map *map)
 	}
 	//MAP PARSING PART
 	// printf ("\n=== MAP TIME ===\n\n");
-
 	while(get_next_line(fd, &line))
 	{
 		if(line[0] == '\0' && map->y_count == 0)
 			continue ;
-		else if (line[0] == '\0' && map->y_count != 0)
+		else if ((line[0] != ' ' && line[0] != '1')&& map->y_count != 0)
 			return (0);
 		if(!(map_line_parser(line, map)))
 		{	
@@ -303,12 +301,12 @@ int		parser(t_map *map)
 		printf("===ERROR===\n");
 		return (0);
 	}
+	free(line);
 	if(!(map_parser(map)))
 	{	
 		printf("===ERROR===\n");
 		return (0);
 	}
-	free(line);
 	get_angle(map);
 	longest_width(map);
 	return (1);

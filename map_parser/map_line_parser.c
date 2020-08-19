@@ -19,14 +19,9 @@ static int map_join(char *line, t_map *map)
 
 	tmp_map_line = map->map_line;
 	if (!(tmp_line = ft_strjoin(line, "\n")))
-	{
 		return (0);
-	
-	}
 	if (!(map->map_line = ft_strjoin(map->map_line, tmp_line)))
-	{
 		return (0);
-	}
 	free(tmp_map_line);
 	free(tmp_line);
 	return (1);
@@ -73,17 +68,15 @@ static int line_check(char *line, t_map *map)
 			continue ;
 		}
 		if (line[i] == ' ')
-		{
 			if ((line[i - 1] != ' ' && line[i - 1] != '1') || (line[i + 1] != ' ' && line[i + 1] != '1'))
 				return (0);
-		}
 		if ((line[i] == 'N' || line[i] == 'E' || line[i] == 'S' || line[i] == 'W') && map->player_pos == '0')
 		{
 			map->player_pos = line[i];
 			map->x_player = i;
 			map->y_player = map->y_count - 1;
 		}
-		else if ((line[i] == 'N' || line[i] == 'E' || line[i] == 'S' || line[i] == 'W') && map->player_pos != '0')
+		if ((line[i] == 'N' || line[i] == 'E' || line[i] == 'S' || line[i] == 'W') && map->player_pos != '0')
 			return (0);
 		if (line[i + 1] == '\0' && line[i] != '1')
 			return (0);
