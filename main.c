@@ -10,9 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "main.h"
-#include "engine.h"
+//#include "main.h"
+//#include "engine.h"
 #include <stdio.h>
+#include "./libraries/libft/includes/libft.h"
+
 int             main(int argc, char **argv)
 {
 	int len;
@@ -26,8 +28,17 @@ int             main(int argc, char **argv)
 		printf("no arguments");
 		return (0);
 	}
-	len = ft_strlen(argv[1]);
-	len--;
-	game();
+	if ((len = ft_strlen(argv[1])) < 4)
+	{
+		printf("invalid argument");
+		return (0);
+	}
+	len -= 4;
+	if (ft_strncmp(&argv[1][len], ".cub", 4) != 0)
+	{
+		printf("not .cub format");
+		return (0);
+	}
+	printf ("%c", argv[1][len]);	
 	return (1);
 }
