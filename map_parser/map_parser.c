@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 03:49:06 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/19 20:12:06 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/19 23:59:39 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	map_parser(t_map *map)
 	int j;
 
 	i = 1;
+
 	if (!(map->map = ft_split(map->map_line, '\n')))
 		return (0);
 	if (!(first_last(map->map[map->y_count - 1], (void*) 0)))

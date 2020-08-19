@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 21:34:44 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/19 21:58:12 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/19 23:17:22 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,18 @@ int		error_handler(t_map *map,char *line, int code)
 	{	
 		ft_putstr_fd("==PARAMS ERROR==\n--->", 0);
 		ft_putstr_fd(line, 0);
+		free (line);
+	}
+	else if (code == 4)
+	{	
+		ft_putstr_fd("==MAP ERROR==\n--->", 0);
+		ft_putstr_fd(line, 0);
+		free (line);
+	}
+	else if (code == 5)
+	{	
+		ft_putstr_fd("==MAP ERROR==\n--->", 0);
+		ft_putstr_fd(line, 0);;
 	}
 	return (0);
 }

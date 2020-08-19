@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 01:54:32 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/19 19:51:02 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/20 00:07:54 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,11 @@ int	first_last(char *line, t_map *map)
 		i++;
 	}
 	if (map)
+	{
 		if (!(map_join(line, map)))
 			return (0);
+	}
+	
 	return (1);
 }
 

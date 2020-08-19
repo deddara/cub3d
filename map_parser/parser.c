@@ -6,12 +6,30 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 20:53:16 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/19 21:58:48 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/20 00:18:45 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "map_parser.h"
 #include <stdio.h>
+
+// static void freesher(char **arr)
+// {
+// 	int i;
+// 	int j;
+
+// 	j = 0;
+// 	i = 2;
+// 	if (arr[0][1] == 'R' || arr[0][1] == 'C' || arr[0][1] == 'F')
+// 		i = 3;
+// 	while (arr[j])
+// 	{
+// 		free (arr[j]);
+// 		j++;
+// 	}
+// 	free (arr);
+// }
+
 static unsigned long create_rgb(int r, int g, int b)
 {   
     return ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
@@ -40,6 +58,27 @@ static int f_word_counter(char **str)
 	return (1);
 }
 
+static int check_is_alone(char *line)
+{
+	int i;
+	int count;
+
+	count = 0;
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] != ' ')
+			count++;
+		i++;
+	}
+	if ((line[0] == 'R' || line[0] == 'S' || line[0] == 'C'
+		|| line[0] == 'F') && count < 2)
+		return (0);
+	else if (count < 3)
+		return (0);
+	return (1);
+}
+
 static int r_checker(char *line, t_map *map)
 {
 	int i;
@@ -47,16 +86,18 @@ static int r_checker(char *line, t_map *map)
 	i = 0;
 
 	map->count++;
-	if(!(map->r = ft_split(line, ' ')))
+	if(!check_is_alone(line))
 		return (0);
-	if (!(check_int(map->r[1]) || !(check_int(map->r[2]))))
-		return (0); 
-	if(!(map->x = ft_atoi(map->r[1])) || !(map->y = ft_atoi(map->r[2])))
+	if(!(map->r = ft_split(line, ' ')))
 		return (0);
 	while(map->r[i])
 		i++;
 	if (i != 3)
 		return(0);
+	if (!(check_int(map->r[1]) || !(check_int(map->r[2]))))
+		return (0); 
+	if(!(map->x = ft_atoi(map->r[1])) || !(map->y = ft_atoi(map->r[2])))
+		return (0);
 	free (map->r);
 	return (1);
 }
@@ -74,7 +115,6 @@ static int ea_checker(char *line, t_map *map)
 		return (0);
 	if(!(map->ea = ft_strdup(words[1])))
 		return (0);
-	free (*words);
 	return (1);
 }	
 
@@ -91,7 +131,6 @@ static int we_checker(char *line, t_map *map)
 		return (0);
 	if(!(map->we = ft_strdup(words[1])))
 		return (0);
-	free (*words);
 	return (1);
 }	
 
@@ -108,7 +147,6 @@ static int so_checker(char *line, t_map *map)
 		return (0);
 	if(!(map->so = ft_strdup(words[1])))
 		return (0);
-	free (*words);
 	return (1);
 }	
 
@@ -125,9 +163,6 @@ static int no_checker(char *line, t_map *map)
 		return (0);
 	if(!(map->no = ft_strdup(words[1])))
 		return (0);
-	
-	free (*words);
-	free (words);
 	return (1);
 }	
 
@@ -144,38 +179,27 @@ static int s_checker(char *line, t_map *map)
 		return (0);
 	if(!(map->s = ft_strdup(words[1])))
 		return (0);
-	free (*words);
 	return (1);
 }
 
 int		f_checker(char *line, t_map *map)
 {
-	char	**words;
 	char	**nums;
 	int		r;
 	int 	g;
 	int		b;
-
 	map->count++;
-	if (!(words = ft_split(line, ' ')))
+	if (!(nums = ft_split(line, ',')))
 		return (0);
-	if (!(word_counter(words)))
+	if (!(f_word_counter(nums)))
 		return (0);
-	if (!(nums = ft_split(words[1], ',')))
-		return (0);
-	if (!(f_word_counter(nums)) || !(check_int(nums[0]) || !(check_int(nums[1]))) || !(check_int(nums[2])))
-		return (0);
-	r = ft_atoi(nums[0]);
+	r = ft_atoi(&nums[0][1]);
 	g = ft_atoi(nums[1]);
 	b = ft_atoi(nums[2]);
 	if (line[0] == 'F')
 		map->f_rgb = create_rgb(r, g, b);
 	else
 		map->c_rgb = create_rgb(r, g ,b);
-	free (*words);
-	free (words);
-	free (*nums);
-	free (nums);
 	return (1);
 }
 
@@ -275,7 +299,6 @@ int		parser(t_map *map, char *argv)
 			break ;
 		free(line);
 	}
-	free (line);
 	if(!(check_all_params(map)))
 		return (error_handler(map, line, 3));
 	while(get_next_line(fd, &line))
@@ -286,35 +309,19 @@ int		parser(t_map *map, char *argv)
 			continue ;
 		}
 		else if ((line && line[0] != ' ' && line[0] != '1')&& map->y_count != 0)
-		{
-			free(line);
-			ft_putstr_fd("dd",0);
-			return (0);
-		}
+			return (error_handler(map, line, 4));
 		if(!(map_line_parser(line, map)))
-		{	
-			printf("===ERROR==2=\n");
-			return (0);
-		}
-		printf("%s\n", line);
+			return (error_handler(map, line, 4));
 		free(line);
 	}
 	if ((line && line[0] != ' ' && line[0] != '1')&& map->y_count != 0)
-	{
-		free(line);
-		return (0);
-	}
+		return (error_handler(map, line, 4));
 	if(!(map_line_parser(line, map)))
-	{	
-		printf("===ERROR===3\n");
-		return (0);
-	}
-	free(line);
+		return (error_handler(map, line, 4));
+	free (line);
+	// ft_putstr_fd(map->map_line, 0);
 	if(!(map_parser(map)))
-	{	
-		printf("===ERROR===\n");
-		return (0);
-	}
+		return (error_handler(map, 0, 5));
 	if(!get_angle(map))
 		return(0);
 	longest_width(map);
