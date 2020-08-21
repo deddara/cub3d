@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 18:06:30 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/19 20:00:15 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/21 17:52:49 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void		d_and_a_handler(t_raycast *ray)
 	if (ray->keys.d)
 	{
 		if (skipper_move(ray->map, (int)ray->player_y,\
-		(int)(ray->player_x + ray->plane_x * 0.12)))
+		(int)(ray->player_x + ray->plane_x * 0.21)))
 			ray->player_x += ray->plane_x * 0.2;
 		if (skipper_move(ray->map, (int)(ray->player_y + ray->plane_y * 0.21),\
 		(int)ray->player_x))
