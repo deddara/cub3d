@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 20:53:16 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/21 15:58:33 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/21 17:09:58 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,5 @@ int		parser(t_map *map, char *argv)
 	if(!get_angle(map))
 		return(0);
 	longest_width(map);
-	ft_putstr_fd("sraka\n\n\n", 0);
 	return (1);
 }

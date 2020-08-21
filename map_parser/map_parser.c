@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 03:49:06 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/21 16:54:57 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/21 17:10:26 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ int map_start_parser(char *line, t_map *map, int fd)
 			return (error_handler(map, line, 4));
 		free_line(line);
 	}
-	ft_putstr_fd("d", 0);
 	if ((line && line[0] != ' ' && line[0] != '1')&& map->y_count != 0)
 		return (error_handler(map, line, 4));	
 	if(!(map_line_parser(line, map)))
@@ -73,6 +72,5 @@ int map_start_parser(char *line, t_map *map, int fd)
 	free_line(line);
 	if(!(map_parser(map)))
 		return (error_handler(map, 0, 5));
-	ft_putstr_fd("a", 0);
 	return (1);
 }
