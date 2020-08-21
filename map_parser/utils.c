@@ -26,8 +26,9 @@ int	ft_lstmapnew(t_map *map)
 	map->f_rgb = -1;
 	map->y_count = 0;
 	map->player_pos = '0';
-	if(!(map->map_line = (char*)malloc(sizeof(char) * 1)))
-		return (0);
+	if (!(map->map_line = ft_strdup("")))
+		return (200);
+	map->map = NULL;
 	map->map_line[0] = '\0';
     map->no = NULL;
 	map->a_player = 0;

@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 19:38:29 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/20 00:37:01 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/21 16:37:10 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,8 @@ int			game(char *argv)
     t_vars		vars;
     t_map		*map;
 	t_raycast	ray;
-	map = malloc(sizeof(t_map) * 1);
+	if(!(map = malloc(sizeof(t_map) * 1)))
+		return (0);
 	if(!parser(map, argv))
 		return (0); //парсинг карты
     vars.mlx = mlx_init();
