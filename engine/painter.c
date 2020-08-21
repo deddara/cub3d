@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 18:02:29 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/18 17:43:35 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/21 17:31:48 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 static void	texture_clalcs(t_raycast *ray, t_paint *paint, t_map *map)
 {
 	ray->wall_height = (int)(map->y / ray->wall_dist);
-	ray->wall_start = (map->y / 2 - ray->wall_height / 2);
+	ray->wall_start = !ray->keys.ctrl ? (map->y / 2 - ray->wall_height / 2) : (map->y / 3 - ray->wall_height / 2);
 	if (ray->wall_start < 0)
 		ray->wall_start = 0;
-	ray->wall_end = (ray->wall_height / 2 + map->y / 2);
+	ray->wall_end = !ray->keys.ctrl ? (ray->wall_height / 2 + map->y / 2) : (ray->wall_height / 2 + map->y / 3);
 	if (ray->wall_end >= map->y)
 		ray->wall_end = map->y - 1;
 	if ((ray->wall_side == 2 || ray->wall_side == 3))
@@ -31,8 +31,8 @@ static void	texture_clalcs(t_raycast *ray, t_paint *paint, t_map *map)
 	if (ray->wall_side == 2 || ray->wall_side == 1)
 		paint->tex_x = paint->tex_w - paint->tex_x - 1;
 	paint->step = 1.0 * paint->tex_h / ray->wall_height;
-	paint->tex_pos = \
-	(ray->wall_start - map->y / 2 + ray->wall_height / 2) * paint->step;
+	paint->tex_pos = !ray->keys.ctrl ? \
+	(ray->wall_start - map->y / 2 + ray->wall_height / 2) * paint->step : (ray->wall_start - map->y / 3 + ray->wall_height / 2) * paint->step;
 }
 
 static void	h_w_calcs(t_raycast *ray, t_paint *paint)

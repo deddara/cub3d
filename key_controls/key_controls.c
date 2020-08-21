@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/13 16:11:25 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/18 18:50:52 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/21 17:37:03 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int			key_press(int keycode, t_raycast *ray)
 		mlx_destroy_window(ray->vars->mlx, ray->vars->win);
 		exit(0);
 	}
+	if (keycode == 257)
+		ray->keys.ctrl = 1;
 	return (0);
 }
 
@@ -51,6 +53,8 @@ int			key_release(int keycode, t_raycast *ray)
 		ray->keys.r_arr = 0;
 	if (keycode == 53)
 		ray->keys.esc = 0;
+	if (keycode == 257)
+		ray->keys.ctrl = 0;
 	return (0);
 }
 
@@ -71,7 +75,7 @@ int			key_controls(t_raycast *ray)
 	ray->img->img = mlx_new_image(ray->vars->mlx, ray->map->x, ray->map->y);
 	ray->img->addr = mlx_get_data_addr(ray->img->img,\
 		&ray->img->bits_per_pixel, &ray->img->line_length, &ray->img->endian);
-	paint_fc(ray->map, ray->img);
+	paint_fc(ray, ray->img);
 	ray_caster(ray->map, ray->img, ray);
 	mlx_put_image_to_window(ray->vars->mlx, ray->vars->win,\
 		ray->img->img, 0, 0);

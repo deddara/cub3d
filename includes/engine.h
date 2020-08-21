@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/09 14:47:52 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/18 18:58:57 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/21 17:36:46 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ typedef struct	s_keys
 	int esc;
 	int l_arr;
 	int r_arr;
+	int	ctrl;
 }				t_keys;
 
 typedef struct	s_paint
@@ -127,7 +128,7 @@ void			dir_calc(t_raycast *ray, t_map *map);
 int				key_press(int keycode, t_raycast *ray);
 int				key_release(int keycode, t_raycast *ray);
 int				key_controls(t_raycast *ray);
-void			paint_fc(t_map *map, t_data *img);
+void			paint_fc(t_raycast *ray, t_data *img);
 void			sprites_count(t_raycast *ray, t_map *map);
 void			sprite_handler(t_raycast *ray);
 int				getpixelcolor(t_data *img, int x, int y);
