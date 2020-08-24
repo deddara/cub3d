@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 21:22:20 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/19 22:26:31 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/24 16:00:44 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,4 @@ int             main(int argc, char **argv)
 		return (0);
 	if (!(game(argv[1])))
 		exit(0);
-	return (1);
 }

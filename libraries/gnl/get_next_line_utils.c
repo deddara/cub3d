@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/15 17:24:24 by deddara           #+#    #+#             */
-/*   Updated: 2020/07/27 19:46:51 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/24 16:39:41 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,7 @@ char		*ft_strdup_gnl(const char *src)
 		return (NULL);
 	while (src[i] != '\0')
 		i++;
-	result = (char*)malloc(sizeof(char) * (i + 1));
-	if (!result)
+	if(!(result = (char*)malloc(sizeof(char) * (i + 1))))
 		return (0);
 	i = 0;
 	while (src[i])

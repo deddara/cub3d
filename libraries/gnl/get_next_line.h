@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/27 01:34:18 by deddara           #+#    #+#             */
-/*   Updated: 2020/07/27 19:54:06 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/24 16:40:56 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define GET_NEXT_LINE_H
 # include <stdlib.h>
 # include <unistd.h>
-# define BUFFER_SIZE 50
+# define BUFFER_SIZE 1
 
 typedef struct		s_list_g
 {
