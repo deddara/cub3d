@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 21:22:20 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/25 17:14:45 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/25 19:23:26 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@ static int	argv_handler(int argc, char **argv)
 	if (argc > 3)
 	{
 		ft_putstr_fd("Too many arguments", 0);
+		return (0);
+	}
+	if (argc == 3 && (ft_strncmp("--save", argv[2], ft_strlen(argv[2])) != 0\
+	||ft_strncmp("--save", argv[2], 6) != 0))
+	{
+		ft_putstr_fd("invalid second argument", 0);
 		return (0);
 	}
 	if (!argv[1])
@@ -45,7 +51,7 @@ int			main(int argc, char **argv)
 {
 	if (!argv_handler(argc, argv))
 		return (0);
-	if (!(game(argv[1])))
+	if (!(game(argv, argc)))
 		exit(0);
 	return (1);
 }

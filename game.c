@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 19:38:29 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/25 17:31:00 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/25 20:02:06 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,14 @@ static int		win_init(t_vars *vars, t_data *img, t_map *map, char *argv)
 	return (1);
 }
 
-int				game(char *argv)
+int				game(char **argv, int argc)
 {
 	t_data		img;
 	t_vars		vars;
 	t_map		map;
 	t_raycast	ray;
 
-	if (!(win_init(&vars, &img, &map, argv)))
+	if (!(win_init(&vars, &img, &map, argv[1])))
 		return (0);
 	if (!init(&ray, &map))
 		return (0);
@@ -79,6 +79,8 @@ int				game(char *argv)
 	ray.vars = &vars;
 	paint_fc(&ray, &img);
 	ray_caster(&map, &img, &ray);
+	if (argc == 3)
+		return (make_scr(&ray, &img));
 	mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
 	mlx_hook(vars.win, 2, 1L << 0, key_press, &ray);
 	mlx_hook(vars.win, 3, 1L << 1, key_release, &ray);

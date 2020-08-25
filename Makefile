@@ -6,7 +6,7 @@
 #    By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/27 16:22:26 by deddara           #+#    #+#              #
-#    Updated: 2020/08/21 15:20:06 by deddara          ###   ########.fr        #
+#    Updated: 2020/08/25 19:08:27 by deddara          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,7 @@ all: $(OBJ_DIR) $(NAME)
 
 $(NAME): $(GNL_SRC.O) $(PARS_SRC.O) $(ENGINE_SRC.O) $(CTRLS_SRC.O)
 	@$(CC) $(COMPILE_FLGS) -O2 $(GNL_SRC.O) $(PARS_SRC.O) $(CTRLS_SRC.O) $(ENGINE_SRC.O) \
-	-L$(LBFT_DIR) -lft -L$(MLX_DIR) $(MLX_FLAGS) game.c main.c
+	-L$(LBFT_DIR) -lft -L$(MLX_DIR) $(MLX_FLAGS) game.c main.c make_scr.c
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)/$(GNL_DIR) $(OBJ_DIR)/$(PARS_DIR) $(OBJ_DIR)/$(CTRLS_DIR) $(OBJ_DIR)/$(ENGINE_DIR)

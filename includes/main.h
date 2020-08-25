@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 21:22:15 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/19 21:29:49 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/25 19:11:55 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,5 @@ typedef struct	s_data
 }				t_data;
 
 void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
-int				game(char *argv);
+int				game(char **argv, int argc);
 #endif
