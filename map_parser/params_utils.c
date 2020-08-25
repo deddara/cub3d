@@ -1,15 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   params_utils.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/08/25 17:03:26 by deddara           #+#    #+#             */
+/*   Updated: 2020/08/25 17:04:16 by deddara          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "map_parser.h"
 
-void freesher(char **words)
+void	freesher(char **words)
 {
-	int i = 0;
+	int i;
 
+	i = 0;
 	if (words)
 	{
 		while (words[i])
 		{
-			free (words[i]);
+			free(words[i]);
 			i++;
 		}
 	}
@@ -17,7 +29,7 @@ void freesher(char **words)
 	words = NULL;
 }
 
-int word_counter(char **str)
+int		word_counter(char **str)
 {
 	int i;
 
@@ -29,7 +41,7 @@ int word_counter(char **str)
 	return (1);
 }
 
-int check_is_alone(char *line)
+int		check_is_alone(char *line)
 {
 	int i;
 	int count;

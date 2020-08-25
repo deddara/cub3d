@@ -1,3 +1,4 @@
 *.dSYM
 obj/
 .vscode
+a.out
