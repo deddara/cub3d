@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rgb_parser.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/08/25 17:06:35 by deddara           #+#    #+#             */
+/*   Updated: 2020/08/25 17:07:32 by deddara          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "map_parser.h"
 
 static int	f_check_color_string(char *line, int i, int *rgb)
@@ -33,7 +45,9 @@ int			f_checker(char *line, t_map *map)
 {
 	int				errcode;
 	int				rgb[3];
-	int					i = 0;
+	int				i;
+
+	i = 0;
 	errcode = 0;
 	map->count++;
 	i++;
@@ -44,11 +58,14 @@ int			f_checker(char *line, t_map *map)
 	map->f_rgb = rgb[0] << 16 | rgb[1] << 8 | rgb[2];
 	return (1);
 }
+
 int			c_checker(char *line, t_map *map)
 {
 	int				errcode;
 	int				rgb[3];
-	int					i = 0;
+	int				i;
+
+	i = 0;
 	errcode = 0;
 	map->count++;
 	i++;

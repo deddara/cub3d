@@ -6,22 +6,22 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 21:41:07 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/25 14:49:19 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/25 17:11:08 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "map_parser.h"
 
-int	ft_lstmapnew(t_map *map)
+int			ft_lstmapnew(t_map *map)
 {
-    map->count = 0;
-	map->r = NULL; 
-    map->no = NULL;
-    map->so = NULL;
-    map->we = NULL;
-    map->ea = NULL;
-    map->s = NULL;
-    map->c_rgb = -1;
+	map->count = 0;
+	map->r = NULL;
+	map->no = NULL;
+	map->so = NULL;
+	map->we = NULL;
+	map->ea = NULL;
+	map->s = NULL;
+	map->c_rgb = -1;
 	map->f_rgb = -1;
 	map->y_count = 0;
 	map->x_count = 0;
@@ -35,9 +35,9 @@ int	ft_lstmapnew(t_map *map)
 	return (1);
 }
 
-int check_int(char *str)
+int			check_int(char *str)
 {
-	while(*str)
+	while (*str)
 	{
 		if (*str < '0' || *str > '9')
 			return (0);
@@ -54,12 +54,13 @@ static int	ft_isspace(int c)
 	return (0);
 }
 
-void	f_skip_spaces(char *line, int *i)
+void		f_skip_spaces(char *line, int *i)
 {
 	while (ft_isspace(line[*i]))
 		(*i)++;
 }
-int		f_cub3d_atoi(char *line, int *i)
+
+int			f_cub3d_atoi(char *line, int *i)
 {
 	long long int	result;
 	int				sign;

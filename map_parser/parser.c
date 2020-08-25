@@ -6,14 +6,13 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 20:53:16 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/25 14:41:43 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/25 17:06:24 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "map_parser.h"
-# include <math.h>
 
-static int get_angle(t_map *map)
+static int	get_angle(t_map *map)
 {
 	if (map->player_pos == 'N')
 		map->a_player = 3 * M_PI / 2;
@@ -31,17 +30,16 @@ static int get_angle(t_map *map)
 	return (1);
 }
 
-static void longest_width(t_map *map)
+static void	longest_width(t_map *map)
 {
 	int y;
-
-	y = 0;
 	int len;
 	int prev_len;
 
+	y = 0;
 	len = 0;
 	while (map->map[y])
-	{	
+	{
 		prev_len = len;
 		len = ft_strlen(map->map[y]);
 		if (prev_len < len)
@@ -51,20 +49,20 @@ static void longest_width(t_map *map)
 	map->x_count = prev_len;
 }
 
-int		parser(t_map *map, char *argv)
+int			parser(t_map *map, char *argv)
 {
 	int		fd;
 	char	*line;
 
 	line = NULL;
-	if((fd = open(argv, O_RDONLY)) < 0)
+	if ((fd = open(argv, O_RDONLY)) < 0)
 		return (error_handler(0, 0, 1));
-	if(!ft_lstmapnew(map))
+	if (!ft_lstmapnew(map))
 		return (error_handler(0, 0, 2));
-	if(!(params_parser(line, map, fd)) || !(map_start_parser(line, map, fd)))
+	if (!(params_parser(line, map, fd)) || !(map_start_parser(line, map, fd)))
 		return (0);
-	if(!get_angle(map))
-		return(0);
+	if (!get_angle(map))
+		return (0);
 	longest_width(map);
 	return (1);
 }
