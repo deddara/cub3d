@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 01:54:32 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/25 16:42:44 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/25 17:12:10 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,8 @@ static int	line_check(char *line, t_map *map)
 	map->y_count++;
 	while (line[i])
 	{
-		if ((line[i] != ' ' && line[i] != '1' && line[i] != 'N' && line[i] != 'W'
-		&& line[i] != 'E' && line[i] != 'S' && line[i] != '2'\
+		if ((line[i] != ' ' && line[i] != '1' && line[i] != 'N' && \
+		line[i] != 'W' && line[i] != 'E' && line[i] != 'S' && line[i] != '2'\
 		&& line[i] != '0') || ((line[i] == '0' || line[i] == '2' \
 		|| line[i] == 'N' || line[i] == 'E' || line[i] == 'S' \
 		|| line[i] == 'W') && !flag))
