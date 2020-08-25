@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 21:41:07 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/25 13:46:53 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/25 14:49:19 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 int	ft_lstmapnew(t_map *map)
 {
     map->count = 0;
-	map->x = 0;
-	map->y = 0;
 	map->r = NULL; 
     map->no = NULL;
     map->so = NULL;

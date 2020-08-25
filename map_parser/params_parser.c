@@ -12,9 +12,10 @@ void free_line(char *line)
 static int r_checker(char *line, t_map *map)
 {
 	int i;
+	int x;
+	int y;
 
 	i = 0;
-
 	map->count++;
 	if(!check_is_alone(line))
 		return (0);
@@ -23,12 +24,14 @@ static int r_checker(char *line, t_map *map)
 	while(map->r[i])
 		i++;
 	if (i != 3 || !(check_int(map->r[1]) || !(check_int(map->r[2])))
-		|| !(map->x = ft_atoi(map->r[1])) || !(map->y = ft_atoi(map->r[2])))
+		|| !(x = ft_atoi(map->r[1])) || !(y = ft_atoi(map->r[2])))
 	{
 		free(map->r);
 		map->r = NULL;
 		return(0);
 	}
+	map->x = (map->x >= x) ? x : map->x;
+	map->y = (map->y >= y) ? y : map->y;	
 	free (map->r);
 	map->r = NULL;
 	return (1);
