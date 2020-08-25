@@ -6,19 +6,19 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 01:54:32 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/25 13:43:55 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/25 16:42:44 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "map_parser.h"
 
-static int map_join(char *line, t_map *map)
+static int	map_join(char *line, t_map *map)
 {
 	char	*tmp_map_line;
 	char	*tmp_line;
 
-	if(!line)
-		return(0);
+	if (!line)
+		return (0);
 	tmp_line = NULL;
 	tmp_map_line = NULL;
 	tmp_map_line = map->map_line;
@@ -34,7 +34,7 @@ static int map_join(char *line, t_map *map)
 	return (1);
 }
 
-int	first_last(char *line, t_map *map)
+int			first_last(char *line, t_map *map)
 {
 	int i;
 
@@ -50,11 +50,32 @@ int	first_last(char *line, t_map *map)
 		if (!(map_join(line, map)))
 			return (0);
 	}
-	
 	return (1);
 }
 
-static int line_check(char *line, t_map *map)
+static int	valid_line_add(char *line, int i, t_map *map)
+{
+	if (line[i] == ' ')
+		if ((line[i - 1] != ' ' && line[i - 1] != '1') || \
+				(line[i + 1] != ' ' && line[i + 1] != '1'))
+			return (0);
+	if ((line[i] == 'N' || line[i] == 'E' || line[i] == 'S' || line[i] == 'W') \
+		&& map->player_pos == '0')
+	{
+		map->player_pos = line[i];
+		map->x_player = i;
+		map->y_player = map->y_count - 1;
+		return (1);
+	}
+	else if ((line[i] == 'N' || line[i] == 'E' || line[i] == 'S' \
+	|| line[i] == 'W') && map->player_pos != '0')
+		return (0);
+	if (line[i + 1] == '\0' && line[i] != '1')
+		return (0);
+	return (1);
+}
+
+static int	line_check(char *line, t_map *map)
 {
 	int i;
 	int flag;
@@ -64,43 +85,31 @@ static int line_check(char *line, t_map *map)
 	map->y_count++;
 	while (line[i])
 	{
-		if (line[i] != ' ' && line[i] != '1' && line[i] != 'N' && line[i] != 'W'
-			&& line[i] != 'E' && line[i] != 'S' && line[i] != '2' && line[i] != '0')
+		if ((line[i] != ' ' && line[i] != '1' && line[i] != 'N' && line[i] != 'W'
+		&& line[i] != 'E' && line[i] != 'S' && line[i] != '2'\
+		&& line[i] != '0') || ((line[i] == '0' || line[i] == '2' \
+		|| line[i] == 'N' || line[i] == 'E' || line[i] == 'S' \
+		|| line[i] == 'W') && !flag))
 			return (0);
-		if ((line[i] == '0' || line[i] == '2' || line[i] == 'N' || line[i] == 'E'
-			|| line[i] == 'S' || line[i] == 'W') && flag == 0)
-			return (0);
-		if (line[i] == '1')
-			flag++;
+		flag = (line[i] == '1') ? flag + 1 : flag;
 		if (line[i] == ' ' && !flag)
 		{
 			i++;
 			continue ;
 		}
-		if (line[i] == ' ')
-			if ((line[i - 1] != ' ' && line[i - 1] != '1') || (line[i + 1] != ' ' && line[i + 1] != '1'))
-				return (0);
-		if ((line[i] == 'N' || line[i] == 'E' || line[i] == 'S' || line[i] == 'W') && map->player_pos == '0')
-		{
-			map->player_pos = line[i];
-			map->x_player = i;
-			map->y_player = map->y_count - 1;
-		}
-		else if ((line[i] == 'N' || line[i] == 'E' || line[i] == 'S' || line[i] == 'W') && map->player_pos != '0')
-			return (0);
-		if (line[i + 1] == '\0' && line[i] != '1')
+		if (!(valid_line_add(line, i, map)))
 			return (0);
 		i++;
 	}
 	return (1);
 }
 
-int map_line_parser(char *line, t_map *map)
+int			map_line_parser(char *line, t_map *map)
 {
-	if(map->y_count == 0)
+	if (map->y_count == 0)
 	{
 		map->y_count++;
-		if(!first_last(line, map))
+		if (!first_last(line, map))
 			return (0);
 		return (1);
 	}
