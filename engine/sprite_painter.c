@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 17:22:49 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/18 15:46:56 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/25 16:04:54 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,14 @@ static void	draw_sprite(t_spaint *spaint, t_raycast *ray)
 
 static void	y_calcs(t_raycast *ray, t_spaint *spaint)
 {
-	spaint->start_y = -spaint->spr_h / 2 + ray->map->y / 2 + spaint->v_move_scr;
+	spaint->start_y = !ray->keys.ctrl ? -spaint->spr_h / 2 + \
+	ray->map->y / 2 + spaint->v_move_scr : \
+		-spaint->spr_h / 2 + ray->map->y / 2 + spaint->v_move_scr;
 	if (spaint->start_y < 0)
-		spaint->start_y = 0;
-	spaint->end_y = spaint->spr_h / 2 + ray->map->y / 2 + spaint->v_move_scr;
+		spaint->start_y = 1;
+	spaint->end_y = !ray->keys.ctrl ? spaint->spr_h / 2 + \
+	ray->map->y / 2 + spaint->v_move_scr : \
+	spaint->spr_h / 2 + ray->map->y / 2 + spaint->v_move_scr;
 	if (spaint->end_y >= ray->map->y)
 		spaint->end_y = ray->map->y - 1;
 }
