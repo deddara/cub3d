@@ -6,109 +6,164 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/15 13:23:19 by deddara           #+#    #+#             */
-/*   Updated: 2020/07/27 19:45:56 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/25 14:00:25 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include "get_next_line.h"
 
-t_lister	*get_fd(t_lister **list, int fd)
-{
-	t_lister *tmp;
+/*
+** Exit function is to free memory in case of exit because error is occurred
+** (exit code -1), or when we exit bacause in FD nothing to read more.
+** We search current sheet of list and free it, with no missing pointer to
+** next sheet in list.
+*/
 
-	if ((*list) == NULL)
-		return ((*list = ft_lstnew_gnl(fd)));
-	tmp = (*list);
-	while ((tmp->fd != fd && tmp->next != 0))
-		tmp = tmp->next;
-	if (tmp->fd == fd)
-		return (tmp);
+static int	f_exit(char *buf, int fd, t_list_gnl **g_head, int exit_code)
+{
+	t_list_gnl		*g_tmp;
+	t_list_gnl		*g_tmp_2;
+
+	free(buf);
+	g_tmp = *g_head;
+	if (g_tmp->fd == fd)
+		*g_head = g_tmp->next;
 	else
 	{
-		tmp->next = ft_lstnew_gnl(fd);
-		return (tmp->next);
+		while (g_tmp->next->fd != fd)
+			g_tmp = g_tmp->next;
+		g_tmp_2 = g_tmp->next;
+		g_tmp->next = g_tmp->next->next;
+		g_tmp = g_tmp_2;
 	}
+	free(g_tmp);
+	return (exit_code);
 }
 
-static char	*check_buf(t_lister *list, char **line)
-{
-	char *new_liner;
-	char *new_line;
+/*
+** part of step 3.
+** check for the presence of a symbol '\n' in the last readed buffer string,
+** and duplicatind part of string after '\n' position to remainder. Symbol
+** '\n' to '\0' replacement is to limit the attachable to "line" portion of a
+** buffer string.
+** If '\n' in buffer string is found, we return with 1, and if it is not -
+** return with 0. In case of error of ft_strdup, we return to exit function
+** with exit code -1.
+*/
 
-	if ((list)->rest_buf == NULL)
+static int	f_chk_buf(char *buf, t_list_gnl *g_curr, t_list_gnl **g_head)
+{
+	char			*tmp_ptr;
+
+	if ((tmp_ptr = ft_strchr(buf, '\n')))
 	{
-		if (!(new_liner = (char *)malloc(sizeof(char) * 1)))
-			return (NULL);
-		new_liner[0] = '\0';
-		return (new_liner);
+		*tmp_ptr = '\0';
+		if (!(g_curr->rmndr = ft_strdup(++tmp_ptr)))
+			return (f_exit(buf, g_curr->fd, g_head, -1));
+		g_curr->rmndr_start = g_curr->rmndr;
 	}
-	if ((new_line = ft_strchr_gnl((list)->rest_buf, '\n')))
-	{
-		*new_line++ = '\0';
-		if (!((*line) = ft_strdup_gnl((list)->rest_buf)))
-			return (NULL);
-		new_line = ft_strdup_gnl(new_line);
-		free((list)->rest_buf);
-		(list)->rest_buf = new_line;
-		return (*line);
-	}
-	(*line) = (list)->rest_buf;
-	(list)->rest_buf = NULL;
-	return (*line);
+	return (tmp_ptr ? 1 : 0);
 }
 
-static int	reader_mn(char *buf, t_lister *list, char **line)
-{
-	char *new_line;
+/*
+** step 3/
+** read FD in buffer string in fragments of BUFFER_SIZE bytes, while there is
+** something to read. After reading each fragment, we check it for the presence
+** of a symbol '\n' in it. If it is there, then we join to "line" part of buffer
+** string before position of '\n', rest of buffer string duplicate to remainder
+** and return with "1". If there is no '\n' symbol in the buffer string, we join
+** to "line" whole buffer string and read again. If the entire FD is readed and
+** the '\n' symbol is not found, we return to exit function with exit code 0.
+** In case of error we return to exit function with exit code -1.
+*/
 
-	if ((new_line = ft_strchr_gnl(buf, '\n')))
-	{
-		*new_line++ = '\0';
-		if (!((list)->rest_buf = ft_strdup_gnl(new_line)))
-			return (0);
-	}
-	list->line_back = (*line);
-	if (!((*line) = ft_strjoin_gnl(*line, buf)))
-		return (0);
-	free(list->line_back);
-	list->line_back = NULL;
-	return (1);
-}
-
-static int	read_line(t_lister **list, char **line, int fd, t_lister *ptr)
+static int	f_read_line(t_list_gnl *g_curr, t_list_gnl **g_head, char **line)
 {
-	const long long		buff_size = BUFFER_SIZE;
+	long long			result;
 	char				*buf;
-	long long			ret;
+	char				*tmp_ptr;
 
-	ret = 0;
-	if (!(buf = (char*)malloc(sizeof(char) * buff_size + 1)))
-		return (clear(list, fd, buf, -1));
-	while (((ptr)->rest_buf == NULL) && (ret = read(fd, buf, buff_size)))
+	if (!(buf = (char*)(malloc(sizeof(char) * BUFFER_SIZE + 1))))
+		return (f_exit(buf, g_curr->fd, g_head, -1));
+	while ((result = read(g_curr->fd, buf, BUFFER_SIZE)) > 0)
 	{
-		if (ret < 0)
-			return (clear(list, fd, buf, -1));
-		buf[ret] = '\0';
-		if (!reader_mn(buf, ptr, line))
-			return (clear(list, fd, buf, -1));
+		buf[result] = '\0';
+		result = f_chk_buf(buf, g_curr, g_head);
+		tmp_ptr = *line;
+		if (!(*line = ft_strjoin(*line, buf)))
+			return (f_exit(buf, g_curr->fd, g_head, -1));
+		free(tmp_ptr);
+		if (result)
+		{
+			free(buf);
+			return (1);
+		}
 	}
-	if (ret < buff_size && ((ptr)->rest_buf) == NULL)
-		return (clear(list, fd, buf, 0));
-	free(buf);
-	return (1);
+	return (result == 0 ? f_exit(buf, g_curr->fd, g_head, 0) : \
+							f_exit(buf, g_curr->fd, g_head, -1));
 }
+
+/*
+** step 2.
+** checking for the existence of the remainder of the line from the previous
+** iteration GNL. If it exist - checking for the '\n' symbol in remainder,
+** if it is there, then duplicate part of string before position of '\n',
+** move pointer of remainder string, and return with "1". Symbol
+** '\n' to '\0' replacement is to limit the attachable to "line" portion of a
+** buffer string.
+** If remainder exist, but there isn't '\n' in it, duplicate whole remainder
+** string in "line" and return to next step, to function, that reads FD
+** in searh of a symbol '\n'.
+** If remainder is not exist, return to next step directly.
+** In case of error we return to exit function with exit code -1.
+*/
+
+static int	f_chk_rmndr(t_list_gnl *g_curr, t_list_gnl **g_head, char **line)
+{
+	char				*tmp_ptr;
+	char				*start_pos;
+
+	if (!(*line = ft_strdup("")))
+		return (f_exit(NULL, g_curr->fd, g_head, -1));
+	if (g_curr->rmndr)
+	{
+		start_pos = g_curr->rmndr;
+		if ((tmp_ptr = ft_strchr(g_curr->rmndr, '\n')))
+		{
+			*tmp_ptr = '\0';
+			g_curr->rmndr = ++tmp_ptr;
+		}
+		tmp_ptr = *line;
+		if (!(*line = ft_strdup(start_pos)))
+			return (f_exit(NULL, g_curr->fd, g_head, -1));
+		free(tmp_ptr);
+		if (start_pos != g_curr->rmndr)
+			return (1);
+		free(g_curr->rmndr_start);
+	}
+	return (f_read_line(g_curr, g_head, line));
+}
+
+/*
+** step 1.
+** checking of incoming arguments for valid values,
+** declaration of head element of list by  static variable (g_head),
+** declaration and initialisation of the current scheet of list (g_curr),
+** return to function to check remainder of string from previous iteration GNL
+** In case of error we return with -1.
+*/
 
 int			get_next_line(int fd, char **line)
 {
-	static t_lister	*list;
-	t_lister		*list_ptr;
-	const long long	buff_size = BUFFER_SIZE;
-	char			test[1];
+	static t_list_gnl	*g_head;
+	t_list_gnl			*g_curr;
+	const long long		buf_size = BUFFER_SIZE;
+	char				read_chk[1];
 
-	if (fd < 0 || buff_size <= 0 || !line || read(fd, test, 0) < 0 ||
-	!(list_ptr = get_fd(&list, fd)))
+	if (fd < 0 || !line || buf_size < 1 || ((read(fd, read_chk, 0) < 0)))
 		return (-1);
-	if (!((*line) = check_buf(list_ptr, line)))
-		return (clear(&(list), fd, NULL, -1));
-	return (read_line(&(list), line, fd, list_ptr));
+	if (!(g_curr = f_search_gnl(fd, &g_head)))
+		return (-1);
+	return (f_chk_rmndr(g_curr, &g_head, line));
 }

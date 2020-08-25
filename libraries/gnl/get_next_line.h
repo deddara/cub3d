@@ -6,29 +6,36 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/27 01:34:18 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/24 16:40:56 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/25 13:59:06 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
+
 # define GET_NEXT_LINE_H
 # include <stdlib.h>
 # include <unistd.h>
-# define BUFFER_SIZE 1
 
-typedef struct		s_list_g
+/*
+** fd - file descriptor
+** rmndr - remainder of readed line from last iteration of GNL function
+** rmndr_start - pointer to start of 'rmndr' string (for 'free')
+*/
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 32
+# endif
+
+typedef struct	s_list_gnl
 {
-	int				fd;
-	char			*rest_buf;
-	char			*line_back;
-	struct s_list_g	*next;
-}					t_lister;
+	int					fd;
+	char				*rmndr;
+	char				*rmndr_start;
+	struct s_list_gnl	*next;
+}				t_list_gnl;
 
-t_lister			*ft_lstnew_gnl(int content);
-int					get_next_line(int fd, char **line);
-char				*ft_strchr_gnl(const char *s, int c);
-char				*ft_strjoin_gnl(char *s1, char *s2);
-char				*ft_strdup_gnl(const char *src);
-int					clear(t_lister **list, int fd, char *buf, int code);
+int				get_next_line(int fd, char **line);
+t_list_gnl		*f_gnl_new(int fd);
+t_list_gnl		*f_search_gnl(int fd, t_list_gnl **g_head);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 01:54:32 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/24 16:09:48 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/25 13:43:55 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static int map_join(char *line, t_map *map)
 	char	*tmp_map_line;
 	char	*tmp_line;
 
+	if(!line)
+		return(0);
 	tmp_line = NULL;
 	tmp_map_line = NULL;
 	tmp_map_line = map->map_line;
@@ -28,10 +30,7 @@ static int map_join(char *line, t_map *map)
 	if (!(map->map_line = ft_strjoin(map->map_line, tmp_line)))
 		return (0);
 	free(tmp_map_line);
-	if (tmp_line)
-	{
-		free(tmp_line);
-	}
+	free(tmp_line);
 	return (1);
 }
 

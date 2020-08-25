@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 21:41:07 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/20 01:48:02 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/25 13:46:53 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ int	ft_lstmapnew(t_map *map)
 {
     map->count = 0;
 	map->x = 0;
-	map->y = 0; 
+	map->y = 0;
+	map->r = NULL; 
     map->no = NULL;
     map->so = NULL;
     map->we = NULL;
@@ -25,12 +26,11 @@ int	ft_lstmapnew(t_map *map)
     map->c_rgb = -1;
 	map->f_rgb = -1;
 	map->y_count = 0;
+	map->x_count = 0;
 	map->player_pos = '0';
 	if (!(map->map_line = ft_strdup("")))
-		return (200);
+		return (0);
 	map->map = NULL;
-	map->map_line[0] = '\0';
-    map->no = NULL;
 	map->a_player = 0;
 	map->x_player = 0;
 	map->y_player = 0;

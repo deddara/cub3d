@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 19:38:29 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/24 16:19:14 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/21 17:39:20 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,25 +81,23 @@ int			game(char *argv)
 {
     t_data		img;
     t_vars		vars;
-    t_map		*map;
+    t_map		map;
 	t_raycast	ray;
-	map = malloc(sizeof(t_map) * 1);
-	if(!parser(map, argv))
+	if(!parser(&map, argv))
 		return (0); //парсинг карты
     vars.mlx = mlx_init();
-    vars.win = mlx_new_window(vars.mlx, map->x, map->y, "Hello world!");
-    img.img = mlx_new_image(vars.mlx, map->x, map->y);
+    vars.win = mlx_new_window(vars.mlx, map.x, map.y, "Hello world!");
+    img.img = mlx_new_image(vars.mlx, map.x, map.y);
     img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
-                                 &img.endian);
-	if(!_init(&ray, map))
+                                 &img.endian);	
+	if(!_init(&ray, &map))
 		return (0);
-	
-	ray.map = map;
+	ray.map = &map;
 	ray.img = &img;
 	ray.vars = &vars;
 	keys_init(&ray);
 	paint_fc(&ray, &img);
-	ray_caster(map, &img, &ray);
+	ray_caster(&map, &img, &ray);
     mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0); 
 	mlx_hook(vars.win, 2, 1L << 0, key_press, &ray);
 	mlx_hook(vars.win, 3, 1L << 1, key_release, &ray);

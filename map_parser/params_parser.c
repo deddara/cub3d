@@ -69,7 +69,7 @@ static int check_all_params(t_map *map)
 int params_parser(char *line, t_map *map, int fd)
 {
     while(get_next_line(fd, &line) > 0)
-	{		
+	{
 		if(line[0] == '\0')
 		{	
 			free_line(line);
