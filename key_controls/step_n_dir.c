@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 18:06:30 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/21 17:52:49 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/26 22:28:43 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,25 +68,8 @@ void		d_and_a_handler(t_raycast *ray)
 
 void		r_and_l_handler(t_raycast *ray)
 {
-	double old_dir_x;
-	double old_plane_x;
-
 	if (ray->keys.l_arr)
-	{
-		old_dir_x = ray->dir_x;
-		ray->dir_x = ray->dir_x * cos(-0.05) - ray->dir_y * sin(-0.05);
-		ray->dir_y = old_dir_x * sin(-0.05) + ray->dir_y * cos(-0.05);
-		old_plane_x = ray->plane_x;
-		ray->plane_x = ray->plane_x * cos(-0.05) - ray->plane_y * sin(-0.05);
-		ray->plane_y = old_plane_x * sin(-0.05) + ray->plane_y * cos(-0.05);
-	}
+		l_arr_move(ray);
 	if (ray->keys.r_arr)
-	{
-		old_dir_x = ray->dir_x;
-		ray->dir_x = ray->dir_x * cos(0.05) - ray->dir_y * sin(0.05);
-		ray->dir_y = old_dir_x * sin(0.05) + ray->dir_y * cos(0.05);
-		old_plane_x = ray->plane_x;
-		ray->plane_x = ray->plane_x * cos(0.05) - ray->plane_y * sin(0.05);
-		ray->plane_y = old_plane_x * sin(0.05) + ray->plane_y * cos(0.05);
-	}
+		r_arr_move(ray);
 }

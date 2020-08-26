@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/09 14:47:52 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/26 17:57:40 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/26 22:50:23 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,4 +141,8 @@ void			d_and_a_handler(t_raycast *ray);
 void			w_and_s_handler(t_raycast *ray);
 int				make_scr(t_raycast *ray, t_data *img);
 int				shut_down_music(void);
+int				esc_press(t_raycast *ray);
+void			l_arr_move(t_raycast *ray);
+int				mouse_move(int x, int y, t_raycast *ray);
+void			r_arr_move(t_raycast *ray);
 #endif

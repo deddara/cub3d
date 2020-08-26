@@ -6,12 +6,13 @@
 #    By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/27 16:22:26 by deddara           #+#    #+#              #
-#    Updated: 2020/08/26 20:05:05 by deddara          ###   ########.fr        #
+#    Updated: 2020/08/26 22:55:31 by deddara          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3d
 
+GAME_PROG = game.c
 MLX_DIR = ./libraries/minilibx/
 LBFT_DIR = ./libraries/libft/
 OBJ_DIR = obj/
@@ -39,7 +40,7 @@ ENGINE_SRC = $(addprefix $(ENGINE_DIR),ray_caster ray_caster_utils painter sprit
 ENGINE_SRC.O = $(addprefix $(OBJ_DIR), $(ENGINE_SRC:=.o))
 #CONTROLS
 CTRLS_DIR = key_controls/
-CTRLS_SRC = $(addprefix $(CTRLS_DIR),key_controls step_n_dir)
+CTRLS_SRC = $(addprefix $(CTRLS_DIR),key_controls step_n_dir key_controls_utils)
 CTRLS_SRC.O = $(addprefix $(OBJ_DIR), $(CTRLS_SRC:=.o))
 
 
@@ -48,20 +49,23 @@ all: $(OBJ_DIR) $(NAME)
 	@echo "\033[32m[+] Make completed!\033[0m"
 
 $(NAME): $(GNL_SRC.O) $(PARS_SRC.O) $(ENGINE_SRC.O) $(CTRLS_SRC.O)
-	@$(CC) $(COMPILE_FLGS) -O2 $(GNL_SRC.O) $(PARS_SRC.O) $(CTRLS_SRC.O) $(ENGINE_SRC.O) \
-	-L$(LBFT_DIR) -lft -L$(MLX_DIR) $(MLX_FLAGS) $(BONUS) game.c main.c make_scr.c
+	$(CC) $(COMPILE_FLGS) -O2 $(GNL_SRC.O) $(PARS_SRC.O) $(CTRLS_SRC.O) $(ENGINE_SRC.O) \
+	-L$(LBFT_DIR) -lft -L$(MLX_DIR) $(MLX_FLAGS) $(GAME_PROG) main.c make_scr.c
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)/$(GNL_DIR) $(OBJ_DIR)/$(PARS_DIR) $(OBJ_DIR)/$(CTRLS_DIR) $(OBJ_DIR)/$(ENGINE_DIR)
 
 $(GNL_SRC.O): $(OBJ_DIR)%.o: %.c 
-	@$(CC) $(COMPILE_FLGS) -O2 -c $< -o $@
+	$(CC) $(BONUS) $(COMPILE_FLGS) -O2 -c $< -o $@
 $(PARS_SRC.O): $(OBJ_DIR)%.o: %.c 
-	@$(CC) $(COMPILE_FLGS) -O2 -c $< -o $@
+	$(CC) $(BONUS) $(COMPILE_FLGS) -O2 -c $< -o $@
 $(ENGINE_SRC.O) : $(OBJ_DIR)%.o: %.c 
-	@$(CC) $(COMPILE_FLGS) -O2 -c $< -o $@
+	$(CC) $(BONUS) $(COMPILE_FLGS) -O2 -c $< -o $@
 $(CTRLS_SRC.O) : $(OBJ_DIR)%.o: %.c 
-	@$(CC) $(COMPILE_FLGS) -O2 -c $< -o $@
+	$(CC) $(BONUS) $(COMPILE_FLGS) -O2 -c $< -o $@
+
+bonus:
+	make BONUS="-D BONUS" GAME_PROG=game_bonus.c all
 
 clean:
 	@rm -rf $(OBJ_DIR)
