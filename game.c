@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 19:38:29 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/26 15:50:55 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/26 21:59:43 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,43 @@ static int		win_init(t_vars *vars, t_data *img, t_map *map, char *argv)
 	return (1);
 }
 
+static int		mouse_move(int x, int y, t_raycast *ray)
+{
+	static int	prev_x;
+	double old_dir_x;
+	double old_plane_x;
+	if (y)
+	{
+		;
+	}
+	if (prev_x < x)
+	{	
+		old_dir_x = ray->dir_x;
+		ray->dir_x = ray->dir_x * cos(0.05) - ray->dir_y * sin(0.05);
+		ray->dir_y = old_dir_x * sin(0.05) + ray->dir_y * cos(0.05);
+		old_plane_x = ray->plane_x;
+		ray->plane_x = ray->plane_x * cos(0.05) - ray->plane_y * sin(0.05);
+		ray->plane_y = old_plane_x * sin(0.05) + ray->plane_y * cos(0.05);
+	}
+	else if (prev_x > x)
+	{
+		old_dir_x = ray->dir_x;
+		ray->dir_x = ray->dir_x * cos(-0.05) - ray->dir_y * sin(-0.05);
+		ray->dir_y = old_dir_x * sin(-0.05) + ray->dir_y * cos(-0.05);
+		old_plane_x = ray->plane_x;
+		ray->plane_x = ray->plane_x * cos(-0.05) - ray->plane_y * sin(-0.05);
+		ray->plane_y = old_plane_x * sin(-0.05) + ray->plane_y * cos(-0.05);
+	}
+	prev_x = x;
+	if (x < 20 || x > ray->map->x - 20)
+	{
+		prev_x = 0;
+		mlx_mouse_move(ray->vars->win,
+			ray->map->x / 2, ray->map->y / 2);
+	}
+	return (0);
+}
+
 int				game(char **argv, int argc)
 {
 	t_data		img;
@@ -82,8 +119,10 @@ int				game(char **argv, int argc)
 	if (argc == 3)
 		return (make_scr(&ray, &img));
 	mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
+	mlx_mouse_hide(vars.mlx, vars.win);
 	mlx_hook(vars.win, 2, 1L << 0, key_press, &ray);
 	mlx_hook(vars.win, 3, 1L << 1, key_release, &ray);
+	mlx_hook(vars.win, 6, 1L << 6, mouse_move, &ray);
 	mlx_loop_hook(vars.mlx, key_controls, &ray);
 	mlx_loop(vars.mlx);
 	return (0);
