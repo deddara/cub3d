@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 21:22:20 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/26 16:52:53 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/26 17:11:40 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int			shut_down_music(void)
 	kill = ft_strjoin("kill ", line);
 	free_line(line);
 	system(kill);
+	free(kill);
 	system("rm processes.txt");
 	return (1);
 }
@@ -79,6 +80,10 @@ int			main(int argc, char **argv)
 	if (!argv_handler(argc, argv))
 		return (0);
 	if (!(game(argv, argc)))
+	{
+		shut_down_music();
 		exit(0);
+	}
+	shut_down_music();
 	return (1);
 }

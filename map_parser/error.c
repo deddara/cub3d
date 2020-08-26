@@ -6,11 +6,12 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 21:34:44 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/25 16:14:23 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/26 17:11:07 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "map_parser.h"
+#include "engine.h"
 
 int		error_handler(t_map *map, char *line, int code)
 {

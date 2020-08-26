@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 17:22:49 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/26 15:35:59 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/26 17:57:52 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ static void	draw__sprite_y(t_spaint *spaint, t_raycast *ray, int stripe)
 	y = spaint->start_y;
 	while (y < spaint->end_y)
 	{
-		d = (y - spaint->v_move_scr) * 256 - ray->map->y * 128 +\
+		d = !ray->keys.ctrl ? (y - spaint->v_move_scr) * 256 - ray->map->y * 128 +\
+			spaint->spr_h * 128 : (y - spaint->v_move_scr) * 256 - ray->map->y / 1.5 * 128 +\
 			spaint->spr_h * 128;
 		spaint->tex_y = ((d * ray->txtr_s.height)\
 			/ spaint->spr_h) / 256;
@@ -52,13 +53,11 @@ static void	draw_sprite(t_spaint *spaint, t_raycast *ray)
 static void	y_calcs(t_raycast *ray, t_spaint *spaint)
 {
 	spaint->start_y = !ray->keys.ctrl ? -spaint->spr_h / 2 + \
-	ray->map->y / 2 + spaint->v_move_scr : \
-		-spaint->spr_h / 2 + ray->map->y / 2 + spaint->v_move_scr;
+	ray->map->y / 2 + spaint->v_move_scr : -spaint->spr_h / 2 + ray->map->y / 3 + spaint->v_move_scr;
 	if (spaint->start_y < 0)
 		spaint->start_y = 1;
 	spaint->end_y = !ray->keys.ctrl ? spaint->spr_h / 2 + \
-	ray->map->y / 2 + spaint->v_move_scr : \
-	spaint->spr_h / 2 + ray->map->y / 2 + spaint->v_move_scr;
+	ray->map->y / 2 + spaint->v_move_scr : spaint->spr_h / 2 + ray->map->y / 3 + spaint->v_move_scr;
 	if (spaint->end_y >= ray->map->y)
 		spaint->end_y = ray->map->y - 1;
 }
