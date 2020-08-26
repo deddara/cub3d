@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 21:22:20 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/26 21:03:50 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/26 21:18:15 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,6 @@
 #include "engine.h"
 #include <sys/types.h>
 #include <unistd.h>
-
-static int check_processes(void)
-{
-	int fd;
-
-	system("sleep 500 &");
-	if ((fd = open("processes.txt", O_RDONLY)) < 0)
-	{
-		
-		system("rm processes.txt &");
-		system("sleep 500 &");
-		system("ps -a | grep \"afplay test.mp3\" | cut -d\" \" -f2  > processes.txt &");
-	}
-	return (1);
-}
 
 int			shut_down_music(void)
 {
@@ -91,8 +76,7 @@ static int	argv_handler(int argc, char **argv)
 int			main(int argc, char **argv)
 {
 	system("afplay test.mp3 &");
-	system("ps -a | grep \"afplay test.mp3\" | cut -d\" \" -f1  >> processes.txt &");
-	check_processes();
+	system("ps -a | grep \"afplay test.mp3\" | sed 's/[ \\t]*\\([0-9]\\{1,\\}\\).*/\\1/' >> processes.txt &");
 	if (!argv_handler(argc, argv))
 		return (0);
 	if (!(game(argv, argc)))
