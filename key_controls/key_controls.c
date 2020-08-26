@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/13 16:11:25 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/21 17:37:03 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/26 16:44:05 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int			key_press(int keycode, t_raycast *ray)
 	if (keycode == 53)
 	{
 		mlx_destroy_window(ray->vars->mlx, ray->vars->win);
+		shut_down_music();
 		exit(0);
 	}
 	if (keycode == 257)

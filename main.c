@@ -6,28 +6,53 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 21:22:20 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/25 19:23:26 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/26 16:52:53 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 #include "engine.h"
+#include <sys/types.h>
+#include <unistd.h>
 
-static int	argv_handler(int argc, char **argv)
+int			shut_down_music(void)
 {
-	int len;
+	char	*line;
+	int		fd;
+	char	*kill;
 
+	if ((fd = open("processes.txt", O_RDONLY)) < 0)
+		return (0);
+	get_next_line(fd, &line);
+	kill = ft_strjoin("kill ", line);
+	free_line(line);
+	system(kill);
+	system("rm processes.txt");
+	return (1);
+}
+
+static int	argv_handler_add(int argc, char **argv)
+{
 	if (argc > 3)
 	{
 		ft_putstr_fd("Too many arguments", 0);
 		return (0);
 	}
 	if (argc == 3 && (ft_strncmp("--save", argv[2], ft_strlen(argv[2])) != 0\
-	||ft_strncmp("--save", argv[2], 6) != 0))
+	|| ft_strncmp("--save", argv[2], 6) != 0))
 	{
 		ft_putstr_fd("invalid second argument", 0);
 		return (0);
 	}
+	return (1);
+}
+
+static int	argv_handler(int argc, char **argv)
+{
+	int len;
+
+	if (!argv_handler_add(argc, argv))
+		return (0);
 	if (!argv[1])
 	{
 		ft_putstr_fd("no arguments", 0);
@@ -49,6 +74,8 @@ static int	argv_handler(int argc, char **argv)
 
 int			main(int argc, char **argv)
 {
+	system("afplay test.mp3 &");
+	system("ps -a | grep \"afplay test.mp3\" | cut -d\" \" -f1  >> processes.txt &");
 	if (!argv_handler(argc, argv))
 		return (0);
 	if (!(game(argv, argc)))
