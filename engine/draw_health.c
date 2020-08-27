@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 13:35:57 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/27 15:46:57 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/27 17:21:06 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,34 +15,23 @@
 
 int		draw_health(t_raycast *ray)
 {
-	t_data health;
 	int y;
 	int x;
 	int pixel;
-	int y1 = 0;
-	int x1;
+	
 	y = 0;
-	x = 0;
-	if(!(health.img = mlx_png_file_to_image(ray->vars->mlx, "./pics/unnamed.png",\
-	&health.width, &health.height)))
-		return (0);
-	if(!(health.addr = mlx_get_data_addr(health.img,\
-		&health.bits_per_pixel, &health.line_length, &health.endian)))
-		return (0);
-	while (y < health.height)
+	while (y < ray->map->y / 7)
 	{	
 		x = 0;
-		x1 = 0;
-		while (x < health.width)
+		while (x < ray->map->x / 5)
 		{
-			pixel = getpixelcolor(&health, x , y);
+			pixel = getpixelcolor(&ray->health, (int)((double)((x / (double)(ray->map->x / 5)) * ray->health.width)),\
+			(int)((double)((y / (double)(ray->map->y / 7)) * ray->health.height)));
 			if ((pixel & 0x00FFFFFF) != 0)
-				my_mlx_pixel_put(ray->img, x1, y1, pixel);
-			x += ray->map->x / health.width * 1.5 ;
-			x1++;
+				my_mlx_pixel_put(ray->img, ray->map->x - x, y, pixel);
+			x++;
 		}
-		y1++;
-		y += ray->map->y /  health.height * 1;
+		y++;
 	}
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 22:37:29 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/27 15:30:57 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/27 17:37:14 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,18 @@ void			my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
+static void		keys_init(t_raycast *ray)
+{
+	ray->keys.w = 0;
+	ray->keys.s = 0;
+	ray->keys.a = 0;
+	ray->keys.d = 0;
+	ray->keys.l_arr = 0;
+	ray->keys.r_arr = 0;
+	ray->keys.esc = 0;
+	ray->keys.ctrl = 0;
+}
+
 static int		init(t_raycast *ray, t_map *map)
 {
 	int i;
@@ -32,21 +44,11 @@ static int		init(t_raycast *ray, t_map *map)
 	ray->player_y = (double)map->y_player + 0.5;
 	ray->dlt_dist_x = 0;
 	ray->dlt_dist_y = 0;
+	ray->map = map;
+	keys_init(ray);
 	sprites_count(ray, map);
 	dir_calc(ray, map);
 	return (1);
-}
-
-static void		keys_init(t_raycast *ray)
-{
-	ray->keys.w = 0;
-	ray->keys.s = 0;
-	ray->keys.a = 0;
-	ray->keys.d = 0;
-	ray->keys.l_arr = 0;
-	ray->keys.r_arr = 0;
-	ray->keys.esc = 0;
-	ray->keys.ctrl = 0;
 }
 
 static int		win_init(t_vars *vars, t_data *img, t_map *map, char *argv)
@@ -73,10 +75,9 @@ int				game(char **argv, int argc)
 		return (0);
 	if (!init(&ray, &map))
 		return (0);
-	keys_init(&ray);
-	ray.map = &map;
 	ray.img = &img;
 	ray.vars = &vars;
+	take_textures(&ray);
 	paint_fc(&ray, &img);
 	ray_caster(&map, &img, &ray);
 	draw_health(&ray);
