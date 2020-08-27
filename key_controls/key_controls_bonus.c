@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 13:27:03 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/27 13:27:13 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/27 15:33:20 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ int			key_controls(t_raycast *ray)
 		&ray->img->bits_per_pixel, &ray->img->line_length, &ray->img->endian);
 	paint_fc(ray, ray->img);
 	ray_caster(ray->map, ray->img, ray);
+	draw_health(ray);
 	mlx_put_image_to_window(ray->vars->mlx, ray->vars->win,\
 		ray->img->img, 0, 0);
 	return (0);

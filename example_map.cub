@@ -1,4 +1,4 @@
-R 1920 1080
+R 640 480
 NO ./pics/eagle.xpm
 SO ./pics/redbrick.xpm
 WE ./pics/purplestone.xpm
@@ -7,6 +7,7 @@ S ./pics/pillar.xpm
 
 C 0,0,126
 F 52,58,65
+
         1111111111111111111111111
         1000000000110000000000001
         1011000001110000002000001

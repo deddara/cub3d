@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 22:37:29 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/27 13:29:57 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/27 15:30:57 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ int				game(char **argv, int argc)
 	ray.vars = &vars;
 	paint_fc(&ray, &img);
 	ray_caster(&map, &img, &ray);
+	draw_health(&ray);
 	if (argc == 3)
 		return (make_scr(&ray, &img));
 	mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
