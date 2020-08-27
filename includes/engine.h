@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/09 14:47:52 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/26 22:50:23 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/27 13:42:58 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,4 +145,5 @@ int				esc_press(t_raycast *ray);
 void			l_arr_move(t_raycast *ray);
 int				mouse_move(int x, int y, t_raycast *ray);
 void			r_arr_move(t_raycast *ray);
+int				draw_health(t_raycast *ray);
 #endif
