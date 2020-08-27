@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 22:25:10 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/26 22:53:52 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/27 13:30:31 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 int		mouse_move(int x, int y, t_raycast *ray)
 {
 	static int	prev_x;
+	mlx_mouse_hide(ray->vars->mlx, ray->vars->win);
 	if (y)
 	{
 		;

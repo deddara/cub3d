@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 21:22:20 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/26 21:18:15 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/27 13:23:58 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ static int	argv_handler(int argc, char **argv)
 	return (1);
 }
 
+#ifdef BONUS
 int			main(int argc, char **argv)
 {
 	system("afplay test.mp3 &");
@@ -87,3 +88,15 @@ int			main(int argc, char **argv)
 	shut_down_music();
 	return (1);
 }
+
+#else
+
+int			main(int argc, char **argv)
+{
+	if (!argv_handler(argc, argv))
+		return (0);
+	if (!(game(argv, argc)))
+		exit(0);
+	return (1);
+}
+#endif

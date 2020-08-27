@@ -6,13 +6,15 @@
 #    By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/27 16:22:26 by deddara           #+#    #+#              #
-#    Updated: 2020/08/27 13:06:03 by deddara          ###   ########.fr        #
+#    Updated: 2020/08/27 13:28:33 by deddara          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3d
 
 GAME_PROG = game
+KEY_CTRLS = key_controls
+
 MLX_DIR = ./libraries/minilibx/
 LBFT_DIR = ./libraries/libft/
 OBJ_DIR = obj/
@@ -40,7 +42,7 @@ ENGINE_SRC = $(addprefix $(ENGINE_DIR),ray_caster ray_caster_utils painter sprit
 ENGINE_SRC.O = $(addprefix $(OBJ_DIR), $(ENGINE_SRC:=.o))
 #CONTROLS
 CTRLS_DIR = key_controls/
-CTRLS_SRC = $(addprefix $(CTRLS_DIR),key_controls step_n_dir key_controls_utils)
+CTRLS_SRC = $(addprefix $(CTRLS_DIR), $(KEY_CTRLS) step_n_dir key_controls_utils)
 CTRLS_SRC.O = $(addprefix $(OBJ_DIR), $(CTRLS_SRC:=.o))
 
 #main files
@@ -81,7 +83,7 @@ $(MAIN_SRC.O) : $(OBJ_DIR)%.o: %.c
 	@$(CC) $(BONUS) $(COMPILE_FLGS) -O2 -c $< -o $@
 
 bonus:
-	make BONUS="-D BONUS" GAME_PROG=game_bonus all
+	make BONUS="-D BONUS" GAME_PROG=game_bonus KEY_CTRLS=key_controls_bonus all
 
 clean:
 	@rm -rf $(OBJ_DIR)

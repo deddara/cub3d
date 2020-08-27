@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 03:49:06 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/25 16:50:41 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/27 13:17:29 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,6 @@ int			map_parser(t_map *map)
 
 int			map_start_parser(char *line, t_map *map, int fd)
 {
-	get_next_line(fd, &line);
-	if ((line[0] == ' ' || line[0] == '1'))
-		return (error_handler(map, 0, 5));
-	free_line(line);
 	while (get_next_line(fd, &line) > 0)
 	{
 		if (line[0] == '\0' && map->y_count == 0)

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_controls.c                                     :+:      :+:    :+:   */
+/*   key_controls_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/13 16:11:25 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/27 13:27:28 by deddara          ###   ########.fr       */
+/*   Created: 2020/08/27 13:27:03 by deddara           #+#    #+#             */
+/*   Updated: 2020/08/27 13:27:13 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int			key_press(int keycode, t_raycast *ray)
 		shut_down_music();
 		exit(0);
 	}
+	if (keycode == 257)
+		ray->keys.ctrl = 1;
 	return (0);
 }
 
@@ -52,6 +54,8 @@ int			key_release(int keycode, t_raycast *ray)
 		ray->keys.r_arr = 0;
 	if (keycode == 53)
 		ray->keys.esc = 0;
+	if (keycode == 257)
+		ray->keys.ctrl = 0;
 	return (0);
 }
 
