@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 19:38:29 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/27 13:06:32 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/27 18:06:25 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ int				game(char **argv, int argc)
 	ray.map = &map;
 	ray.img = &img;
 	ray.vars = &vars;
+	take_textures(&ray);
 	paint_fc(&ray, &img);
 	ray_caster(&map, &img, &ray);
 	if (argc == 3)
