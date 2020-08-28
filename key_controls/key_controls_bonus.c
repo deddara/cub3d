@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 13:27:03 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/27 18:01:10 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/28 16:29:21 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,4 +83,13 @@ int			key_controls(t_raycast *ray)
 	mlx_put_image_to_window(ray->vars->mlx, ray->vars->win,\
 		ray->img->img, 0, 0);
 	return (0);
+}
+
+void key_main_handler(t_raycast *ray, t_vars *vars)
+{
+	mlx_hook(vars->win, 2, 1L << 0, key_press, ray);
+	mlx_hook(vars->win, 3, 1L << 1, key_release, ray);
+	mlx_hook(vars->win, 6, 1L << 6, mouse_move, ray);
+	mlx_hook(vars->win, 17, 1L << 17, esc_press, ray);
+	mlx_loop_hook(vars->mlx, key_controls, ray);
 }

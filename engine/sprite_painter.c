@@ -6,12 +6,14 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 17:22:49 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/28 16:10:00 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/28 16:16:06 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 #include "engine.h"
+
+#ifdef BONUS
 
 static void	draw__sprite_y(t_spaint *spaint, t_raycast *ray, int stripe, t_sprite *data)
 {
@@ -35,6 +37,33 @@ static void	draw__sprite_y(t_spaint *spaint, t_raycast *ray, int stripe, t_sprit
 		y++;
 	}
 }
+
+#else
+
+static void	draw__sprite_y(t_spaint *spaint, t_raycast *ray, int stripe, t_sprite *data)
+{
+	int		y;
+	int		d;
+	double	shade;
+	int		color;
+	
+	shade = 1 / (1 + 0.005 * data->dist + 0.006 * pow(data->dist, 2));
+	y = spaint->start_y;
+	while (y < spaint->end_y)
+	{
+		d = !ray->keys.ctrl ? (y - spaint->v_move_scr) * 256 - ray->map->y * 128 +\
+			spaint->spr_h * 128 : (y - spaint->v_move_scr) * 256 - ray->map->y / 1.5 * 128 +\
+			spaint->spr_h * 128;
+		spaint->tex_y = ((d * ray->txtr_s.height)\
+			/ spaint->spr_h) / 256;
+		color = getpixelcolor(&ray->txtr_s, spaint->tex_x, spaint->tex_y);
+		if ((color & 0x00FFFFFF) != 0)
+			my_mlx_pixel_put(ray->img, stripe, y, color);
+		y++;
+	}
+}
+
+#endif
 
 static void	draw_sprite(t_spaint *spaint, t_raycast *ray, t_sprite *data)
 {

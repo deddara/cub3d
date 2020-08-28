@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/09 14:47:52 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/28 16:08:38 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/28 16:30:30 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,8 @@ void			l_arr_move(t_raycast *ray);
 int				mouse_move(int x, int y, t_raycast *ray);
 void			r_arr_move(t_raycast *ray);
 int				draw_health(t_raycast *ray);
-void			take_textures(t_raycast *ray);
+int				take_textures(t_raycast *ray);
 void			paint_mini_map(t_raycast *ray);
 int				f_add_shade(int color, float shade);
+void			key_main_handler(t_raycast *ray, t_vars *vars);
 #endif

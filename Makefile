@@ -6,7 +6,7 @@
 #    By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/27 16:22:26 by deddara           #+#    #+#              #
-#    Updated: 2020/08/28 15:47:38 by deddara          ###   ########.fr        #
+#    Updated: 2020/08/28 16:38:35 by deddara          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,11 +52,11 @@ MAIN_SRC.O = $(addprefix $(OBJ_DIR), $(MAIN_SRC:=.o))
 
 all: $(OBJ_DIR) lft lx $(NAME)
 	@cp ./libraries/minilibx/libmlx.dylib ./
+	@echo "\033[32m[+] Make completed!\033[0m"
 
 $(NAME): $(GNL_SRC.O) $(PARS_SRC.O) $(ENGINE_SRC.O) $(CTRLS_SRC.O) $(MAIN_SRC.O)
 	$(CC) $(COMPILE_FLGS) -O2 $(GNL_SRC.O) $(PARS_SRC.O) $(CTRLS_SRC.O) $(ENGINE_SRC.O) $(MAIN_SRC.O) \
 	-L$(LBFT_DIR) -lft -L$(MLX_DIR) $(MLX_FLAGS) -o $(NAME)
-	@echo "\033[32m[+] Make completed!\033[0m"
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)/$(GNL_DIR) $(OBJ_DIR)/$(PARS_DIR) $(OBJ_DIR)/$(CTRLS_DIR) $(OBJ_DIR)/$(ENGINE_DIR)

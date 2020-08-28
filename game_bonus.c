@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 22:37:29 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/27 17:48:54 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/28 16:28:04 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,7 @@ int				game(char **argv, int argc)
 	if (argc == 3)
 		return (make_scr(&ray, &img));
 	mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
-	mlx_hook(vars.win, 2, 1L << 0, key_press, &ray);
-	mlx_hook(vars.win, 3, 1L << 1, key_release, &ray);
-	mlx_hook(vars.win, 6, 1L << 6, mouse_move, &ray);
-	mlx_hook(vars.win, 17, 1L << 17, esc_press, &ray);
-	mlx_loop_hook(vars.mlx, key_controls, &ray);
+	key_main_handler(&ray, &vars);
 	mlx_loop(vars.mlx);
 	return (0);
 }
