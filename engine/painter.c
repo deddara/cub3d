@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 18:02:29 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/26 22:20:06 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/28 16:11:07 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,14 @@ void		paint_map(t_raycast *ray, t_map *map, t_data *img, int x)
 {
 	int		color;
 	int		y;
+	double	shade;
 	t_paint	paint;
 
 	h_w_calcs(ray, &paint);
 	texture_clalcs(ray, &paint, map);
 	y = ray->wall_start;
+	shade = 1 / (1 + 0.005 * ray->wall_dist + 0.006 * \
+			pow(ray->wall_dist, 2));
 	while (y < ray->wall_end)
 	{
 		paint.tex_y = (int)paint.tex_pos & (paint.tex_h - 1);
@@ -83,7 +86,7 @@ void		paint_map(t_raycast *ray, t_map *map, t_data *img, int x)
 		else if (ray->wall_side == 3)
 			color = getpixelcolor(&ray->txtr_we, paint.tex_x, paint.tex_y);
 		paint.tex_pos += paint.step;
-		my_mlx_pixel_put(img, x, y, color);
+		my_mlx_pixel_put(img, x, y, f_add_shade(color, shade));
 		y++;
 	}
 }

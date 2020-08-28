@@ -6,7 +6,7 @@
 #    By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/02 01:40:26 by deddara           #+#    #+#              #
-#    Updated: 2020/07/27 20:50:12 by deddara          ###   ########.fr        #
+#    Updated: 2020/08/28 15:48:50 by deddara          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,6 @@ all: $(NAME)
 $(NAME): $(OBJ_DIR) $(SRC_FLS.O)
 	@ar rc $(NAME) $(SRC_FLS.O)
 	@ranlib $(NAME)
-	@echo "\033[32m[+] Make completed!\033[0m"
 
 $(OBJ_DIR):
 	@mkdir $(OBJ_DIR)

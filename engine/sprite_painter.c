@@ -6,19 +6,21 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 17:22:49 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/26 17:57:52 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/28 16:10:00 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 #include "engine.h"
 
-static void	draw__sprite_y(t_spaint *spaint, t_raycast *ray, int stripe)
+static void	draw__sprite_y(t_spaint *spaint, t_raycast *ray, int stripe, t_sprite *data)
 {
-	int	y;
-	int d;
-	int color;
-
+	int		y;
+	int		d;
+	double	shade;
+	int		color;
+	
+	shade = 1 / (1 + 0.005 * data->dist + 0.006 * pow(data->dist, 2));
 	y = spaint->start_y;
 	while (y < spaint->end_y)
 	{
@@ -29,12 +31,12 @@ static void	draw__sprite_y(t_spaint *spaint, t_raycast *ray, int stripe)
 			/ spaint->spr_h) / 256;
 		color = getpixelcolor(&ray->txtr_s, spaint->tex_x, spaint->tex_y);
 		if ((color & 0x00FFFFFF) != 0)
-			my_mlx_pixel_put(ray->img, stripe, y, color);
+			my_mlx_pixel_put(ray->img, stripe, y, f_add_shade(color, shade));
 		y++;
 	}
 }
 
-static void	draw_sprite(t_spaint *spaint, t_raycast *ray)
+static void	draw_sprite(t_spaint *spaint, t_raycast *ray, t_sprite *data)
 {
 	int	stripe;
 
@@ -45,7 +47,7 @@ static void	draw_sprite(t_spaint *spaint, t_raycast *ray)
 		spaint->spr_scr_x)) * ray->txtr_s.width / spaint->spr_w) / 256;
 		if (spaint->trnsfrm_y > 0 && stripe > 0 && stripe < ray->map->x &&\
 			spaint->trnsfrm_y < ray->x_buffer[stripe])
-			draw__sprite_y(spaint, ray, stripe);
+			draw__sprite_y(spaint, ray, stripe, data);
 		stripe++;
 	}
 }
@@ -86,5 +88,5 @@ void		sprite_painter(t_raycast *ray, t_sprite *sprite_data)
 	spaint.end_x = spaint.spr_w / 2 + spaint.spr_scr_x;
 	if (spaint.end_x >= ray->map->x)
 		spaint.end_x = ray->map->x - 1;
-	draw_sprite(&spaint, ray);
+	draw_sprite(&spaint, ray, sprite_data);
 }

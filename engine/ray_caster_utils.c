@@ -6,12 +6,25 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 17:57:47 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/26 19:52:50 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/28 16:11:12 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 #include "engine.h"
+
+int f_add_shade(int color, float shade)
+{
+	int r;
+	int g;
+	int b;
+
+	r = (color & 0x00FF0000) >> 16;
+	g = (color & 0x0000FF00) >> 8;
+	b = (color & 0x000000FF);
+	return ((int)(r * shade) << 16 | \
+			(int)(g * shade) << 8 | (int)(b * shade));
+}
 
 int			getpixelcolor(t_data *img, int x, int y)
 {
