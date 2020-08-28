@@ -6,11 +6,23 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 03:49:06 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/27 13:17:29 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/28 19:02:28 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "map_parser.h"
+
+static int	check_collums_add(t_map *map, int i, int j)
+{	
+	if (map->map[i][j])
+	{
+		if (map->map[i][j] == '0' || map->map[i][j] == '2' || map->map[i][j] == 'S'
+		|| map->map[i][j] == 'W' || map->map[i][j] == 'E' || map->map[i][j] == 'N' ||
+		map->map[i][j] == '1')
+			return (1);
+	}
+	return (0);
+}
 
 static int	check_collums(t_map *map, int i)
 {
@@ -26,7 +38,11 @@ static int	check_collums(t_map *map, int i)
 			return (0);
 		if ((map->map[i][j] == '0' && (map->map[i - 1][j] == ' ')) ||\
 			(map->map[i][j] == '0' && !(map->map[i - 1][j])) ||\
-			(map->map[i][j] == '0' && !(map->map[i + 1][j])))
+			(map->map[i][j] == '0' && !(map->map[i + 1][j])) || (map->map[i][j] == '0' && (ft_strlen(map->map[i]) > (ft_strlen(map->map[i + 1]))) &&  ) )
+			return (0);
+		if ((map->map[i][j] == 'W' || map->map[i][j] == 'S' \
+		|| map->map[i][j] == 'N'|| map->map[i][j] == 'E'\
+		|| map->map[i][j] == '2') && !map->map[i-1][j])
 			return (0);
 		j++;
 	}

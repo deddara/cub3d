@@ -6,7 +6,7 @@
 #    By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/27 16:22:26 by deddara           #+#    #+#              #
-#    Updated: 2020/08/28 17:01:03 by deddara          ###   ########.fr        #
+#    Updated: 2020/08/28 18:19:23 by deddara          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ HDR_DIR = ./includes/
 HEADERS = -I$(HDR_DIR) -I./libraries/libft/includes/ -I./libraries/minilibx/ -I./libraries/gnl
 COMPILE_FLGS = $(HEADERS) -Wall -Wextra -Werror
 MLX_FLAGS = -lmlx 
-CC = gcc
+CC = gcc -g
 
 
 .PHONY: all clean fclean re bonus
