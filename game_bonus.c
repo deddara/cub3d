@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 22:37:29 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/28 16:39:40 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/28 17:03:45 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static int		win_init(t_vars *vars, t_data *img, t_map *map, char *argv)
 	mlx_get_screen_size(vars->mlx, &map->x, &map->y);
 	if (!parser(map, argv))
 		return (0);
-	vars->win = mlx_new_window(vars->mlx, map->x, map->y, "Hello world!");
+	vars->win = mlx_new_window(vars->mlx, map->x, map->y, "Pozhiloy cub");
 	img->img = mlx_new_image(vars->mlx, map->x, map->y);
 	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel,\
 	&img->line_length, &img->endian);

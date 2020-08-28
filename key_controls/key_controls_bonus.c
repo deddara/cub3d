@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 13:27:03 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/28 16:42:28 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/28 16:53:41 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int			key_controls(t_raycast *ray)
 	return (0);
 }
 
-void key_main_handler(t_raycast *ray, t_vars *vars)
+void		key_main_handler(t_raycast *ray, t_vars *vars)
 {
 	mlx_hook(vars->win, 2, 1L << 0, key_press, ray);
 	mlx_hook(vars->win, 3, 1L << 1, key_release, ray);

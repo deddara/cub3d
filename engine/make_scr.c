@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 19:05:28 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/26 16:24:28 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/28 16:48:53 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int				make_scr(t_raycast *ray, t_data *img)
 {
 	char bmp_fheader[14];
 	char bmpinfheader[40];
-	
+
 	ft_bzero(bmp_fheader, 14);
 	ft_bzero(bmpinfheader, 40);
 	make_header(bmp_fheader, bmpinfheader, ray, img);

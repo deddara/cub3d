@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 22:25:10 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/27 13:30:31 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/28 16:52:28 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,10 @@
 
 #ifdef BONUS
 
-int		mouse_move(int x, int y, t_raycast *ray)
+int			mouse_move(int x, int y, t_raycast *ray)
 {
 	static int	prev_x;
+
 	mlx_mouse_hide(ray->vars->mlx, ray->vars->win);
 	if (y)
 	{
@@ -36,6 +37,7 @@ int		mouse_move(int x, int y, t_raycast *ray)
 	}
 	return (0);
 }
+
 #endif
 
 int			esc_press(t_raycast *ray)
@@ -62,7 +64,7 @@ void		r_arr_move(t_raycast *ray)
 {
 	double old_dir_x;
 	double old_plane_x;
-	
+
 	old_dir_x = ray->dir_x;
 	ray->dir_x = ray->dir_x * cos(0.05) - ray->dir_y * sin(0.05);
 	ray->dir_y = old_dir_x * sin(0.05) + ray->dir_y * cos(0.05);

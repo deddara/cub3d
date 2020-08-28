@@ -6,14 +6,14 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 17:57:47 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/28 16:11:12 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/28 16:51:06 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 #include "engine.h"
 
-int f_add_shade(int color, float shade)
+int			f_add_shade(int color, float shade)
 {
 	int r;
 	int g;
