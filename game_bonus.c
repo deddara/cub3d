@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 22:37:29 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/28 16:28:04 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/28 16:39:40 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,8 @@ int				game(char **argv, int argc)
 		return (0);
 	ray.img = &img;
 	ray.vars = &vars;
-	take_textures(&ray);
+	if (!take_textures(&ray))
+		return (0);
 	paint_fc(&ray, &img);
 	ray_caster(&map, &img, &ray);
 	draw_health(&ray);
