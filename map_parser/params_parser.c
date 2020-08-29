@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 16:51:53 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/25 17:03:14 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/29 17:33:21 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,7 @@ static int	r_checker(char *line, t_map *map)
 		return (0);
 	map->x = (map->x >= x) ? x : map->x;
 	map->y = (map->y >= y) ? y : map->y;
-	free(map->r);
-	map->r = NULL;
+	freesher(map->r);
 	return (1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 17:03:26 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/25 17:04:16 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/29 17:32:14 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ void	freesher(char **words)
 			free(words[i]);
 			i++;
 		}
+		free(words);
+		words = NULL;
 	}
-	free(words);
-	words = NULL;
 }
 
 int		word_counter(char **str)

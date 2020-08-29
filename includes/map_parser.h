@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 20:53:11 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/25 17:13:39 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/29 17:57:58 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,5 @@ int					f_checker(char *line, t_map *map);
 void				free_line(char *line);
 int					c_checker(char *line, t_map *map);
 int					map_start_parser(char *line, t_map *map, int fd);
+void				map_clr(t_map *map);
 #endif

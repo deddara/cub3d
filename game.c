@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 19:38:29 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/28 17:03:35 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/29 18:05:58 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,10 @@ void			my_mlx_pixel_put(t_data *data, int x, int y, int color)
 
 static int		init(t_raycast *ray, t_map *map)
 {
-	int i;
+	int			i;
+	t_sprite	*sprite;
 
+	sprite = NULL;
 	i = 0;
 	if (!(ray->x_buffer = (double*)malloc(sizeof(double) * map->x)))
 		return (0);
@@ -32,7 +34,7 @@ static int		init(t_raycast *ray, t_map *map)
 	ray->player_y = (double)map->y_player + 0.5;
 	ray->dlt_dist_x = 0;
 	ray->dlt_dist_y = 0;
-	sprites_count(ray, map);
+	sprites_count(ray, map, sprite);
 	dir_calc(ray, map);
 	return (1);
 }

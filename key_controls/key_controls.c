@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/13 16:11:25 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/28 16:53:12 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/29 17:46:32 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int			key_press(int keycode, t_raycast *ray)
 	{
 		mlx_destroy_window(ray->vars->mlx, ray->vars->win);
 		shut_down_music();
+		map_clr(ray->map);
+		ray_clr(ray);
 		exit(0);
 	}
 	return (0);

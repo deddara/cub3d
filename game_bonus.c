@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 22:37:29 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/28 17:03:45 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/29 18:06:09 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,10 @@ static void		keys_init(t_raycast *ray)
 
 static int		init(t_raycast *ray, t_map *map)
 {
-	int i;
+	int			i;
+	t_sprite	*sprite;
 
+	sprite = NULL;
 	i = 0;
 	if (!(ray->x_buffer = (double*)malloc(sizeof(double) * map->x)))
 		return (0);
@@ -46,7 +48,7 @@ static int		init(t_raycast *ray, t_map *map)
 	ray->dlt_dist_y = 0;
 	ray->map = map;
 	keys_init(ray);
-	sprites_count(ray, map);
+	sprites_count(ray, map, sprite);
 	dir_calc(ray, map);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 22:25:10 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/28 16:52:28 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/29 17:46:54 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ int			esc_press(t_raycast *ray)
 {
 	mlx_destroy_window(ray->vars->mlx, ray->vars->win);
 	shut_down_music();
+	map_clr(ray->map);
+	ray_clr(ray);
 	exit(0);
 }
 

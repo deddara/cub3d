@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/09 14:47:52 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/28 16:30:30 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/29 18:03:30 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ int				key_press(int keycode, t_raycast *ray);
 int				key_release(int keycode, t_raycast *ray);
 int				key_controls(t_raycast *ray);
 void			paint_fc(t_raycast *ray, t_data *img);
-void			sprites_count(t_raycast *ray, t_map *map);
+void			sprites_count(t_raycast *ray, t_map *map, t_sprite *sprite);
 void			sprite_handler(t_raycast *ray);
 int				getpixelcolor(t_data *img, int x, int y);
 void			paint_map(t_raycast *ray, t_map *map, t_data *img, int x);
@@ -151,4 +151,5 @@ int				take_textures(t_raycast *ray);
 void			paint_mini_map(t_raycast *ray);
 int				f_add_shade(int color, float shade);
 void			key_main_handler(t_raycast *ray, t_vars *vars);
+void			ray_clr(t_raycast *ray);
 #endif

@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/13 18:19:45 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/25 16:00:59 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/29 18:03:52 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,9 @@ static void	sprites_sort(t_raycast *ray)
 	}
 }
 
-void		sprites_count(t_raycast *ray, t_map *map)
+void		sprites_count(t_raycast *ray, t_map *map, t_sprite *sprite)
 {
 	t_counters	count;
-	t_sprite	*sprite;
 
 	count.flag = 0;
 	count.i = 0;
