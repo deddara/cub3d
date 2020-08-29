@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 13:35:57 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/28 15:41:00 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/29 18:37:15 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int			draw_health(t_raycast *ray)
 		}
 		y++;
 	}
+	paint_mini_map(ray);
 	return (1);
 }
 
