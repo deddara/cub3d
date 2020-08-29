@@ -6,23 +6,11 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 03:49:06 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/28 19:02:28 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/29 17:16:37 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "map_parser.h"
-
-static int	check_collums_add(t_map *map, int i, int j)
-{	
-	if (map->map[i][j])
-	{
-		if (map->map[i][j] == '0' || map->map[i][j] == '2' || map->map[i][j] == 'S'
-		|| map->map[i][j] == 'W' || map->map[i][j] == 'E' || map->map[i][j] == 'N' ||
-		map->map[i][j] == '1')
-			return (1);
-	}
-	return (0);
-}
 
 static int	check_collums(t_map *map, int i)
 {
@@ -37,12 +25,14 @@ static int	check_collums(t_map *map, int i)
 		|| map->map[i - 1][j] == 'E'))
 			return (0);
 		if ((map->map[i][j] == '0' && (map->map[i - 1][j] == ' ')) ||\
-			(map->map[i][j] == '0' && !(map->map[i - 1][j])) ||\
-			(map->map[i][j] == '0' && !(map->map[i + 1][j])) || (map->map[i][j] == '0' && (ft_strlen(map->map[i]) > (ft_strlen(map->map[i + 1]))) &&  ) )
+		(map->map[i][j] == '0' && (j > (int)(ft_strlen(map->map[i + 1]) - 1)))
+		|| (map->map[i][j] == '0' && (j > (int)(ft_strlen(map->map[i - 1])\
+		- 1))))
 			return (0);
-		if ((map->map[i][j] == 'W' || map->map[i][j] == 'S' \
-		|| map->map[i][j] == 'N'|| map->map[i][j] == 'E'\
-		|| map->map[i][j] == '2') && !map->map[i-1][j])
+		if (((map->map[i][j] == 'W' || map->map[i][j] == 'S' \
+		|| map->map[i][j] == 'N' || map->map[i][j] == 'E' ||\
+		map->map[i][j] == '2') && (j > (int)(ft_strlen(map->map[i + 1]) - 1)\
+		|| j > (int)(ft_strlen(map->map[i - 1]) - 1))))
 			return (0);
 		j++;
 	}
@@ -69,6 +59,28 @@ int			map_parser(t_map *map)
 	return (1);
 }
 
+static int	check_last(char *line, t_map *map)
+{
+	if (line && line[0] == '\0')
+	{
+		free_line(line);
+		if (!(map_parser(map)))
+			return (error_handler(map, 0, 5));
+		return (1);
+	}
+	else
+	{
+		if ((line && line[0] != ' ' && line[0] != '1') && map->y_count != 0)
+			return (error_handler(map, line, 4));
+		if (!(map_line_parser(line, map)))
+			return (error_handler(map, line, 4));
+		free_line(line);
+		if (!(map_parser(map)))
+			return (error_handler(map, 0, 5));
+	}
+	return (1);
+}
+
 int			map_start_parser(char *line, t_map *map, int fd)
 {
 	while (get_next_line(fd, &line) > 0)
@@ -84,12 +96,7 @@ int			map_start_parser(char *line, t_map *map, int fd)
 			return (error_handler(map, line, 4));
 		free_line(line);
 	}
-	if ((line && line[0] != ' ' && line[0] != '1') && map->y_count != 0)
-		return (error_handler(map, line, 4));
-	if (!(map_line_parser(line, map)))
-		return (error_handler(map, line, 4));
-	free_line(line);
-	if (!(map_parser(map)))
-		return (error_handler(map, 0, 5));
+	if (!(check_last(line, map)))
+		return (0);
 	return (1);
 }

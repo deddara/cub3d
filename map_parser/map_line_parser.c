@@ -6,7 +6,7 @@
 /*   By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 01:54:32 by deddara           #+#    #+#             */
-/*   Updated: 2020/08/25 17:12:10 by deddara          ###   ########.fr       */
+/*   Updated: 2020/08/29 16:55:39 by deddara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,25 @@ int			first_last(char *line, t_map *map)
 	int i;
 
 	i = 0;
-	while (line[i])
-	{
-		if (line[i] != '1' && line[i] != ' ')
-			return (0);
-		i++;
-	}
 	if (map)
 	{
+		while (line[i])
+		{
+			if (line[i] != '1' && line[i] != ' ')
+				return (0);
+			i++;
+		}
 		if (!(map_join(line, map)))
 			return (0);
+	}
+	else
+	{
+		while (line[i] && line[i] != '\n')
+		{
+			if (line[i] != '1' && line[i] != ' ')
+				return (0);
+			i++;
+		}
 	}
 	return (1);
 }
