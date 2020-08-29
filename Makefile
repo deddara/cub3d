@@ -6,7 +6,7 @@
 #    By: deddara <deddara@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/27 16:22:26 by deddara           #+#    #+#              #
-#    Updated: 2020/08/29 19:54:28 by deddara          ###   ########.fr        #
+#    Updated: 2020/08/29 20:09:56 by deddara          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -92,7 +92,7 @@ clean:
 fclean: clean libfclean
 	@rm -f $(NAME)
 	@rm -rf cub3d.dSYM
-	@rm libmlx.dylib
+	@rm -f libmlx.dylib
 
 re: fclean libfclean all
 
